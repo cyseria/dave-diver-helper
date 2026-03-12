@@ -7,6 +7,7 @@ import { recipeData } from "../data/recipes";
 import { staffData } from "../data/staff";
 import { weaponsData } from "../data/weapons";
 import { usePlayerProgress } from "../store/usePlayerProgress";
+import { getFishImageUrl } from "../utils/fishImage";
 import styles from "./Home.module.css";
 
 export function Home() {
@@ -157,7 +158,7 @@ export function Home() {
 
           {nextFish && (
             <RecommendationCard
-              icon={nextFish.image ?? nextFish.emoji}
+              icon={getFishImageUrl(nextFish.image) ?? ""}
               category="下一条鱼"
               title={nextFish.name}
               description={`${nextFish.depthMin !== undefined && nextFish.depthMax !== undefined ? `深度 ${nextFish.depthMin}–${nextFish.depthMax}m` : "深度未知"} | ${nextFish.description ?? "暂无描述"}`}

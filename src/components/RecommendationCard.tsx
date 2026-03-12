@@ -20,7 +20,11 @@ export function RecommendationCard({
   return (
     <div className={styles.card}>
       <div className={styles.iconWrap}>
-        <span className={styles.icon}>{icon}</span>
+        {icon && (icon.startsWith("http") || icon.startsWith("/") || icon.startsWith("data:")) ? (
+          <img src={icon} alt="" className={styles.icon} />
+        ) : (
+          <span className={styles.icon}>{icon}</span>
+        )}
       </div>
       <div className={styles.body}>
         <span className={styles.category}>{category}</span>

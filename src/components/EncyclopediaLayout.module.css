@@ -5,10 +5,10 @@
   overflow: hidden;
 }
 
+/* 左侧图鉴列表固定宽度，不随页面缩放；仅右侧详情区自适应 */
 .list {
-  width: 42%;
-  min-width: 280px;
-  max-width: 480px;
+  width: 478px;
+  flex-shrink: 0;
   min-height: 0;
   border-right: var(--pixel-border, 2px solid #3d2b1f);
   overflow: hidden;

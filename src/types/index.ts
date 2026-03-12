@@ -44,7 +44,6 @@ export interface Weapon {
 }
 export type Rarity = "common" | "uncommon" | "rare" | "legendary";
 export type MarkerType = "fish" | "treasure" | "boss";
-export type FishTime = "day" | "night" | "day_night";
 export type FishCategory =
   | "normal"
   | "photo"
@@ -55,8 +54,7 @@ export type FishCategory =
 export interface Fish {
   id: string;
   name: string;
-  emoji: string;
-  /** 展示图，当前可用 emoji；后续可改为图片路径供页面读取 */
+  /** 展示图路径，如 images/fish/shallow/小丑鱼.png */
   image: string;
   stars: number; // 1–5 stars
   depthMin?: number;
@@ -68,7 +66,6 @@ export interface Fish {
   recipeIds: string[];
   description?: string;
   rank?: number; // Marinca rank
-  time?: FishTime;
   zones?: string[]; // module ids
   habitat?: string; // sub-area note
   category?: FishCategory;

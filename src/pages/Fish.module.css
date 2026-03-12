@@ -60,6 +60,15 @@
   opacity: 1 !important;
 }
 
+.cardBoss {
+  border-color: #9333ea;
+  box-shadow: 2px 2px 0 #9333ea;
+}
+
+.cardBoss:hover {
+  box-shadow: 3px 3px 0 #9333ea;
+}
+
 .cardImg {
   flex: 1;
   display: flex;
@@ -72,6 +81,17 @@
 
 .cardCaptured .cardImg {
   background: #f0e4c0;
+}
+
+/* category: photo 的卡片在图片区域右上角显示相机图标 */
+.cardPhotoIcon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  font-size: 14px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
 }
 
 /* 原图 296×224，仅前端展示 296×174，底部裁掉 */
@@ -139,8 +159,8 @@
 /* 卡片内星星：直接定位在图片右下角，无包裹层 */
 .cardStarsPosition {
   position: absolute;
-  bottom: -3px;
-  right: -1px;
+  bottom: 12px;
+  right: 2px;
   z-index: 1;
   gap: 1px;
 }
@@ -173,7 +193,7 @@
 }
 
 .starSm {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .starLg {

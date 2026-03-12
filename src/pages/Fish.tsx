@@ -219,9 +219,6 @@ export function Fish() {
   const getStars = (fishId: string, defaultStars: number) =>
     fishStarRatings[fishId] || defaultStars;
 
-  const getTimeLabel = (time?: string) =>
-    time === "night" ? "夜" : time === "day_night" ? "昼夜" : "昼";
-
   const habitatZones = useMemo(() => {
     const seen = new Set<string>();
     const out: Array<{ id: string; name: string; emoji: string; mapZone: "shallow" | "deep" | "binghe" }> = [];
@@ -256,7 +253,7 @@ export function Fish() {
           return (
             <div
               key={fish.id}
-              className={`${styles.card} ${captured ? styles.cardCaptured : ""} ${isSelected ? styles.cardSelected : ""}`}
+              className={`${styles.card} ${captured ? styles.cardCaptured : ""} ${isSelected ? styles.cardSelected : ""} ${fish.category === "boss" ? styles.cardBoss : ""}`}
               onClick={() => navigate(`/fish/${fish.id}`)}
               onKeyDown={(e) =>
                 e.key === "Enter" && navigate(`/fish/${fish.id}`)
@@ -266,6 +263,9 @@ export function Fish() {
               tabIndex={0}
             >
               <div className={styles.cardImg}>
+                {fish.category === "photo" ? (
+                  <span className={styles.cardPhotoIcon} aria-hidden>📷</span>
+                ) : null}
                 {(() => {
                   const src = getFishImageUrl(fish.image);
                   return src ? (
@@ -273,7 +273,7 @@ export function Fish() {
                       <img src={src} alt="" className={styles.cardEmoji} />
                     </div>
                   ) : (
-                    <span className={styles.cardEmoji}>{fish.image ?? fish.emoji}</span>
+                    <span className={styles.cardEmoji} aria-hidden>{fish.name || "—"}</span>
                   );
                 })()}
                 <StarRating
@@ -301,9 +301,6 @@ export function Fish() {
                 <span className={styles.cardName}>{fish.name}</span>
                 <div className={styles.cardMeta}>
                   <span className={styles.cardMetaItem}>{depthText}</span>
-                  <span className={styles.cardMetaItem}>
-                    {fish.time ? getTimeLabel(fish.time) : "—"}
-                  </span>
                 </div>
               </div>
             </div>
@@ -322,7 +319,7 @@ export function Fish() {
             return src ? (
               <img src={src} alt="" className={styles.detailEmoji} />
             ) : (
-              <span className={styles.detailEmoji}>{selected.image ?? selected.emoji}</span>
+              <span className={styles.detailEmoji} aria-hidden>{selected.name || "—"}</span>
             );
           })()}
         </div>
@@ -347,11 +344,6 @@ export function Fish() {
           />
           <div className={styles.detailNameRow}>
             <h1 className={styles.detailName}>{selected.name}</h1>
-            {selected.time && (
-              <span className={`${styles.timeTag} ${styles[`timeTag_${selected.time}`]}`}>
-                {getTimeLabel(selected.time)}
-              </span>
-            )}
           </div>
           <p className={styles.detailDesc}>
             {selected.description ?? "—"}
