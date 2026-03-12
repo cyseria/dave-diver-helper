@@ -11,5 +11,6 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     base: base,
+    assetsInclude: ["**/*.PNG"],
   };
 });

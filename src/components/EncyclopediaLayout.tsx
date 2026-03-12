@@ -20,14 +20,16 @@ export function EncyclopediaLayout({
         <div className={styles.listScroll}>{listPanel}</div>
       </aside>
       <main className={styles.detail}>
-        {hasSelection ? (
-          detailPanel
-        ) : (
-          <div className={styles.empty}>
-            <span className={styles.emptyIcon}>🌊</span>
-            <p>{emptyMessage}</p>
-          </div>
-        )}
+        <div className={styles.detailScroll}>
+          {hasSelection ? (
+            detailPanel
+          ) : (
+            <div className={styles.empty}>
+              <span className={styles.emptyIcon}>🌊</span>
+              <p>{emptyMessage}</p>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );

@@ -4,6 +4,7 @@ import { Topbar } from "./components/Topbar";
 import { Fish } from "./pages/Fish";
 import { Home } from "./pages/Home";
 import { MapPage } from "./pages/Map";
+import { Quests } from "./pages/Quests";
 import { Recipes } from "./pages/Recipes";
 import { Staff } from "./pages/Staff";
 import { Weapons } from "./pages/Weapons";
@@ -25,6 +26,8 @@ function App() {
             <Route path="/weapons" element={<Weapons />} />
             <Route path="/weapons/:id" element={<Weapons />} />
             <Route path="/map" element={<MapPage />} />
+            <Route path="/quests" element={<Quests />} />
+            <Route path="/quests/:id" element={<Quests />} />
           </Routes>
         </main>
       </div>

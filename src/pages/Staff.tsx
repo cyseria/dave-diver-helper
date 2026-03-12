@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../components/EncyclopediaLayout";
 import { TabBar } from "../components/TabBar";
@@ -51,10 +51,19 @@ function StatBar({
 export function Staff() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"staff" | "levels">("staff");
+  const [tab, setTab] = useState<"staff" | "levels" | "tips">("staff");
   const { hiredStaffIds, toggleStaffHired } = usePlayerProgress();
 
   const selected = id ? staffData.find((s) => s.id === id) : null;
+
+  // Default select first staff when entering (or switching back) to staff tab
+  useEffect(() => {
+    if (tab !== "staff") return;
+    if (id) return;
+    const first = staffData[0];
+    if (!first) return;
+    navigate(`/staff/${first.id}`, { replace: true });
+  }, [tab, id, navigate]);
 
   // ── Grid list panel ───────────────────────────────────────────────────────
   const listPanel = (

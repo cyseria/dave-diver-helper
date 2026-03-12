@@ -13,6 +13,7 @@ interface TabBarProps<T extends string = string> {
   value: T;
   onChange: (id: T) => void;
   "aria-label"?: string;
+  theme?: "light" | "dark";
 }
 
 export function TabBar<T extends string = string>({
@@ -20,10 +21,11 @@ export function TabBar<T extends string = string>({
   value,
   onChange,
   "aria-label": ariaLabel = "切换标签",
+  theme = "light",
 }: TabBarProps<T>) {
   return (
     <div
-      className={styles.tabBar}
+      className={`${styles.tabBar} ${theme === "dark" ? styles.tabBarDark : ""}`}
       role="tablist"
       aria-label={ariaLabel}
     >

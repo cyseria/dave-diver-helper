@@ -1,225 +1,310 @@
+/* ══════════════════════════════════════
+   PAGE SHELL
+══════════════════════════════════════ */
 .page {
   display: flex;
+  flex-direction: column;
   flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 
-/* Sidebar */
+/* Below the TabBar */
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════ */
 .sidebar {
-  width: 220px;
-  min-width: 200px;
+  width: 240px;
+  min-width: 220px;
+  flex-shrink: 0;
   border-right: var(--pixel-border, 2px solid #3d2b1f);
   background: var(--color-surface, #fffdf7);
   overflow-y: auto;
-  padding: 16px;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+  padding: 14px;
 }
 
-.sidebarSection {
+.zoneHeader {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.sidebarTitle {
-  font-family: "Press Start 2P", monospace;
-  font-size: 8px;
-  color: var(--color-text-secondary, #7a6a5a);
-  margin-bottom: 8px;
-  letter-spacing: 0.05em;
-}
-
-.filterBtn {
-  padding: 7px 10px;
-  background: var(--color-surface-alt, #ede8dc);
-  border: 2px solid var(--color-border, #3d2b1f);
-  font-size: 12px;
-  color: var(--color-text, #2a1f14);
-  text-align: left;
-  transition: background 0.1s, box-shadow 0.1s;
-}
-
-.filterBtn:hover {
-  background: var(--color-primary-light, #fde8dc);
-}
-
-.filterActive {
-  background: var(--color-primary-light, #fde8dc) !important;
-  border-color: var(--color-primary, #e87040);
-  color: var(--color-primary, #e87040);
-  font-weight: 700;
-  box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
-}
-
-/* Info panel */
-.infoPanel {
-  margin-top: 8px;
-  border: var(--pixel-border, 2px solid #3d2b1f);
-  box-shadow: var(--pixel-shadow, 3px 3px 0 #3d2b1f);
-  padding: 12px;
-  background: var(--color-surface, #fffdf7);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.infoPanelHeader {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.infoTypeIcon {
-  font-size: 24px;
-  line-height: 1;
-}
-
-.infoName {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--color-text, #2a1f14);
-  line-height: 1.3;
-}
-
-.infoDepth {
-  font-size: 11px;
-  color: #2b5f80;
-}
-
-.infoDesc {
-  font-size: 11px;
-  color: var(--color-text-secondary, #7a6a5a);
-  line-height: 1.6;
-}
-
-.infoFish {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.infoFishLabel {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-muted, #ada090);
-  font-weight: 700;
-}
-
-.infoFishList {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.infoFishBtn {
-  padding: 5px 8px;
-  background: var(--color-secondary-light, #e0f0e4);
-  border: 1px solid var(--color-secondary, #6baf7a);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-text, #2a1f14);
-  text-align: left;
-  transition: background 0.1s;
-}
-
-.infoFishBtn:hover {
-  background: var(--color-secondary, #6baf7a);
-  color: white;
-}
-
-/* Map area */
-.mapArea {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 16px;
-  gap: 12px;
-}
-
-.mapTitle {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 2px solid;
   flex-shrink: 0;
 }
 
-.pixel {
+.zoneEmoji { font-size: 22px; line-height: 1; }
+
+.zoneName {
   font-family: "Press Start 2P", monospace;
-  font-size: 10px;
-  color: var(--color-text, #2a1f14);
+  font-size: 9px;
+  font-weight: 400;
+  margin-bottom: 4px;
 }
 
-.depthLabel {
-  font-size: 12px;
+.zoneDepth {
+  font-size: 10.5px;
   color: var(--color-text-muted, #ada090);
+  font-weight: 600;
 }
 
-.mapCanvas {
-  flex: 1;
-  position: relative;
-  border: var(--pixel-border, 2px solid #3d2b1f);
-  box-shadow: var(--pixel-shadow, 3px 3px 0 #3d2b1f);
-  overflow: hidden;
+.zoneDesc {
+  margin: 0;
+  font-size: 11px;
+  color: var(--color-text-muted, #7a6a5a);
+  line-height: 1.7;
+}
+
+/* Random combination notice */
+.combineNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 8px 10px;
+  background: #fff8e8;
+  border: 1.5px solid #e8c040;
+  font-size: 11px;
+  color: #7a5c10;
+  line-height: 1.6;
+}
+
+.combineIcon {
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Module list items (shallow sea sidebar) */
+.moduleListItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--color-surface, #fffdf7);
+  border: 1.5px solid rgba(61, 43, 31, 0.2);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s, border-color 0.15s;
+}
+
+.moduleListItem:hover {
+  background: var(--color-surface-alt, #ede8dc);
+}
+
+.moduleListItemActive {
+  background: #f0f8ff !important;
+  border-width: 2px;
+  box-shadow: 2px 2px 0 rgba(61, 43, 31, 0.15);
+}
+
+.moduleItemEmoji {
+  font-size: 16px;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.moduleItemText {
   display: flex;
   flex-direction: column;
-}
-
-.depthZone {
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-left: 60px;
-}
-
-.zoneLabel {
-  font-size: 11px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-}
-
-.markerWrap {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-}
-
-.depthRuler {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 50px;
-  background: rgba(0, 0, 0, 0.15);
-  pointer-events: none;
-}
-
-.rulerTick {
-  position: absolute;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  transform: translateY(-50%);
-}
-
-.rulerTick span {
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
-  padding: 0 4px;
-  font-weight: 700;
-}
-
-.rulerTick::after {
-  content: "";
+  gap: 1px;
   flex: 1;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.3);
+  min-width: 0;
+}
+
+.moduleItemName {
+  font-size: 12px;
+  font-weight: 700;
+  color: inherit;
+}
+
+.moduleItemNote {
+  font-size: 9.5px;
+  color: var(--color-text-muted, #ada090);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moduleItemCount {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-text-muted, #ada090);
+  flex-shrink: 0;
+}
+
+/* Side section */
+.sideSection {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sideSectionTitle {
+  font-family: "Press Start 2P", monospace;
+  font-size: 7.5px;
+  color: var(--color-text-muted, #ada090);
+  letter-spacing: 0.05em;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed rgba(61, 43, 31, 0.2);
+}
+
+/* Creature row */
+.creatureRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.creatureEmoji { font-size: 16px; flex-shrink: 0; line-height: 1.3; }
+.creatureInfo { display: flex; flex-direction: column; gap: 1px; }
+.creatureName { font-size: 12px; font-weight: 700; color: var(--color-text, #2a1f14); }
+.creatureNote { font-size: 10px; color: var(--color-text-muted, #ada090); line-height: 1.4; }
+
+/* Resource chips */
+.resourceList { display: flex; flex-direction: column; gap: 4px; }
+
+.resourceChip {
+  font-size: 11px;
+  color: var(--color-text, #2a1f14);
+  padding: 3px 8px;
+  background: var(--color-surface-alt, #ede8dc);
+  border: 1px solid rgba(61, 43, 31, 0.2);
+  line-height: 1.5;
+}
+
+/* Tips */
+.tipRow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.tipDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 0;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.tipText {
+  font-size: 11px;
+  color: var(--color-text-muted, #7a6a5a);
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════
+   IMAGE VIEWER
+══════════════════════════════════════ */
+.viewer {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #1a2a3a;
+}
+
+/* Image container */
+.imgContainer {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #0f1e2e;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.openOriginalBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: inherit;
+  background: rgba(0, 0, 0, 0.65);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.openOriginalBtn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.mapImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* Thumbnail strip */
+.thumbStrip {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #111e2c;
+  border-top: 2px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+  overscroll-behavior: contain;
+  flex-shrink: 0;
+}
+
+.thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  padding: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+
+.thumb:hover { border-color: rgba(255, 255, 255, 0.5); }
+
+.thumbActive {
+  border-width: 2px;
+  opacity: 1;
+}
+
+.thumbImg {
+  width: 80px;
+  height: 56px;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbLabel {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
 }

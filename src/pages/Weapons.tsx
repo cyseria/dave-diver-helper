@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CATEGORY_EMOJI,
   CATEGORY_LABELS,
@@ -392,16 +392,38 @@ export function Weapons() {
     : null;
   const inCat = weaponsData.filter((w) => w.category === category);
   const ownedInCat = inCat.filter((w) => ownedWeaponIds.includes(w.id)).length;
+  const ownedByCat: Record<WeaponCategory, { owned: number; total: number }> =
+    WEAPON_CATEGORIES.reduce(
+      (acc, cat) => {
+        const list = weaponsData.filter((w) => w.category === cat);
+        acc[cat] = {
+          total: list.length,
+          owned: list.filter((w) => ownedWeaponIds.includes(w.id)).length,
+        };
+        return acc;
+      },
+      {} as Record<WeaponCategory, { owned: number; total: number }>,
+    );
 
   function handleCategoryChange(cat: WeaponCategory) {
     setCategory(cat);
     setSelectedId(null);
   }
 
+  // Default select the first root weapon in category
+  useEffect(() => {
+    if (selectedId) return;
+    const roots = inCat.filter((w) => w.parentId === null);
+    const first = roots[0] ?? inCat[0];
+    if (!first) return;
+    setSelectedId(first.id);
+  }, [category, selectedId, inCat]);
+
   const weaponTabs = WEAPON_CATEGORIES.map((cat) => ({
     id: cat,
     label: CATEGORY_LABELS[cat],
     emoji: CATEGORY_EMOJI[cat],
+    count: `${ownedByCat[cat].owned}/${ownedByCat[cat].total}`,
   }));
 
   return (
@@ -421,9 +443,7 @@ export function Weapons() {
             <span className={styles.treePanelTitle}>
               {CATEGORY_EMOJI[category]} {CATEGORY_LABELS[category]} 升级路线
             </span>
-            <span className={styles.treePanelCount}>
-              {ownedInCat}/{inCat.length} 已拥有
-            </span>
+            <span className={styles.treePanelCount}>已拥有</span>
           </div>
           <div className={styles.treeScrollOuter}>
             <WeaponTree

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../components/EncyclopediaLayout";
 import { TabBar } from "../components/TabBar";
@@ -8,14 +8,8 @@ import { recipeData } from "../data/recipes";
 import { usePlayerProgress } from "../store/usePlayerProgress";
 import styles from "./Fish.module.css";
 
-const WEAPON_LABELS: Record<string, string> = {
-  harpoon: "🔱 鱼叉",
-  spear_gun: "🎯 鱼枪",
-  net: "🕸️ 渔网",
-  rifle: "🔫 步枪",
-  none: "—",
-};
 
+// Used by tab bar (keyed by module id)
 const FISH_MODULE_EMOJI: Record<string, string> = {
   "blue-hole-entrance": "🌊",
   "blue-hole-mid": "🛳️",
@@ -28,7 +22,86 @@ const FISH_MODULE_EMOJI: Record<string, string> = {
   "fish-trap": "🦞",
 };
 
+// Used by zone chips in detail panel (keyed by Chinese zone name)
+const ZONE_EMOJI: Record<string, string> = {
+  蓝洞入口: "🌊",
+  蓝洞中层: "🛳️",
+  蓝洞深海: "🐙",
+  夜行性: "🌙",
+  冰河通道: "🧊",
+  冰河地区: "❄️",
+  热泉喷出区域: "🌋",
+  海马: "🐴",
+  鱼笼: "🦞",
+};
+
+const FISH_MODULE_THEME: Record<
+  string,
+  { activeBg: string; activeBorder: string; activeColor: string; hoverBg: string }
+> = {
+  "blue-hole-entrance": {
+    activeBg: "#e6f5ff",
+    activeBorder: "#3b82f6",
+    activeColor: "#1e3a8a",
+    hoverBg: "rgba(59, 130, 246, 0.08)",
+  },
+  "blue-hole-mid": {
+    activeBg: "#eafaf0",
+    activeBorder: "#22c55e",
+    activeColor: "#14532d",
+    hoverBg: "rgba(34, 197, 94, 0.10)",
+  },
+  "blue-hole-depths": {
+    activeBg: "#e0f2fe",
+    activeBorder: "#0ea5e9",
+    activeColor: "#0c4a6e",
+    hoverBg: "rgba(14, 165, 233, 0.10)",
+  },
+  "night-only": {
+    activeBg: "#f5f3ff",
+    activeBorder: "#8b5cf6",
+    activeColor: "#3730a3",
+    hoverBg: "rgba(139, 92, 246, 0.10)",
+  },
+  "glacier-passage": {
+    activeBg: "#eff6ff",
+    activeBorder: "#60a5fa",
+    activeColor: "#1e3a8a",
+    hoverBg: "rgba(96, 165, 250, 0.10)",
+  },
+  "glacial-area": {
+    activeBg: "#ecfeff",
+    activeBorder: "#06b6d4",
+    activeColor: "#155e75",
+    hoverBg: "rgba(6, 182, 212, 0.10)",
+  },
+  "hydrothermal-vents": {
+    activeBg: "#fff7ed",
+    activeBorder: "#f97316",
+    activeColor: "#9a3412",
+    hoverBg: "rgba(249, 115, 22, 0.10)",
+  },
+  seahorses: {
+    activeBg: "#fef9c3",
+    activeBorder: "#f59e0b",
+    activeColor: "#92400e",
+    hoverBg: "rgba(245, 158, 11, 0.12)",
+  },
+  "fish-trap": {
+    activeBg: "#fef2f2",
+    activeBorder: "#ef4444",
+    activeColor: "#991b1b",
+    hoverBg: "rgba(239, 68, 68, 0.10)",
+  },
+};
+
 const STAR_POSITIONS = [1, 2, 3] as const;
+
+function zoneToMapZone(zoneName: string): "shallow" | "deep" | "binghe" {
+  if (zoneName === "冰河通道" || zoneName === "冰河地区") return "binghe";
+  if (zoneName === "热泉喷出区域") return "deep";
+  return "shallow";
+}
 
 function StarRating({
   stars,
@@ -119,11 +192,20 @@ export function Fish() {
     fishGuideModules.find((m) => m.id === selectedModuleId) ??
     fishGuideModules[0];
 
+  // 顺序严格按 fishData（即 shallow / mid / depths 等文件中的书写顺序）
   const moduleFish = selectedModule
-    ? selectedModule.fishIds
-        .map((fishId) => fishData.find((f) => f.id === fishId))
-        .filter((f): f is NonNullable<typeof f> => !!f)
+    ? fishData.filter((f) => f.zones?.includes(selectedModule.name))
     : fishData;
+
+  // Default select first fish in current module (entering page or switching module)
+  useEffect(() => {
+    const first = moduleFish[0];
+    if (!first) return;
+    const inModule = id ? moduleFish.some((f) => f.id === id) : false;
+    if (!id || !inModule) {
+      navigate(`/fish/${first.id}`, { replace: true });
+    }
+  }, [id, navigate, moduleFish]);
 
   const getStars = (fishId: string, defaultStars: number) =>
     fishStarRatings[fishId] || defaultStars;
@@ -131,28 +213,16 @@ export function Fish() {
   const getTimeLabel = (time?: string) =>
     time === "night" ? "夜" : time === "day_night" ? "昼夜" : "昼";
 
-  const getEstimatedStats = (fish: (typeof fishData)[number]) => {
-    if (fish.hp !== undefined && fish.attack !== undefined) {
-      return { hp: fish.hp, attack: fish.attack, estimated: false };
+  const habitatZones = useMemo(() => {
+    const seen = new Set<string>();
+    const out: Array<{ id: string; name: string; emoji: string; mapZone: "shallow" | "deep" | "binghe" }> = [];
+    for (const name of selected?.zones ?? []) {
+      if (seen.has(name)) continue;
+      seen.add(name);
+      out.push({ id: name, name, emoji: ZONE_EMOJI[name] ?? "🗺️", mapZone: zoneToMapZone(name) });
     }
-
-    const base = Math.max(1, fish.stars);
-    let hp = base * 120;
-    let attack = base * 12;
-
-    if (fish.category === "boss") {
-      hp *= 4;
-      attack *= 3;
-    } else if (fish.category === "seahorse") {
-      hp = 30;
-      attack = 0;
-    } else if (fish.category === "trap") {
-      hp = 10;
-      attack = 0;
-    }
-
-    return { hp, attack, estimated: true };
-  };
+    return out;
+  }, [selected?.zones]);
 
   const getCaptureTip = () => {
     if (!selected) return null;
@@ -206,14 +276,14 @@ export function Fish() {
                     }}
                   />
                 </div>
-                <span className={styles.cardEmoji}>{fish.emoji}</span>
+                <span className={styles.cardEmoji}>{fish.image ?? fish.emoji}</span>
               </div>
               <div className={styles.cardFooter}>
                 <span className={styles.cardName}>{fish.name}</span>
                 <div className={styles.cardMeta}>
                   <span className={styles.cardMetaItem}>{depthText}</span>
                   <span className={styles.cardMetaItem}>
-                    {getTimeLabel(fish.time)}
+                    {fish.time ? getTimeLabel(fish.time) : "—"}
                   </span>
                 </div>
               </div>
@@ -228,7 +298,7 @@ export function Fish() {
     <div className={styles.detail}>
       <div className={styles.detailTop}>
         <div className={styles.detailImgBox}>
-          <span className={styles.detailEmoji}>{selected.emoji}</span>
+          <span className={styles.detailEmoji}>{selected.image ?? selected.emoji}</span>
         </div>
         <div className={styles.detailInfo}>
           <StarRating
@@ -249,9 +319,16 @@ export function Fish() {
               }
             }}
           />
-          <h1 className={styles.detailName}>{selected.name}</h1>
+          <div className={styles.detailNameRow}>
+            <h1 className={styles.detailName}>{selected.name}</h1>
+            {selected.time && (
+              <span className={`${styles.timeTag} ${styles[`timeTag_${selected.time}`]}`}>
+                {getTimeLabel(selected.time)}
+              </span>
+            )}
+          </div>
           <p className={styles.detailDesc}>
-            {selected.description ?? "暂无描述"}
+            {selected.description ?? "—"}
           </p>
         </div>
         <button
@@ -263,63 +340,87 @@ export function Fish() {
         </button>
       </div>
 
-      <div className={styles.infoGrid}>
-        {(() => {
-          const stats = getEstimatedStats(selected);
-          return (
+      <div className={styles.statsBlock}>
+        {/* Row 1: HP + ATK（仅真实数据，无则显示 —，不做估算） */}
+        <div className={styles.statPairRow}>
+          <div className={styles.statCell}>
+            <span className={styles.statEm}>❤️</span>
+            <span className={styles.statLbl}>生命值</span>
+            <span className={styles.statVal}>
+              {selected.hp !== undefined ? selected.hp : "—"}
+            </span>
+          </div>
+          <div className={styles.statCellDivider} />
+          <div className={styles.statCell}>
+            <span className={styles.statEm}>⚔️</span>
+            <span className={styles.statLbl}>攻击力</span>
+            <span className={styles.statVal}>
+              {selected.attack !== undefined ? selected.attack : "—"}
+            </span>
+          </div>
+        </div>
+        <div className={styles.statDivider} />
+        {/* Row 2: Region + Depth */}
+        <div className={styles.statPairRow}>
+          <div className={styles.statCell}>
+            <span className={styles.statEm}>🗺️</span>
+            <span className={styles.statLbl}>区域</span>
+            <div className={styles.statChips}>
+              {habitatZones.length > 0 ? (
+                habitatZones.map((z) => (
+                  <button
+                    key={z.id}
+                    type="button"
+                    className={styles.zoneChip}
+                    onClick={() => navigate(`/map?zone=${z.mapZone}`)}
+                    title="前往地图"
+                  >
+                    {z.emoji} {z.name} ↗
+                  </button>
+                ))
+              ) : (
+                <span className={styles.statValMuted}>—</span>
+              )}
+            </div>
+          </div>
+          <div className={styles.statCellDivider} />
+          <div className={styles.statCell}>
+            <span className={styles.statEm}>📏</span>
+            <span className={styles.statLbl}>深度</span>
+            <span className={styles.statVal}>
+              {selected.depthMin !== undefined && selected.depthMax !== undefined
+                ? `${selected.depthMin}–${selected.depthMax} m`
+                : "—"}
+            </span>
+          </div>
+        </div>
+        <div className={styles.statDivider} />
+        {/* Row 3: Weight + Meat by star（仅在有 meatByStar 时展示肉量） */}
+        <div className={styles.statPairRow}>
+          <div className={styles.statCell}>
+            <span className={styles.statEm}>⚖️</span>
+            <span className={styles.statLbl}>重量</span>
+            <span className={styles.statVal}>
+              {selected.weight != null ? `${selected.weight} kg` : "—"}
+            </span>
+          </div>
+          {selected.meatByStar ? (
             <>
-              <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>
-                  HP{stats.estimated ? " (估)" : ""}
-                </span>
-                <span className={styles.infoValue}>{stats.hp}</span>
-              </div>
-              <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>
-                  ATK{stats.estimated ? " (估)" : ""}
-                </span>
-                <span className={styles.infoValue}>{stats.attack}</span>
+              <div className={styles.statCellDivider} />
+              <div className={styles.statCell}>
+                <span className={styles.statEm}>🥩</span>
+                <span className={styles.statLbl}>掉落肉量</span>
+                <div className={styles.meatByStar}>
+                  <span className={styles.meatStar}>1★</span>
+                  <span>{selected.meatByStar[0]}</span>
+                  <span className={styles.meatStar}>2★</span>
+                  <span>{selected.meatByStar[1]}</span>
+                  <span className={styles.meatStar}>3★</span>
+                  <span>{selected.meatByStar[2]}</span>
+                </div>
               </div>
             </>
-          );
-        })()}
-        <div className={styles.infoItem}>
-          <span className={styles.infoLabel}>Region</span>
-          <span className={styles.infoValue}>
-            {selected.zones?.length
-              ? selected.zones
-                  .map((z) =>
-                    fishGuideModules.find((m) => m.id === z)?.name ?? z,
-                  )
-                  .join(" / ")
-              : "—"}
-          </span>
-        </div>
-        <div className={styles.infoItem}>
-          <span className={styles.infoLabel}>Depth</span>
-          <span className={styles.infoValue}>
-            {selected.depthMin !== undefined && selected.depthMax !== undefined
-              ? `${selected.depthMin}–${selected.depthMax}m`
-              : "—"}
-          </span>
-        </div>
-        <div className={styles.infoItem}>
-          <span className={styles.infoLabel}>Active Time</span>
-          <span className={styles.infoValue}>
-            {selected.time === "night"
-              ? "Night"
-              : selected.time === "day_night"
-                ? "Day & Night"
-                : "Day"}
-          </span>
-        </div>
-        <div className={styles.infoItem}>
-          <span className={styles.infoLabel}>Recommended Weapon</span>
-          <span className={styles.infoValue}>
-            {selected.recommendedWeapon
-              ? WEAPON_LABELS[selected.recommendedWeapon] ?? "—"
-              : "—"}
-          </span>
+          ) : null}
         </div>
       </div>
 
@@ -364,9 +465,9 @@ export function Fish() {
   ) : null;
 
   const fishTabs = fishGuideModules.map((module) => {
-    const moduleFishList = module.fishIds
-      .map((fishId) => fishData.find((f) => f.id === fishId))
-      .filter((f): f is NonNullable<typeof f> => !!f);
+    const moduleFishList = fishData.filter((f) =>
+      f.zones?.includes(module.name),
+    );
     const capturedCount = moduleFishList.filter((f) =>
       capturedFishIds.includes(f.id),
     ).length;
@@ -380,12 +481,28 @@ export function Fish() {
 
   return (
     <div className={styles.page}>
-      <TabBar
-        tabs={fishTabs}
-        value={selectedModuleId}
-        onChange={setSelectedModuleId}
-        aria-label="鱼类图鉴区域"
-      />
+      <div
+        className={styles.fishTabWrap}
+        style={
+          {
+            "--tab-active-bg":
+              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).activeBg,
+            "--tab-active-border":
+              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).activeBorder,
+            "--tab-active-color":
+              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).activeColor,
+            "--tab-hover-bg":
+              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).hoverBg,
+          } as React.CSSProperties
+        }
+      >
+        <TabBar
+          tabs={fishTabs}
+          value={selectedModuleId}
+          onChange={setSelectedModuleId}
+          aria-label="鱼类图鉴区域"
+        />
+      </div>
       <EncyclopediaLayout
         listPanel={listPanel}
         detailPanel={detailPanel}

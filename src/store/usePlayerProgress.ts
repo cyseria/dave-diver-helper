@@ -5,14 +5,16 @@ interface PlayerProgressState {
   storyProgress: number;
   weaponLevel: number;
   capturedFishIds: string[];
-  unlockedRecipeIds: string[];
+  recipeEnhanceLevels: Record<string, number>;
   hiredStaffIds: string[];
   ownedWeaponIds: string[];
-  fishStarRatings: Record<string, number>; // custom per-fish star rating
+  fishStarRatings: Record<string, number>;
+  completedQuestIds: string[];
   toggleFishCaptured: (id: string) => void;
-  toggleRecipeUnlocked: (id: string) => void;
+  setRecipeEnhanceLevel: (id: string, level: number) => void;
   toggleStaffHired: (id: string) => void;
   toggleWeaponOwned: (id: string) => void;
+  toggleQuestCompleted: (id: string) => void;
   setStoryProgress: (value: number) => void;
   setWeaponLevel: (value: number) => void;
   setFishStarRating: (id: string, stars: number) => void;
@@ -21,13 +23,14 @@ interface PlayerProgressState {
 export const usePlayerProgress = create<PlayerProgressState>()(
   persist(
     (set, get) => ({
-      storyProgress: 35,
-      weaponLevel: 2,
-      capturedFishIds: ["clownfish", "blue_tang", "pufferfish"],
-      unlockedRecipeIds: ["clownfish_sushi", "blue_tang_salad", "salmon_bowl"],
+      storyProgress: 0,
+      weaponLevel: 0,
+      capturedFishIds: [],
+      recipeEnhanceLevels: {},
       hiredStaffIds: [],
-      ownedWeaponIds: ["rifle_base"],
+      ownedWeaponIds: [],
       fishStarRatings: {},
+      completedQuestIds: [],
       toggleFishCaptured: (id) => {
         const { capturedFishIds } = get();
         set({
@@ -36,13 +39,9 @@ export const usePlayerProgress = create<PlayerProgressState>()(
             : [...capturedFishIds, id],
         });
       },
-      toggleRecipeUnlocked: (id) => {
-        const { unlockedRecipeIds } = get();
-        set({
-          unlockedRecipeIds: unlockedRecipeIds.includes(id)
-            ? unlockedRecipeIds.filter((r) => r !== id)
-            : [...unlockedRecipeIds, id],
-        });
+      setRecipeEnhanceLevel: (id, level) => {
+        const { recipeEnhanceLevels } = get();
+        set({ recipeEnhanceLevels: { ...recipeEnhanceLevels, [id]: level } });
       },
       toggleStaffHired: (id) => {
         const { hiredStaffIds } = get();
@@ -58,6 +57,14 @@ export const usePlayerProgress = create<PlayerProgressState>()(
           ownedWeaponIds: ownedWeaponIds.includes(id)
             ? ownedWeaponIds.filter((w) => w !== id)
             : [...ownedWeaponIds, id],
+        });
+      },
+      toggleQuestCompleted: (id) => {
+        const { completedQuestIds } = get();
+        set({
+          completedQuestIds: completedQuestIds.includes(id)
+            ? completedQuestIds.filter((q) => q !== id)
+            : [...completedQuestIds, id],
         });
       },
       setStoryProgress: (value) => set({ storyProgress: value }),

@@ -14,16 +14,18 @@ export function Home() {
   const {
     storyProgress,
     capturedFishIds,
-    unlockedRecipeIds,
+    recipeEnhanceLevels,
     hiredStaffIds,
     ownedWeaponIds,
   } = usePlayerProgress();
 
-  // Fish & recipe
+  // Fish & recipe（食谱：强化等级 ≥1 视为已获得）
   const totalFish = fishData.length;
   const totalRecipes = recipeData.length;
   const capturedCount = capturedFishIds.length;
-  const unlockedCount = unlockedRecipeIds.length;
+  const unlockedCount = recipeData.filter(
+    (r) => (recipeEnhanceLevels[r.id] ?? 0) >= 1,
+  ).length;
 
   // Staff
   const totalStaff = staffData.length;
@@ -41,7 +43,9 @@ export function Home() {
 
   // Recommendations
   const nextFish = fishData.find((f) => !capturedFishIds.includes(f.id));
-  const nextRecipe = recipeData.find((r) => !unlockedRecipeIds.includes(r.id));
+  const nextRecipe = recipeData.find(
+    (r) => (recipeEnhanceLevels[r.id] ?? 0) < 1,
+  );
 
   // Recommend highest-tier unhired staff
   const nextStaff =
@@ -153,7 +157,7 @@ export function Home() {
 
           {nextFish && (
             <RecommendationCard
-              icon={nextFish.emoji}
+              icon={nextFish.image ?? nextFish.emoji}
               category="下一条鱼"
               title={nextFish.name}
               description={`${nextFish.depthMin !== undefined && nextFish.depthMax !== undefined ? `深度 ${nextFish.depthMin}–${nextFish.depthMax}m` : "深度未知"} | ${nextFish.description ?? "暂无描述"}`}

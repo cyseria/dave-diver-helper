@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: "/staff", label: "员工图鉴" },
   { to: "/weapons", label: "武器图鉴" },
   { to: "/map", label: "地图" },
+  { to: "/quests", label: "任务" },
 ];
 
 export function Topbar() {

@@ -9,6 +9,27 @@
   overflow-x: auto;
 }
 
+.tabBarDark {
+  background: #1a2a3a;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.tabBarDark .tab {
+  color: rgba(255, 255, 255, 0.65);
+  border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+.tabBarDark .tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tabBarDark .tabActive {
+  background: #243447;
+  color: #7eb8f0;
+  border-bottom-color: #5a9bd8;
+}
+
 .tab {
   display: flex;
   align-items: center;
@@ -30,14 +51,14 @@
 }
 
 .tab:hover {
-  background: rgba(232, 112, 64, 0.08);
+  background: var(--tab-hover-bg, rgba(232, 112, 64, 0.08));
   color: var(--color-text, #2a1f14);
 }
 
 .tabActive {
-  background: var(--color-primary-soft, #fde8d8);
-  color: #a03010;
-  border-bottom: 2px solid var(--color-primary, #e87040);
+  background: var(--tab-active-bg, var(--color-primary-soft, #fde8d8));
+  color: var(--tab-active-color, #a03010);
+  border-bottom: 2px solid var(--tab-active-border, var(--color-primary, #e87040));
   margin-bottom: -2px;
 }
 

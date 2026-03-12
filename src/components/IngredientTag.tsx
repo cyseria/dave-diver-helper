@@ -26,7 +26,7 @@ export function IngredientTag({
       onClick={() => onFishClick?.(fishId)}
       title={hasFish ? "已捕获" : "未捕获，点击查看"}
     >
-      <span className={styles.emoji}>{fish.emoji}</span>
+      <span className={styles.emoji}>{fish.image ?? fish.emoji}</span>
       <span className={styles.name}>{fish.name}</span>
       <span className={styles.qty}>×{quantity}</span>
       {!hasFish && <span className={styles.missingBadge}>缺</span>}

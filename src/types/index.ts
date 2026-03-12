@@ -56,6 +56,8 @@ export interface Fish {
   id: string;
   name: string;
   emoji: string;
+  /** 展示图，当前可用 emoji；后续可改为图片路径供页面读取 */
+  image: string;
   stars: number; // 1–5 stars
   depthMin?: number;
   depthMax?: number;
@@ -72,6 +74,10 @@ export interface Fish {
   category?: FishCategory;
   source?: string[]; // source notes
   note?: string; // special note / capture tip
+  /** 重量（kg） */
+  weight?: number;
+  /** 按星级掉落肉量 [1星, 2星, 3星] */
+  meatByStar?: [number, number, number];
 }
 
 export interface FishGuideModule {
@@ -144,6 +150,35 @@ export interface RestaurantTier {
   nightSeats: number | null;
   hallStaff: number;
   kitchenStaff: number;
+}
+
+// ── Quest types ────────────────────────────────────────────────────────────
+export type QuestType = "main" | "sub" | "vip";
+
+export interface QuestBoss {
+  name: string;
+  tips: string[];
+}
+
+export interface Quest {
+  id: string;
+  chapterId: string;
+  name: string;
+  emoji: string;
+  type: QuestType;
+  description: string;
+  objectives: string[];
+  tips: string[];
+  reward?: string;
+  boss?: QuestBoss;
+}
+
+export interface QuestChapter {
+  id: string;
+  order: number; // 0 = prologue, 1–7 = chapters, 99 = epilogue
+  name: string;
+  emoji: string;
+  summary: string;
 }
 
 export interface MapLocation {

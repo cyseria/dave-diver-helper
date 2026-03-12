@@ -1,4 +1,4 @@
-/* ── Page wrapper with top TabBar ── */
+/* ── Page wrapper ── */
 .recipesPage {
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-/* ── List / Grid ── */
+/* ── List ── */
 .listWrap {
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@
   font-weight: 700;
 }
 
-.countUnlocked {
+.countHighlight {
   color: var(--color-warning, #e8a040);
 }
 
@@ -81,20 +81,19 @@
   padding: 10px;
 }
 
-/* ── Card base ── */
+/* ── Cards ── */
 .card {
   display: flex;
   flex-direction: column;
-  aspect-ratio: 1; /* enforce square */
+  aspect-ratio: 1;
   border: 2px solid var(--color-border, #3d2b1f);
   box-shadow: 2px 2px 0 var(--color-border, #3d2b1f);
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
   position: relative;
   overflow: hidden;
-  /* Default = locked state */
   background: var(--color-surface-alt, #ede8dc);
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
 .card:hover {
@@ -103,79 +102,72 @@
   opacity: 1;
 }
 
-/* Unlocked card — full color */
-.cardUnlocked {
+.cardOwned {
   background: #fff8e8;
   border-color: #b8861a;
   opacity: 1;
 }
 
-.cardUnlocked:hover {
+.cardOwned:hover {
   border-color: var(--color-warning, #e8a040);
 }
 
-/* Selected highlight */
 .cardSelected {
   border-color: var(--color-primary, #e87040) !important;
   box-shadow: 3px 3px 0 var(--color-primary, #e87040) !important;
   opacity: 1 !important;
 }
 
-/* ── Card image area — fills remaining space ── */
 .cardImg {
-  flex: 1; /* fill space above footer */
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   border-bottom: 1px solid var(--color-border, #3d2b1f);
-  /* locked: gray bg */
   background: #d8d0c4;
 }
 
-.cardUnlocked .cardImg {
-  /* unlocked: warm bg */
+.cardOwned .cardImg {
   background: #f0e4c0;
 }
 
 .cardEmoji {
-  font-size: 42px; /* big emoji to match square card */
-  /* locked: muted */
+  font-size: 42px;
   filter: grayscale(0.5) opacity(0.7);
 }
 
-.cardUnlocked .cardEmoji {
+.cardOwned .cardEmoji {
   filter: none;
 }
 
-/* Lock icon overlay on locked cards */
 .lockOverlay {
   position: absolute;
   top: 4px;
   right: 4px;
   font-size: 11px;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
-/* ── Card footer — thin bar ── */
+/* Enhancement level badge on card */
+.enhBadge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 7px;
+  background: #b8861a;
+  color: #fff8e0;
+  padding: 2px 5px;
+  line-height: 1.4;
+}
+
 .cardFooter {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 6px 4px 8px;
+  padding: 5px 8px;
   height: 28px;
   flex-shrink: 0;
-}
-
-.cardLevelTag {
-  font-family: "Press Start 2P", monospace;
-  font-size: 7px;
-  color: #8a7a68;
-  flex-shrink: 0;
-}
-
-.cardUnlocked .cardLevelTag {
-  color: #b8861a;
 }
 
 .cardName {
@@ -189,61 +181,32 @@
   text-overflow: ellipsis;
 }
 
-.cardUnlocked .cardName {
+.cardOwned .cardName {
   color: var(--color-text, #2a1f14);
 }
 
-/* ── Top-left corner toggle (unlock checkbox) ── */
-.cardCornerToggle {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(61, 43, 31, 0.45);
-  background: rgba(255, 253, 247, 0.75);
-  font-size: 10px;
-  font-weight: 900;
-  color: var(--color-success, #5aa469);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  transition: border-color 0.12s, background 0.12s;
-}
-
-.cardCornerToggle:hover {
-  border-color: var(--color-success, #5aa469);
-  background: rgba(224, 240, 228, 0.9);
-}
-
-.cardCornerToggleOn {
-  border-color: var(--color-success, #5aa469);
-  background: rgba(224, 240, 228, 0.88);
-}
-
-/* ── Detail Panel ── */
+/* ── Detail panel ── */
 .detail {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 720px;
+  gap: 18px;
+  max-width: 700px;
 }
 
 .detailTop {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  padding-bottom: 20px;
+  padding-bottom: 18px;
   border-bottom: 2px solid var(--color-surface-alt, #ede8dc);
 }
 
 .detailImgBox {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   flex-shrink: 0;
   background: var(--color-surface-alt, #ede8dc);
-  border: 2px solid var(--color-border, #3d2b1f);
+  border: var(--pixel-border, 2px solid #3d2b1f);
   box-shadow: 3px 3px 0 var(--color-border, #3d2b1f);
   display: flex;
   align-items: center;
@@ -251,7 +214,7 @@
 }
 
 .detailEmoji {
-  font-size: 56px;
+  font-size: 52px;
 }
 
 .detailMeta {
@@ -261,137 +224,143 @@
   gap: 8px;
 }
 
-.levelBadge {
-  font-family: "Press Start 2P", monospace;
-  font-size: 9px;
-  color: #b8861a;
-  background: #fff8e0;
-  border: 2px solid #b8861a;
-  padding: 3px 8px;
-  align-self: flex-start;
-}
-
 .detailName {
   font-family: "Press Start 2P", monospace;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--color-text, #2a1f14);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-.priceRow {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.priceIcon {
-  font-size: 18px;
-}
-
-.priceVal {
-  font-size: 26px;
-  font-weight: 900;
-  color: var(--color-warning, #e8a040);
-  font-variant-numeric: tabular-nums;
-}
-
-.priceCur {
-  font-size: 14px;
+.detailDesc {
+  font-size: 12px;
   color: var(--color-text-secondary, #7a6a5a);
+  line-height: 1.7;
 }
 
-.metaStats {
-  display: flex;
-  gap: 16px;
-}
-
-.metaStat {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-}
-
-.metaStatLabel {
-  color: var(--color-text-muted, #ada090);
-  font-size: 11px;
-}
-
-.metaStatVal {
-  font-weight: 800;
-  font-size: 16px;
-  color: var(--color-text, #2a1f14);
-}
-
-.unlockBtn {
-  padding: 8px 14px;
-  border: var(--pixel-border, 2px solid #3d2b1f);
-  box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
-  background: var(--color-surface, #fffdf7);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--color-text, #2a1f14);
-  white-space: nowrap;
-  flex-shrink: 0;
-  align-self: flex-start;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.unlockBtn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--color-border, #3d2b1f);
-}
-
-.unlockBtnOn {
-  background: #fff8e0;
-  border-color: #b8861a;
-  color: #b8861a;
-  box-shadow: 2px 2px 0 #b8861a;
-}
-
-/* ── Description ── */
-.description {
-  font-size: 13px;
-  color: var(--color-text-secondary, #7a6a5a);
-  line-height: 1.8;
-  padding: 14px;
-  background: var(--color-surface, #fffdf7);
-  border-left: 4px solid var(--color-warning, #e8a040);
-}
-
-/* ── Obtain ── */
 .obtainRow {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 12px 16px;
-  background: var(--color-surface, #fffdf7);
-  border: var(--pixel-border, 2px solid #3d2b1f);
-  box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+  gap: 8px;
 }
 
 .obtainIcon {
-  font-size: 22px;
+  font-size: 14px;
   flex-shrink: 0;
-}
-
-.obtainLabel {
-  display: block;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-muted, #ada090);
-  margin-bottom: 3px;
+  margin-top: 1px;
 }
 
 .obtainVal {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--color-text, #2a1f14);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary, #7a6a5a);
+  line-height: 1.6;
 }
 
-/* ── Ingredients ── */
+/* ── Info badges (flame cost + current price) ── */
+.detailBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.flameBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #fff7ed;
+  border: 1.5px solid #f97316;
+  color: #c2410c;
+}
+
+.priceBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #fffbeb;
+  border: 1.5px solid #d97706;
+  color: #92400e;
+}
+
+/* ── Compact level widget (no border box) ── */
+.levelWidget {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0 0;
+  min-width: 86px;
+}
+
+.levelWidgetRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.levelWidgetBtn {
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid rgba(61, 43, 31, 0.35);
+  background: var(--color-surface-alt, #ede8dc);
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--color-text, #2a1f14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.levelWidgetBtn:not(:disabled):hover {
+  border-color: var(--color-primary, #e87040);
+  color: var(--color-primary, #e87040);
+}
+
+.levelWidgetBtn:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.levelWidgetVal {
+  font-family: "Press Start 2P", monospace;
+  font-size: 11px;
+  color: #b8861a;
+  min-width: 40px;
+  text-align: center;
+}
+
+.levelWidgetNA {
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--color-text-muted, #ada090);
+}
+
+.levelWidgetBar {
+  display: flex;
+  gap: 2px;
+  width: 100%;
+  height: 5px;
+}
+
+.levelWidgetSeg {
+  flex: 1;
+  background: rgba(61, 43, 31, 0.12);
+  border-radius: 1px;
+}
+
+.levelWidgetSegFilled {
+  background: #b8861a;
+}
+
+
+/* ── Ingredients section ── */
 .ingredSection {
   display: flex;
   flex-direction: column;
@@ -408,7 +377,6 @@
 .ingredList {
   display: flex;
   flex-direction: column;
-  gap: 0;
   border: var(--pixel-border, 2px solid #3d2b1f);
   box-shadow: var(--pixel-shadow, 3px 3px 0 #3d2b1f);
   overflow: hidden;
@@ -418,7 +386,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 16px;
+  padding: 11px 16px;
   background: var(--color-surface, #fffdf7);
   border-bottom: 1px solid var(--color-surface-alt, #ede8dc);
   text-align: left;
@@ -427,27 +395,17 @@
   width: 100%;
 }
 
-.ingredRow:last-child {
-  border-bottom: none;
-}
+.ingredRow:last-child { border-bottom: none; }
+.ingredRow:not(:disabled):hover { background: var(--color-surface-alt, #ede8dc); }
+.ingredRow:disabled { cursor: default; }
 
-.ingredRow:not(:disabled):hover {
-  background: var(--color-surface-alt, #ede8dc);
-}
-
-.ingredRow:disabled {
-  cursor: default;
-}
-
-.ingredMissing {
-  background: #fff5f5 !important;
-}
+.ingredMissing { background: #fff5f5 !important; }
 
 .ingredEmoji {
-  font-size: 28px;
+  font-size: 26px;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -459,7 +417,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .ingredName {
@@ -503,3 +461,103 @@
   color: var(--color-danger, #d94040);
   font-weight: 600;
 }
+
+/* ── Full upgrade cost matrix ── */
+.upgradeMatrixBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upgradeMatrix {
+  border: var(--pixel-border, 2px solid #3d2b1f);
+  box-shadow: var(--pixel-shadow, 3px 3px 0 #3d2b1f);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.matrixRow {
+  display: flex;
+  border-bottom: 1px solid var(--color-surface-alt, #ede8dc);
+  background: var(--color-surface, #fffdf7);
+  min-width: 0;
+}
+
+.matrixRow:last-child { border-bottom: none; }
+
+.matrixHead {
+  background: var(--color-surface-alt, #ede8dc);
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  color: var(--color-text-muted, #ada090);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.matrixRowDone {
+  opacity: 0.45;
+}
+
+.matrixRowCurrent {
+  background: #fff8e0 !important;
+  font-weight: 700;
+  color: #b8861a !important;
+}
+
+.matrixTotal {
+  background: var(--color-surface-alt, #ede8dc) !important;
+  font-weight: 800;
+  border-top: 2px solid rgba(61, 43, 31, 0.3);
+}
+
+/* "等级" column — fixed narrow */
+.matrixLvCell {
+  flex: 0 0 68px;
+  padding: 8px 10px;
+  font-size: 11px;
+  border-right: 1px solid var(--color-surface-alt, #ede8dc);
+  white-space: nowrap;
+  color: inherit;
+}
+
+/* 售价 / 美味度 columns — fixed medium */
+.matrixNumCell {
+  flex: 0 0 60px;
+  padding: 8px 6px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  border-right: 1px solid var(--color-surface-alt, #ede8dc);
+  color: inherit;
+}
+
+/* ingredient header label */
+.matrixIngCell {
+  flex: 1;
+  min-width: 72px;
+  padding: 8px 8px;
+  font-size: 10px;
+  border-right: 1px solid var(--color-surface-alt, #ede8dc);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: inherit;
+}
+
+.matrixIngCell:last-child { border-right: none; }
+
+/* ingredient value cells */
+.matrixIngValCell {
+  flex: 1;
+  min-width: 72px;
+  padding: 8px 8px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  border-right: 1px solid var(--color-surface-alt, #ede8dc);
+  color: inherit;
+}
+
+.matrixIngValCell:last-child { border-right: none; }
+
