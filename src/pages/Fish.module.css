@@ -74,6 +74,23 @@
   background: #f0e4c0;
 }
 
+/* 原图 296×224，仅前端展示 296×174，底部裁掉 */
+.cardImgCrop {
+  aspect-ratio: 296 / 174;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.cardImgCrop .cardEmoji {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .cardEmoji {
   font-size: 42px;
   filter: grayscale(0.4) opacity(0.75);
@@ -119,13 +136,17 @@
   color: var(--color-text-muted, #ada090);
 }
 
-.cardStarsOverlay {
+/* 卡片内星星：直接定位在图片右下角，无包裹层 */
+.cardStarsPosition {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  bottom: -3px;
+  right: -1px;
+  z-index: 1;
+  gap: 1px;
+}
+
+.cardStarsPosition .starBtn {
   padding: 0;
-  background: none;
-  border: none;
 }
 
 /* ── Interactive Stars ── */
@@ -148,10 +169,11 @@
   display: flex;
   align-items: center;
   will-change: transform;
+  color: inherit;
 }
 
 .starSm {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .starLg {
@@ -184,7 +206,7 @@
 }
 
 .starGray {
-  color: rgba(60, 40, 20, 0.22);
+  color: #5a4a38;
   text-shadow: none;
 }
 
@@ -269,16 +291,24 @@
   border-bottom: 2px solid var(--color-surface-alt, #ede8dc);
 }
 
+/* 原图 296×224，仅前端展示 296×180，底部裁掉 */
 .detailImgBox {
   width: 110px;
-  height: 110px;
+  aspect-ratio: 296 / 180;
   flex-shrink: 0;
+  overflow: hidden;
   background: var(--color-surface-alt, #ede8dc);
   border: 2px solid var(--color-border, #3d2b1f);
   box-shadow: 3px 3px 0 var(--color-border, #3d2b1f);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+}
+
+.detailImgBox img.detailEmoji {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .detailEmoji {
@@ -435,16 +465,33 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 2px 8px;
+  gap: 2px 0;
   font-size: 12px;
-  font-weight: 700;
-  color: var(--color-text, #2a1f14);
+}
+
+.meatChip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.meatChip:not(:last-child)::after {
+  content: " · ";
+  margin-left: 6px;
+  color: var(--color-text-muted, #ada090);
+  font-weight: 400;
 }
 
 .meatStar {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--color-text-muted, #ada090);
   font-weight: 600;
+}
+
+.meatVal {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text, #2a1f14);
 }
 
 .statDivider {

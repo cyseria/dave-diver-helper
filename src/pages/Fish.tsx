@@ -6,6 +6,7 @@ import { fishData } from "../data/fish";
 import { fishGuideModules } from "../data/fishGuideModules";
 import { recipeData } from "../data/recipes";
 import { usePlayerProgress } from "../store/usePlayerProgress";
+import { getFishImageUrl } from "../utils/fishImage";
 import styles from "./Fish.module.css";
 
 
@@ -108,11 +109,17 @@ function StarRating({
   captured,
   size = "sm",
   onRate,
+  rootClassName,
+  onRootClick,
+  onRootKeyDown,
 }: {
   stars: number;
   captured: boolean;
   size?: "sm" | "lg";
   onRate?: (n: number) => void;
+  rootClassName?: string;
+  onRootClick?: (e: React.MouseEvent) => void;
+  onRootKeyDown?: (e: React.KeyboardEvent) => void;
 }) {
   const [animStar, setAnimStar] = useState<number | null>(null);
   const [hoverStar, setHoverStar] = useState<number | null>(null);
@@ -147,8 +154,10 @@ function StarRating({
 
   return (
     <div
-      className={`${styles.starsTrack} ${size === "lg" ? styles.starsTrackLg : ""}`}
+      className={`${styles.starsTrack} ${size === "lg" ? styles.starsTrackLg : ""} ${rootClassName ?? ""}`.trim()}
       onMouseLeave={() => setHoverStar(null)}
+      onClick={onRootClick}
+      onKeyDown={onRootKeyDown as React.KeyboardEventHandler<HTMLDivElement>}
     >
       {STAR_POSITIONS.map((pos) => (
         <button
@@ -257,12 +266,24 @@ export function Fish() {
               tabIndex={0}
             >
               <div className={styles.cardImg}>
-                <div className={styles.cardStarsOverlay}>
-                  <StarRating
-                    stars={getStars(fish.id, fish.stars)}
-                    captured={captured}
-                    size="sm"
-                    onRate={(n) => {
+                {(() => {
+                  const src = getFishImageUrl(fish.image);
+                  return src ? (
+                    <div className={styles.cardImgCrop}>
+                      <img src={src} alt="" className={styles.cardEmoji} />
+                    </div>
+                  ) : (
+                    <span className={styles.cardEmoji}>{fish.image ?? fish.emoji}</span>
+                  );
+                })()}
+                <StarRating
+                  stars={getStars(fish.id, fish.stars)}
+                  captured={captured}
+                  size="sm"
+                  rootClassName={styles.cardStarsPosition}
+                  onRootClick={(e) => e.stopPropagation()}
+                  onRootKeyDown={(e) => e.stopPropagation()}
+                  onRate={(n) => {
                       const currentStars = getStars(fish.id, fish.stars);
                       if (!captured) {
                         toggleFishCaptured(fish.id);
@@ -274,9 +295,7 @@ export function Fish() {
                         setFishStarRating(fish.id, n);
                       }
                     }}
-                  />
-                </div>
-                <span className={styles.cardEmoji}>{fish.image ?? fish.emoji}</span>
+                />
               </div>
               <div className={styles.cardFooter}>
                 <span className={styles.cardName}>{fish.name}</span>
@@ -298,7 +317,14 @@ export function Fish() {
     <div className={styles.detail}>
       <div className={styles.detailTop}>
         <div className={styles.detailImgBox}>
-          <span className={styles.detailEmoji}>{selected.image ?? selected.emoji}</span>
+          {(() => {
+            const src = getFishImageUrl(selected.image);
+            return src ? (
+              <img src={src} alt="" className={styles.detailEmoji} />
+            ) : (
+              <span className={styles.detailEmoji}>{selected.image ?? selected.emoji}</span>
+            );
+          })()}
         </div>
         <div className={styles.detailInfo}>
           <StarRating
@@ -411,12 +437,24 @@ export function Fish() {
                 <span className={styles.statEm}>🥩</span>
                 <span className={styles.statLbl}>掉落肉量</span>
                 <div className={styles.meatByStar}>
-                  <span className={styles.meatStar}>1★</span>
-                  <span>{selected.meatByStar[0]}</span>
-                  <span className={styles.meatStar}>2★</span>
-                  <span>{selected.meatByStar[1]}</span>
-                  <span className={styles.meatStar}>3★</span>
-                  <span>{selected.meatByStar[2]}</span>
+                  <span className={styles.meatChip}>
+                    <span className={styles.meatStar}>★</span>
+                    <span className={styles.meatVal}>
+                      {selected.meatByStar[0] === -1 ? "—" : selected.meatByStar[0]}
+                    </span>
+                  </span>
+                  <span className={styles.meatChip}>
+                    <span className={styles.meatStar}>★★</span>
+                    <span className={styles.meatVal}>
+                      {selected.meatByStar[1] === -1 ? "—" : selected.meatByStar[1]}
+                    </span>
+                  </span>
+                  <span className={styles.meatChip}>
+                    <span className={styles.meatStar}>★★★</span>
+                    <span className={styles.meatVal}>
+                      {selected.meatByStar[2] === -1 ? "—" : selected.meatByStar[2]}
+                    </span>
+                  </span>
                 </div>
               </div>
             </>

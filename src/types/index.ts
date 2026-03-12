@@ -72,11 +72,10 @@ export interface Fish {
   zones?: string[]; // module ids
   habitat?: string; // sub-area note
   category?: FishCategory;
-  source?: string[]; // source notes
   note?: string; // special note / capture tip
   /** 重量（kg） */
   weight?: number;
-  /** 按星级掉落肉量 [1星, 2星, 3星] */
+  /** 按星级掉落肉量 [1星, 2星, 3星]，-1 表示该星级无数据，前端展示为 — */
   meatByStar?: [number, number, number];
 }
 

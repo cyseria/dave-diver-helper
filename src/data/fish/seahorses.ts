@@ -10,7 +10,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 50,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "crowned_seahorse",
@@ -19,7 +18,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 250,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "dwarf_seahorse",
@@ -28,7 +26,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 130,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "giraffe_seahorse",
@@ -37,7 +34,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 130,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "hedgehog_seahorse",
@@ -46,7 +42,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 130,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "jayakars_seahorse",
@@ -55,7 +50,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 50,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "lined_seahorse",
@@ -64,7 +58,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 250,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "long_snouted_seahorse",
@@ -73,7 +66,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 50,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "pacific_seahorse",
@@ -82,7 +74,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 50,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "spiny_seahorse",
@@ -91,7 +82,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 130,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "spotted_seahorse",
@@ -100,7 +90,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 250,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "tiger_tail_seahorse",
@@ -109,7 +98,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 130,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "white_seahorse",
@@ -118,7 +106,6 @@ export const seahorsesFish: Fish[] = [
     depthMax: 250,
     zones: ["海马"],
     category: "seahorse",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "zebra_seahorse",
@@ -126,7 +113,6 @@ export const seahorsesFish: Fish[] = [
     zones: ["海马"],
     category: "seahorse",
     habitat: "石灰岩洞窟",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "leafy_seadragon",
@@ -134,7 +120,6 @@ export const seahorsesFish: Fish[] = [
     zones: ["海马"],
     category: "seahorse",
     habitat: "冰河地区",
-    source: ["玩家攻略"],
   }),
   fish({
     id: "weedy_seadragon",
@@ -142,6 +127,5 @@ export const seahorsesFish: Fish[] = [
     zones: ["海马"],
     category: "seahorse",
     habitat: "冰河地区",
-    source: ["玩家攻略"],
   }),
 ];

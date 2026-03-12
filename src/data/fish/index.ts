@@ -7,7 +7,6 @@ import { glacialZoneFish } from "./glacialZone";
 import { hydrothermalVentsFish } from "./hydrothermalVents";
 import { seahorsesFish } from "./seahorses";
 import { trapFish } from "./trap";
-import { legacyFish } from "./legacy";
 
 export const fishData: Fish[] = [
   ...shallowFish,
@@ -17,6 +16,5 @@ export const fishData: Fish[] = [
   ...glacialZoneFish,
   ...hydrothermalVentsFish,
   ...seahorsesFish,
-  ...trapFish,
-  ...legacyFish,
+  ...trapFish
 ];
