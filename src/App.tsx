@@ -10,7 +10,7 @@ import { Weapons } from "./pages/Weapons";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL || "/"}>
       <div className={styles.appShell}>
         <Topbar />
         <main className={styles.content}>
