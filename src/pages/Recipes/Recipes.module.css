@@ -31,6 +31,13 @@
   min-width: 0;
 }
 
+.listHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 .listTitle {
   font-family: "Press Start 2P", monospace;
   font-size: 9px;
@@ -74,9 +81,27 @@
   outline-offset: 2px;
 }
 
+.featureToggle {
+  border: var(--pixel-border, 2px solid #3d2b1f);
+  background: var(--color-surface, #fffdf7);
+  box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+  padding: 6px 8px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 9px;
+  color: var(--color-text, #2a1f14);
+  cursor: pointer;
+}
+
+.featureToggleActive {
+  border-color: #f59e0b;
+  box-shadow: 2px 2px 0 #f59e0b;
+  background: #fff7df;
+  color: #8a4d00;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 6px;
   padding: 10px;
 }
@@ -106,9 +131,26 @@
 }
 
 .cardSelected {
-  border-color: var(--color-primary, #e87040) !important;
-  box-shadow: 3px 3px 0 var(--color-primary, #e87040) !important;
+  border-color: #3b82f6 !important;
+  box-shadow:
+    0 0 0 2px rgba(59, 130, 246, 0.26),
+    3px 3px 0 #3b82f6 !important;
   opacity: 1 !important;
+}
+
+.cardFeatured {
+  border-color: #f59e0b;
+  box-shadow:
+    0 0 0 1px rgba(245, 158, 11, 0.22),
+    2px 2px 0 #f59e0b;
+}
+
+.cardFeatured.cardSelected {
+  border-color: #3b82f6 !important;
+  box-shadow:
+    0 0 0 2px rgba(59, 130, 246, 0.28),
+    0 0 0 4px rgba(245, 158, 11, 0.28),
+    3px 3px 0 #3b82f6 !important;
 }
 
 .cardImg {
@@ -119,6 +161,38 @@
   position: relative;
   border-bottom: 1px solid var(--color-border, #3d2b1f);
   background: #d8d0c4;
+  min-height: 28px;
+}
+
+.cardOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 6px 6px 7px;
+  background: rgba(237, 232, 220, 0.92);
+  border-top: 1px solid rgba(61, 43, 31, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardOverlayName {
+  font-size: 10px;
+  font-weight: 800;
+  color: #5a4a38;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
+}
+
+.cardOverlayStats {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 0 2px;
 }
 
 
@@ -157,23 +231,59 @@
   filter: drop-shadow(0 0 1px #fff) drop-shadow(0 1px 1px rgba(0,0,0,0.5));
 }
 
+.partyEmojiTag {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  z-index: 2;
+  font-size: 18px;
+  line-height: 1;
+  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
 .cardFooter {
   display: flex;
-  align-items: center;
-  padding: 5px 8px;
-  height: 28px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px 6px 5px;
   flex-shrink: 0;
+  background: rgba(237, 232, 220, 0.98);
+  border-top: 1px solid rgba(61, 43, 31, 0.18);
 }
 
 .cardName {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
   color: #5a4a38;
-  flex: 1;
   min-width: 0;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.cardStatsRow {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.cardStat {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 7.8px;
+  font-weight: 700;
+  color: #5a4a38;
+  padding: 0px 2px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  white-space: nowrap;
 }
 
 
@@ -286,6 +396,30 @@
   background: #fffbeb;
   border: 1.5px solid #d97706;
   color: #92400e;
+}
+
+.tasteBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #fce7f3;
+  border: 1.5px solid #f472b6;
+  color: #831843;
+}
+
+.servingsBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #eff6ff;
+  border: 1.5px solid #60a5fa;
+  color: #1e3a8a;
 }
 
 /* ── 已获得/未获得 切换按钮 ── */

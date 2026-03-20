@@ -1,49 +1,52 @@
 import { useMemo, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../../components/EncyclopediaLayout";
-import { TabBar } from "../../components/TabBar";
-import type { TabItem } from "../../components/TabBar";
-import { recipeData } from "../../data/recipesNamed";
-import { getRecipeImageUrl } from "../../utils/recipeImage";
+import { recipeData } from "../../data/recipes";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
 import type { Recipe } from "../../types";
-import { RecipeTips } from "./RecipeTips";
 import styles from "./Recipes.module.css";
 
-type RecipesPageTab = "guide" | "tips";
-const PAGE_TABS: TabItem<RecipesPageTab>[] = [
-  { id: "tips", label: "推荐", emoji: "⭐" },
-  { id: "guide", label: "食谱图鉴", emoji: "📖" },
+type RecipeSortKey = "sellPrice" | "tastiness";
+
+type PartyFoodKey = "all" | NonNullable<Recipe["partyFood"]>;
+const PARTY_FOOD_OPTIONS: Array<{ value: PartyFoodKey; label: string }> = [
+  { value: "all", label: "全部" },
+  { value: "水母", label: "水母派对" },
+  { value: "金枪鱼", label: "金枪鱼派对" },
+  { value: "旗鱼", label: "旗鱼派对" },
+  { value: "鲨鱼", label: "鲨鱼派对" },
+  { value: "黄瓜", label: "黄瓜派对" },
+  { value: "虾", label: "虾派对" },
+  { value: "龙虾", label: "龙虾派对" },
+  { value: "咖喱", label: "咖喱派对" },
 ];
 
-type RecipeSortKey = "obtained" | "sellPrice" | "tastiness";
+const PARTY_FOOD_EMOJI: Record<NonNullable<Recipe["partyFood"]>, string> = {
+  水母: "🪼",
+  金枪鱼: "🐟",
+  旗鱼: "⚔️",
+  鲨鱼: "🦈",
+  黄瓜: "🥒",
+  虾: "🦐",
+  龙虾: "🦞",
+  咖喱: "🍛",
+};
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export function Recipes() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [pageTab, setPageTab] = useState<RecipesPageTab>("tips");
-  const [sortKey, setSortKey] = useState<RecipeSortKey>("obtained");
-  const { recipeEnhanceLevels, setRecipeEnhanceLevel, capturedFishIds } =
-    usePlayerProgress();
+  const [sortKey, setSortKey] = useState<RecipeSortKey>("sellPrice");
+  const [partyFilter, setPartyFilter] = useState<PartyFoodKey>("all");
+  const [starOnly, setFeaturedOnly] = useState(false);
+  const { capturedFishIds } = usePlayerProgress();
 
   const selected = id ? recipeData.find((r) => r.id === id) ?? null : null;
 
-  const isObtained = selected
-    ? (recipeEnhanceLevels[selected.id] ?? 0) >= 1
-    : false;
-
   const sortedRecipes = useMemo<Recipe[]>(() => {
     const copy = [...recipeData];
-    if (sortKey === "obtained") {
-      copy.sort((a, b) => {
-        const ha = (recipeEnhanceLevels[a.id] ?? 0) >= 1 ? 1 : 0;
-        const hb = (recipeEnhanceLevels[b.id] ?? 0) >= 1 ? 1 : 0;
-        if (hb !== ha) return hb - ha;
-        return a.name.localeCompare(b.name, "zh-Hans-CN");
-      });
-    } else if (sortKey === "sellPrice") {
+    if (sortKey === "sellPrice") {
       copy.sort((a, b) => {
         if (b.sellPrice !== a.sellPrice) return b.sellPrice - a.sellPrice;
         return a.name.localeCompare(b.name, "zh-Hans-CN");
@@ -55,22 +58,39 @@ export function Recipes() {
       });
     }
     return copy;
-  }, [sortKey, recipeEnhanceLevels]);
+  }, [sortKey]);
 
-  // Default select first recipe when entering guide tab
+  const visibleRecipes = useMemo<Recipe[]>(() => {
+    return sortedRecipes.filter((r) => {
+      const partyMatch = partyFilter === "all" || r.partyFood === partyFilter;
+      const starMatch = !starOnly || r.featured === true;
+      return partyMatch && starMatch;
+    });
+  }, [partyFilter, starOnly, sortedRecipes]);
+
+  // Default select first recipe
   useEffect(() => {
-    if (pageTab !== "guide") return;
     if (id) return;
-    const first = sortedRecipes[0];
+    const first = visibleRecipes[0];
     if (!first) return;
     navigate(`/recipes/${first.id}`, { replace: true });
-  }, [pageTab, id, sortedRecipes, navigate]);
+  }, [id, visibleRecipes, navigate]);
 
-  // Summary: how many obtained (level >= 1)
-  const obtainedCount = useMemo(
-    () => recipeData.filter((r) => (recipeEnhanceLevels[r.id] ?? 0) >= 1).length,
-    [recipeEnhanceLevels],
-  );
+  // When party filter changes, keep the selected recipe in sync with visible list.
+  useEffect(() => {
+    if (!id) return;
+    // Use `selected` (derived from URL id) for sync decision instead of relying
+    // on `visibleRecipes` by id, because duplicate ids could cause mismatch.
+    if (!selected) return;
+    const partyMatch =
+      partyFilter === "all" ? true : selected.partyFood === partyFilter;
+    const starMatch = !starOnly || selected.star === true;
+    const shouldMatch = partyMatch && starMatch;
+    if (shouldMatch) return;
+    const first = visibleRecipes[0];
+    if (!first) return;
+    navigate(`/recipes/${first.id}`, { replace: true });
+  }, [id, partyFilter, starOnly, selected, visibleRecipes, navigate]);
 
   // ── List panel ──────────────────────────────────────────────────────────────
   const listPanel = (
@@ -79,32 +99,55 @@ export function Recipes() {
         <div className={styles.listHeaderLeft}>
           <span className={styles.listTitle}>食谱图鉴</span>
           <span className={styles.listCount}>
-            <span className={styles.countHighlight}>{obtainedCount}</span>
-            {" / "}
-            {recipeData.length}
+            {visibleRecipes.length}
+            {" · "}
+            {partyFilter === "all" ? "全部" : `${partyFilter}派对`}
           </span>
         </div>
-        <label className={styles.sortWrap}>
-          <span className={styles.sortLabel}>排序</span>
-          <select
-            className={styles.sortSelect}
-            value={sortKey}
-            onChange={(e) => setSortKey(e.target.value as RecipeSortKey)}
+        <div className={styles.listHeaderRight}>
+          <label className={styles.sortWrap}>
+            <span className={styles.sortLabel}>排序</span>
+            <select
+              className={styles.sortSelect}
+              value={sortKey}
+              onChange={(e) => setSortKey(e.target.value as RecipeSortKey)}
+            >
+              <option value="sellPrice">出售价格（高→低）</option>
+              <option value="tastiness">美味度（高→低）</option>
+            </select>
+          </label>
+          <label className={styles.sortWrap}>
+            <span className={styles.sortLabel}>派对</span>
+            <select
+              className={styles.sortSelect}
+              value={partyFilter}
+              onChange={(e) => setPartyFilter(e.target.value as PartyFoodKey)}
+            >
+              {PARTY_FOOD_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            className={`${styles.featureToggle} ${starOnly ? styles.featureToggleActive : ""}`}
+            onClick={() => setFeaturedOnly((v) => !v)}
+            aria-pressed={starOnly}
+            title="仅显示星标推荐菜谱"
           >
-            <option value="obtained">已获得优先</option>
-            <option value="sellPrice">出售价格（高→低）</option>
-            <option value="tastiness">美味度（高→低）</option>
-          </select>
-        </label>
+            ⭐ 星标
+          </button>
+        </div>
       </div>
       <div className={styles.grid}>
-        {sortedRecipes.map((recipe) => {
-          const hasIt = (recipeEnhanceLevels[recipe.id] ?? 0) >= 1;
+        {visibleRecipes.map((recipe, index) => {
           const isSelected = recipe.id === id;
           return (
             <div
-              key={recipe.id}
-              className={`${styles.card} ${isSelected ? styles.cardSelected : ""} ${hasIt ? styles.cardOwned : ""}`}
+              key={`${recipe.id}-${index}`}
+              className={`${styles.card} ${recipe.star ? styles.cardFeatured : ""} ${isSelected ? styles.cardSelected : ""}`}
               onClick={() => navigate(`/recipes/${recipe.id}`)}
               onKeyDown={(e) =>
                 e.key === "Enter" && navigate(`/recipes/${recipe.id}`)
@@ -112,20 +155,34 @@ export function Recipes() {
               // biome-ignore lint/a11y/noNoninteractiveTabindex: card is a clickable list item
               tabIndex={0}
             >
+              {recipe.partyFood ? (
+                <div className={styles.partyEmojiTag} aria-hidden="true">
+                  {PARTY_FOOD_EMOJI[recipe.partyFood]}
+                </div>
+              ) : null}
               <div className={styles.cardImg}>
                 {(() => {
-                  const imgUrl = getRecipeImageUrl(recipe.name);
+                  const imgUrl = recipe.imageUrl;
                   return imgUrl ? (
                     <img src={imgUrl} alt="" className={styles.cardImgPhoto} />
                   ) : (
-                    <span className={styles.cardEmoji}>{recipe.emoji}</span>
+                    // Party cards should show emoji only in the top-left tag.
+                    recipe.partyFood ? null : (
+                      <span className={styles.cardEmoji}>{recipe.emoji}</span>
+                    )
                   );
                 })()}
-                {!hasIt && <span className={styles.lockOverlay}>🔒</span>}
-                {hasIt && <span className={styles.obtainedBadge}>✓</span>}
               </div>
               <div className={styles.cardFooter}>
                 <span className={styles.cardName}>{recipe.name}</span>
+                <div className={styles.cardStatsRow}>
+                  <span className={styles.cardStat}>
+                    💰 {recipe.sellPrice}
+                  </span>
+                  <span className={styles.cardStat}>
+                    😋 {recipe.tastiness}
+                  </span>
+                </div>
               </div>
             </div>
           );
@@ -141,7 +198,7 @@ export function Recipes() {
       <div className={styles.detailTop}>
         <div className={styles.detailImgBox}>
           {(() => {
-            const imgUrl = getRecipeImageUrl(selected.name);
+            const imgUrl = selected.imageUrl;
             return imgUrl ? (
               <img src={imgUrl} alt="" className={styles.detailImgPhoto} />
             ) : (
@@ -154,35 +211,24 @@ export function Recipes() {
 
           {/* Info badges: artisan flame + current price */}
           <div className={styles.detailBadges}>
-            {selected.artisanFlameCost !== undefined && (
-              <span className={styles.flameBadge}>
-                🔥 {selected.artisanFlameCost} 工匠之火
-              </span>
-            )}
-            {isObtained && (
-              <span className={styles.priceBadge}>
-                💰 {selected.sellPrice} 金
-              </span>
-            )}
+            <span className={styles.priceBadge}>💰 {selected.sellPrice} 金</span>
+            <span className={styles.tasteBadge}>
+              😋 {selected.tastiness} 美味
+            </span>
+            <span className={styles.servingsBadge}>
+              🍽️ {selected.servings} 碟子
+            </span>
           </div>
 
           <p className={styles.detailDesc}>{selected.description}</p>
-          <div className={styles.obtainRow}>
-            <span className={styles.obtainIcon}>📖</span>
-            <span className={styles.obtainVal}>{selected.obtainMethod}</span>
-          </div>
+          {selected.obtainMethod?.trim() ? (
+            <div className={styles.obtainRow}>
+              <span className={styles.obtainIcon}>📖</span>
+              <span className={styles.obtainVal}>{selected.obtainMethod}</span>
+            </div>
+          ) : null}
         </div>
 
-        {/* ── 已获得/未获得 切换 ── */}
-        <button
-          type="button"
-          className={isObtained ? styles.obtainedToggle : styles.notObtainedToggle}
-          onClick={() =>
-            setRecipeEnhanceLevel(selected.id, isObtained ? 0 : 1)
-          }
-        >
-          {isObtained ? "✓ 已获得" : "未获得"}
-        </button>
       </div>
 
       {/* ── Ingredients first ── */}
@@ -230,22 +276,12 @@ export function Recipes() {
 
   return (
     <div className={styles.recipesPage}>
-      <TabBar
-        tabs={PAGE_TABS}
-        value={pageTab}
-        onChange={setPageTab}
-        aria-label="食谱页面切换"
+      <EncyclopediaLayout
+        listPanel={listPanel}
+        detailPanel={detailPanel}
+        hasSelection={!!selected}
+        emptyMessage="← 从左侧选择一个食谱查看详情"
       />
-      {pageTab === "guide" ? (
-        <EncyclopediaLayout
-          listPanel={listPanel}
-          detailPanel={detailPanel}
-          hasSelection={!!selected}
-          emptyMessage="← 从左侧选择一个食谱查看详情"
-        />
-      ) : (
-        <RecipeTips />
-      )}
     </div>
   );
 }

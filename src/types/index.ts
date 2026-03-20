@@ -99,6 +99,7 @@ export interface Recipe {
   name: string;
   emoji: string;
   level: number; // required restaurant level
+  imageUrl?: string | null; // recipe card/detail image url
   sellPrice: number;
   tastiness: number; // 美味度
   servings: number; // 出餐量
@@ -106,6 +107,9 @@ export interface Recipe {
   obtainMethod: string; // 获取方式
   description: string;
   ingredients: Ingredient[];
+  partyFood?: string; // 派对食物类型，如「水母」「金枪鱼」等
+  recommended?: boolean; // 是否推荐
+  star?: boolean; // 是否首页星标推荐
 }
 
 export type StaffRole = "kitchen" | "hall" | "dispatch";

@@ -7,7 +7,7 @@
 
 /* 左侧图鉴列表固定宽度，不随页面缩放；仅右侧详情区自适应 */
 .list {
-  width: 478px;
+  width: 560px;
   flex-shrink: 0;
   min-height: 0;
   border-right: var(--pixel-border, 2px solid #3d2b1f);

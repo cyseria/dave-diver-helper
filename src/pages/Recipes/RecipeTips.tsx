@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { recipeData } from "../../data/recipes";
 import styles from "./RecipeTips.module.css";
 
 /* ─── Tag config ─────────────────────────────────────────── */
@@ -22,6 +23,14 @@ const TAGS: TagDef[] = [
 ];
 
 const TAG_MAP = Object.fromEntries(TAGS.map((t) => [t.id, t]));
+
+const recipeImageByName = (() => {
+  const map = new Map<string, string | null>();
+  for (const r of recipeData) {
+    map.set(r.name, r.imageUrl ?? null);
+  }
+  return map;
+})();
 
 /* ─── Unified card data ──────────────────────────────────── */
 
@@ -78,7 +87,7 @@ const ENTRIES: TipEntry[] = [
   {
     id: "tuna-rice",
     emoji: "🍱",
-    name: "蓝鳍金枪鱼生鱼片盖饭",
+    name: "金枪鱼生鱼片盖饭",
     tags: ["tuna"],
     stats: { price: 1332, tastiness: 400, servings: 9 },
     ingredients: "大西洋蓝鳍金枪鱼×3 · 白米×3 · 鸡蛋×1 · 芝麻×1",
@@ -104,7 +113,7 @@ const ENTRIES: TipEntry[] = [
   {
     id: "sailfish-truffle",
     emoji: "🍣",
-    name: "鞍鞍松露平鳍旗鱼",
+    name: "鞑靼松露平鳍旗鱼",
     tags: ["sailfish"],
     stats: { price: 1461, tastiness: 350, servings: 7 },
     ingredients: "平鳍旗鱼肉片×3 · 紫海胆×2 · 松露×2",
@@ -202,6 +211,7 @@ function StatBadge({
 function EntryCard({ entry }: { entry: TipEntry }) {
   /* Primary theme comes from the first tag */
   const primaryTheme = entry.tags[0] ? TAG_MAP[entry.tags[0]]?.themeKey ?? "" : "";
+  const imgUrl = recipeImageByName.get(entry.name) ?? null;
 
   return (
     <div className={`${styles.card} ${styles[`cardTheme_${primaryTheme}`]}`}>
@@ -224,7 +234,13 @@ function EntryCard({ entry }: { entry: TipEntry }) {
       {/* Main body */}
       <div className={styles.cardBody}>
         <div className={styles.cardTop}>
-          <span className={styles.cardEmoji}>{entry.emoji}</span>
+          {imgUrl ? (
+            <div className={styles.cardImgBox}>
+              <img src={imgUrl} alt="" className={styles.cardImgPhoto} />
+            </div>
+          ) : (
+            <span className={styles.cardEmoji}>{entry.emoji}</span>
+          )}
           <div className={styles.cardNameWrap}>
             {entry.badge && (
               <span className={styles.cardBadge}>{entry.badge}</span>
