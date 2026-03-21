@@ -289,7 +289,7 @@ export const weaponsData: Weapon[] = [
       { name: "闪电步枪II", qty: 1 },
       { name: "震荡步枪II", qty: 1 },
       { name: "蛋白石管", qty: 1, tip: "鱼人族村铁匠铺购买" },
-      { name: "长尾鲨的尾巴", qty: 3, tip: "击杀长尾鲨（深层海域）掉落" },
+      { name: "长尾鲨的尾巴", qty: 3, tip: "击杀浅海长尾鲨（浅海）掉落" },
     ],
     goldCost: 5500,
     tips: [

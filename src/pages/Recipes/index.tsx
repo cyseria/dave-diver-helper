@@ -1,9 +1,12 @@
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../../components/EncyclopediaLayout";
+import { fishData } from "../../data/fish";
 import { recipeData } from "../../data/recipes";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
-import type { Recipe } from "../../types";
+import type { Fish, Recipe } from "../../types";
+import { getFishImageUrl } from "../../utils/fishImage";
+import { resolveIngredientFishIdFromName } from "../../utils/ingredientFishResolve";
 import styles from "./Recipes.module.css";
 
 type RecipeSortKey = "sellPrice" | "tastiness";
@@ -34,6 +37,12 @@ const PARTY_FOOD_EMOJI: Record<NonNullable<Recipe["partyFood"]>, string> = {
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
+const fishById = (() => {
+  const m = new Map<string, Fish>();
+  for (const f of fishData) m.set(f.id, f);
+  return m;
+})();
+
 export function Recipes() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -42,7 +51,7 @@ export function Recipes() {
   const [starOnly, setFeaturedOnly] = useState(false);
   const { capturedFishIds } = usePlayerProgress();
 
-  const selected = id ? recipeData.find((r) => r.id === id) ?? null : null;
+  const selected = id ? (recipeData.find((r) => r.id === id) ?? null) : null;
 
   const sortedRecipes = useMemo<Recipe[]>(() => {
     const copy = [...recipeData];
@@ -63,7 +72,7 @@ export function Recipes() {
   const visibleRecipes = useMemo<Recipe[]>(() => {
     return sortedRecipes.filter((r) => {
       const partyMatch = partyFilter === "all" || r.partyFood === partyFilter;
-      const starMatch = !starOnly || r.featured === true;
+      const starMatch = !starOnly || r.star === true;
       return partyMatch && starMatch;
     });
   }, [partyFilter, starOnly, sortedRecipes]);
@@ -165,23 +174,17 @@ export function Recipes() {
                   const imgUrl = recipe.imageUrl;
                   return imgUrl ? (
                     <img src={imgUrl} alt="" className={styles.cardImgPhoto} />
-                  ) : (
-                    // Party cards should show emoji only in the top-left tag.
-                    recipe.partyFood ? null : (
-                      <span className={styles.cardEmoji}>{recipe.emoji}</span>
-                    )
+                  ) : // Party cards should show emoji only in the top-left tag.
+                  recipe.partyFood ? null : (
+                    <span className={styles.cardEmoji}>{recipe.emoji}</span>
                   );
                 })()}
               </div>
               <div className={styles.cardFooter}>
                 <span className={styles.cardName}>{recipe.name}</span>
                 <div className={styles.cardStatsRow}>
-                  <span className={styles.cardStat}>
-                    💰 {recipe.sellPrice}
-                  </span>
-                  <span className={styles.cardStat}>
-                    😋 {recipe.tastiness}
-                  </span>
+                  <span className={styles.cardStat}>💰 {recipe.sellPrice}</span>
+                  <span className={styles.cardStat}>😋 {recipe.tastiness}</span>
                 </div>
               </div>
             </div>
@@ -211,7 +214,9 @@ export function Recipes() {
 
           {/* Info badges: artisan flame + current price */}
           <div className={styles.detailBadges}>
-            <span className={styles.priceBadge}>💰 {selected.sellPrice} 金</span>
+            <span className={styles.priceBadge}>
+              💰 {selected.sellPrice} 金
+            </span>
             <span className={styles.tasteBadge}>
               😋 {selected.tastiness} 美味
             </span>
@@ -228,7 +233,6 @@ export function Recipes() {
             </div>
           ) : null}
         </div>
-
       </div>
 
       {/* ── Ingredients first ── */}
@@ -236,23 +240,43 @@ export function Recipes() {
         <h3 className={styles.sectionTitle}>🥘 所需食材（每份）</h3>
         <div className={styles.ingredList}>
           {selected.ingredients.map((ing) => {
-            const hasFish = ing.fishId
-              ? capturedFishIds.includes(ing.fishId)
+            const resolvedFishId =
+              ing.fishId ?? resolveIngredientFishIdFromName(ing.name);
+            const hasFish = resolvedFishId
+              ? capturedFishIds.includes(resolvedFishId)
               : true;
+            const linkedFish = resolvedFishId
+              ? fishById.get(resolvedFishId)
+              : undefined;
+            const fishImgUrl = linkedFish
+              ? getFishImageUrl(linkedFish.image)
+              : null;
             return (
               <button
                 type="button"
                 key={`base-${ing.id}`}
                 className={`${styles.ingredRow} ${!hasFish ? styles.ingredMissing : ""}`}
                 onClick={() => {
-                  if (ing.fishId) navigate(`/fish/${ing.fishId}`);
+                  if (resolvedFishId) navigate(`/fish/${resolvedFishId}`);
                 }}
-                disabled={!ing.fishId}
+                disabled={!resolvedFishId}
               >
-                <span className={styles.ingredEmoji}>{ing.emoji}</span>
+                <span className={styles.ingredThumb}>
+                  {fishImgUrl ? (
+                    <img
+                      src={fishImgUrl}
+                      alt=""
+                      className={styles.ingredThumbImg}
+                    />
+                  ) : (
+                    <span className={styles.ingredThumbEmoji}>{ing.emoji}</span>
+                  )}
+                </span>
                 <div className={styles.ingredInfo}>
                   <span className={styles.ingredName}>{ing.name}</span>
-                  <span className={styles.ingredLocation}>📍 {ing.location}</span>
+                  <span className={styles.ingredLocation}>
+                    📍 {ing.location}
+                  </span>
                 </div>
                 <div className={styles.ingredRight}>
                   <span className={styles.ingredQty}>×{ing.quantity}</span>
@@ -262,15 +286,15 @@ export function Recipes() {
             );
           })}
         </div>
-        {selected.ingredients.some(
-          (ing) => ing.fishId && !capturedFishIds.includes(ing.fishId),
-        ) && (
+        {selected.ingredients.some((ing) => {
+          const rid = ing.fishId ?? resolveIngredientFishIdFromName(ing.name);
+          return rid && !capturedFishIds.includes(rid);
+        }) && (
           <div className={styles.missingAlert}>
             ⚠️ 有食材尚未捕获，点击食材行可前往对应鱼类图鉴查看。
           </div>
         )}
       </div>
-
     </div>
   ) : null;
 

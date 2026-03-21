@@ -59,8 +59,6 @@ export interface Fish {
   stars: number; // 1–5 stars
   depthMin?: number;
   depthMax?: number;
-  hp?: number;
-  attack?: number;
   recommendedWeapon?: WeaponType;
   rarity?: Rarity;
   recipeIds: string[];

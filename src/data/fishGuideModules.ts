@@ -5,7 +5,6 @@ export const fishGuideModules: FishGuideModule[] = [
     id: "blue-hole-entrance",
     name: "蓝洞入口",
     description: "Blue Hole Shallows（0–50m）。浅层鱼类与夜潜目标集中。",
-    tips: ["夜行性目标仅在夜潜出现。"],
     fishIds: [
       "baby_humpback_whale",
       "barrel_jellyfish",

@@ -54,6 +54,359 @@
   border-color: var(--color-warning, #e8a040);
 }
 
+/*
+ * 已捕获且 2 星：「精良」银蓝薄荷框（冷色、无闪烁）
+ * 与 3 星暖金形成明显冷暖对比，一眼区分
+ */
+.cardTwoStar {
+  --fine-border: #5a9eb8;
+  --fine-border-hi: #72b8d0;
+  --fine-shadow: #3d5566;
+  --fine-shadow-hi: #4a6a7e;
+
+  background-color: #e8f4f8 !important;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(80, 140, 180, 0.07) 0px,
+    rgba(80, 140, 180, 0.07) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  border-color: var(--fine-border) !important;
+  opacity: 1 !important;
+  box-shadow:
+    2px 2px 0 var(--fine-shadow),
+    inset 0 2px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 rgba(50, 90, 120, 0.12) !important;
+}
+
+.cardTwoStar:hover {
+  transform: translate(-1px, -1px);
+  border-color: var(--fine-border-hi) !important;
+  box-shadow:
+    3px 3px 0 var(--fine-shadow-hi),
+    inset 0 2px 0 rgba(255, 255, 255, 0.82),
+    inset 0 -1px 0 rgba(50, 90, 120, 0.1) !important;
+}
+
+.cardTwoStar .cardImg {
+  background: #dceef4;
+  background-image: linear-gradient(
+    180deg,
+    #f2fafc 0%,
+    #d8e8f0 52%,
+    #c5dce8 100%
+  );
+  border-bottom: 2px solid rgba(55, 85, 105, 0.32);
+}
+
+.cardTwoStar.cardSelected {
+  outline: 2px solid var(--color-primary, #e87040);
+  outline-offset: 2px;
+  border-color: var(--fine-border-hi) !important;
+  box-shadow:
+    3px 3px 0 var(--fine-shadow-hi),
+    inset 0 2px 0 rgba(255, 255, 255, 0.78),
+    inset 0 -1px 0 rgba(50, 90, 120, 0.1) !important;
+}
+
+.cardTwoStar.cardBoss {
+  border-color: var(--fine-border) !important;
+  box-shadow:
+    2px 2px 0 var(--fine-shadow),
+    inset 0 2px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 rgba(50, 90, 120, 0.12) !important;
+}
+
+.cardTwoStar::after {
+  content: "✧";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  z-index: 2;
+  font-size: 11px;
+  line-height: 1;
+  color: #f6fcff;
+  text-shadow:
+    1px 0 0 #4a7a90,
+    -1px 0 0 #4a7a90,
+    0 1px 0 #4a7a90,
+    0 -1px 0 #4a7a90;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.cardTwoStar .cardName {
+  color: #2d4a58;
+}
+
+.cardTwoStar .cardMetaItem {
+  color: #6a8a9a;
+}
+
+/*
+ * 已捕获且 3 星：「传说」高饱和金黄卡（与二星银蓝、一星奶黄拉开差距）
+ * 斜向高光 + 金条底 + 像素描边；阶梯闪烁只动描边/高光，避免糊成一片
+ */
+.cardThreeStar {
+  --gold-border: #ffb300;
+  --gold-border-hi: #ffe082;
+  --gold-shadow: #7a4a00;
+  --gold-shadow-hi: #9a5a08;
+
+  border-color: var(--gold-border) !important;
+  opacity: 1 !important;
+  background-color: #ffc400;
+  background-image: linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.08) 38%,
+      transparent 52%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 220, 60, 0.22) 0px,
+      rgba(255, 220, 60, 0.22) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    linear-gradient(
+      168deg,
+      #fffde7 0%,
+      #fff59d 22%,
+      #ffeb3b 48%,
+      #ffc107 72%,
+      #ffa000 100%
+    );
+  box-shadow:
+    2px 2px 0 var(--gold-shadow),
+    0 0 0 1px rgba(255, 248, 200, 0.95),
+    inset 0 2px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -2px 0 rgba(180, 90, 0, 0.22) !important;
+  animation: rareCardPixelTwinkle 1.6s steps(2, end) infinite;
+}
+
+.cardThreeStar:hover {
+  transform: translate(-1px, -1px);
+  border-color: #ffca28 !important;
+  box-shadow:
+    3px 3px 0 var(--gold-shadow-hi),
+    0 0 0 1px #fff8c0,
+    inset 0 2px 0 rgba(255, 255, 255, 0.88),
+    inset 0 -2px 0 rgba(180, 90, 0, 0.18) !important;
+}
+
+.cardThreeStar .cardImg {
+  background: #ffd54f;
+  background-image: linear-gradient(
+    185deg,
+    #fffde7 0%,
+    #fff176 28%,
+    #ffeb3b 55%,
+    #ffc107 88%,
+    #ff8f00 100%
+  );
+  border-bottom: 2px solid rgba(120, 60, 0, 0.45);
+}
+
+.cardThreeStar.cardSelected {
+  outline: 2px solid var(--color-primary, #e87040);
+  outline-offset: 2px;
+  border-color: #ffea00 !important;
+  box-shadow:
+    3px 3px 0 var(--gold-shadow-hi),
+    0 0 0 1px #fff9c4,
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2px 0 rgba(180, 90, 0, 0.18) !important;
+}
+
+/* 左上角金星，略加强光感 */
+.cardThreeStar::after {
+  content: "✦";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  z-index: 2;
+  font-size: 12px;
+  line-height: 1;
+  color: #fffef5;
+  text-shadow:
+    1px 0 0 #e65100,
+    -1px 0 0 #e65100,
+    0 1px 0 #e65100,
+    0 -1px 0 #e65100,
+    0 0 6px rgba(255, 235, 120, 0.95);
+  pointer-events: none;
+  opacity: 1;
+  animation: rareStarWink 1.4s steps(2, end) infinite;
+}
+
+/* 仅闪烁描边，避免与 hover 的投影抢样式 */
+@keyframes rareCardPixelTwinkle {
+  0%,
+  100% {
+    border-color: #ffb300;
+  }
+  50% {
+    border-color: #ffea00;
+  }
+}
+
+@keyframes rareStarWink {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardThreeStar {
+    animation: none;
+    border-color: #ffb300 !important;
+  }
+
+  .cardThreeStar::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.cardThreeStar .cardName {
+  color: #3d2608;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.cardThreeStar .cardMetaItem {
+  color: #7a5520;
+}
+
+/*
+ * Boss + 已捕获 + 3 星：像素风「魔王金」紫罗兰卡（与普鱼三星金黄区分）
+ */
+.cardBossThreeStar {
+  border-color: #a855f7 !important;
+  opacity: 1 !important;
+  background-color: #c4b5fd;
+  background-image: linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.08) 38%,
+      transparent 52%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(180, 130, 255, 0.2) 0px,
+      rgba(180, 130, 255, 0.2) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    linear-gradient(
+      168deg,
+      #faf5ff 0%,
+      #f3e8ff 20%,
+      #e9d5ff 45%,
+      #d8b4fe 70%,
+      #c084fc 92%,
+      #9333ea 100%
+    );
+  box-shadow:
+    2px 2px 0 #5b21b6,
+    0 0 0 1px rgba(250, 245, 255, 0.95),
+    inset 0 2px 0 rgba(255, 255, 255, 0.78),
+    inset 0 -2px 0 rgba(60, 30, 90, 0.22) !important;
+  animation: bossPurpleRareTwinkle 1.6s steps(2, end) infinite;
+}
+
+.cardBossThreeStar:hover {
+  transform: translate(-1px, -1px);
+  border-color: #c4b5fd !important;
+  box-shadow:
+    3px 3px 0 #6d28d9,
+    0 0 0 1px #f5f0ff,
+    inset 0 2px 0 rgba(255, 255, 255, 0.88),
+    inset 0 -2px 0 rgba(60, 30, 90, 0.16) !important;
+}
+
+.cardBossThreeStar .cardImg {
+  background: #ddd6fe;
+  background-image: linear-gradient(
+    185deg,
+    #faf5ff 0%,
+    #ede9fe 22%,
+    #ddd6fe 52%,
+    #c4b5fd 82%,
+    #a78bfa 100%
+  );
+  border-bottom: 2px solid rgba(76, 29, 149, 0.42);
+}
+
+.cardBossThreeStar.cardSelected {
+  outline: 2px solid var(--color-primary, #e87040);
+  outline-offset: 2px;
+  border-color: #e879f9 !important;
+  box-shadow:
+    3px 3px 0 #7c3aed,
+    0 0 0 1px #faf5ff,
+    inset 0 2px 0 rgba(255, 255, 255, 0.88),
+    inset 0 -2px 0 rgba(60, 30, 90, 0.18) !important;
+}
+
+.cardBossThreeStar::after {
+  content: "✦";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  z-index: 2;
+  font-size: 12px;
+  line-height: 1;
+  color: #fefce8;
+  text-shadow:
+    1px 0 0 #6b21a8,
+    -1px 0 0 #6b21a8,
+    0 1px 0 #6b21a8,
+    0 -1px 0 #6b21a8,
+    0 0 8px rgba(232, 121, 249, 0.95);
+  pointer-events: none;
+  opacity: 1;
+  animation: rareStarWink 1.4s steps(2, end) infinite;
+}
+
+@keyframes bossPurpleRareTwinkle {
+  0%,
+  100% {
+    border-color: #a855f7;
+  }
+  50% {
+    border-color: #e879f9;
+  }
+}
+
+.cardBossThreeStar .cardName {
+  color: #3b0764;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.cardBossThreeStar .cardMetaItem {
+  color: #7c3ea8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardBossThreeStar {
+    animation: none;
+    border-color: #a855f7 !important;
+  }
+
+  .cardBossThreeStar::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 .cardSelected {
   border-color: var(--color-primary, #e87040) !important;
   box-shadow: 3px 3px 0 var(--color-primary, #e87040) !important;

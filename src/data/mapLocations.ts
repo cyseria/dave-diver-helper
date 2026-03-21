@@ -62,7 +62,7 @@ export const mapLocationData: MapLocation[] = [
     depth: 75,
     x: 30,
     relatedFishIds: ["lionfish", "red_snapper"],
-    description: "深海礁石区，狮子鱼在此展示其华丽而危险的身姿。",
+    description: "深海礁石区，翱翔蓑鲉在此展示其华丽而危险的身姿。",
   },
   {
     id: "shark_territory",

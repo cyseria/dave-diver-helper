@@ -15,7 +15,7 @@ const recipeImageByName = (() => {
 })();
 
 export const recipeData: Recipe[] = [
-{
+  {
     id: "鞑靼松露平鳍旗鱼",
     name: "鞑靼松露平鳍旗鱼",
     emoji: "🍱",
@@ -23,14 +23,17 @@ export const recipeData: Recipe[] = [
     sellPrice: 1727,
     tastiness: 295,
     servings: 2,
-    obtainMethod: "",    partyFood: "旗鱼",
+    obtainMethod: "",
+    partyFood: "旗鱼",
     star: true,
-    description: "用切碎的平鳍旗鱼肉代替米饭的寿司形状的料理。放上了满满的松露和海胆籽，味道丰富多彩。",
+    description:
+      "用切碎的平鳍旗鱼肉代替米饭的寿司形状的料理。放上了满满的松露和海胆籽，味道丰富多彩。",
     imageUrl: recipeImageByName.get("鞑靼松露平鳍旗鱼") ?? null,
     ingredients: [
       {
         id: "鞑靼松露平鳍旗鱼_ing_1",
         name: "平鳍旗鱼肉片",
+        fishId: "sailfish",
         emoji: "🐟",
         quantity: 3,
         location: "遇难船内部",
@@ -38,6 +41,7 @@ export const recipeData: Recipe[] = [
       {
         id: "鞑靼松露平鳍旗鱼_ing_2",
         name: "紫海胆",
+        fishId: "purple_sea_urchin",
         emoji: "🐟",
         quantity: 3,
         location: "0-50米",
@@ -51,7 +55,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "松露蓝色龙虾尾生鱼片",
     name: "松露蓝色龙虾尾生鱼片",
     emoji: "🍱",
@@ -63,12 +67,14 @@ export const recipeData: Recipe[] = [
     partyFood: "龙虾",
     recommended: true,
     star: true,
-    description: "蓝色龙虾的尾巴搭配了松露酱。松露的浓郁香味与龙虾的柔和口感很相配。",
+    description:
+      "蓝色龙虾的尾巴搭配了松露酱。松露的浓郁香味与龙虾的柔和口感很相配。",
     imageUrl: recipeImageByName.get("松露蓝色龙虾尾生鱼片") ?? null,
     ingredients: [
       {
         id: "松露蓝色龙虾尾生鱼片_ing_1",
         name: "蓝色龙虾",
+        fishId: "blue_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "0-50米",
@@ -82,7 +88,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "松露鲨鱼三明治",
     name: "松露鲨鱼三明治",
     emoji: "🍱",
@@ -94,7 +100,8 @@ export const recipeData: Recipe[] = [
     partyFood: "鲨鱼",
     recommended: true,
     star: true,
-    description: "像三明治一样，在松露碎片间一层层堆叠了鲨鱼肉片。色和味非常完美。",
+    description:
+      "像三明治一样，在松露碎片间一层层堆叠了鲨鱼肉片。色和味非常完美。",
     imageUrl: recipeImageByName.get("松露鲨鱼三明治") ?? null,
     ingredients: [
       {
@@ -107,6 +114,7 @@ export const recipeData: Recipe[] = [
       {
         id: "松露鲨鱼三明治_ing_2",
         name: "巨口鲨肉片",
+        fishId: "megamouth_shark",
         emoji: "🐟",
         quantity: 3,
         location: "130-250米",
@@ -120,7 +128,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "烤松露南极章鱼",
     name: "烤松露南极章鱼",
     emoji: "🍱",
@@ -129,12 +137,14 @@ export const recipeData: Recipe[] = [
     tastiness: 253,
     servings: 2,
     obtainMethod: "",
-    description: "用炭火烤制的南极章鱼的腿，甘苦与松露一起放在盘子里的料理。完美融合了大海和陆地的味道。",
+    description:
+      "用炭火烤制的南极章鱼的腿，甘苦与松露一起放在盘子里的料理。完美融合了大海和陆地的味道。",
     imageUrl: recipeImageByName.get("烤松露南极章鱼") ?? null,
     ingredients: [
       {
         id: "烤松露南极章鱼_ing_1",
         name: "南极章鱼",
+        fishId: "antarctic_octopus",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -155,9 +165,9 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
-    id: "拼子介金枪鱼生鱼片",
-    name: "拼子介金枪鱼生鱼片",
+  {
+    id: "拂子介金枪鱼生鱼片",
+    name: "拂子介金枪鱼生鱼片",
     emoji: "🍱",
     level: 1,
     sellPrice: 1683,
@@ -166,33 +176,36 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "金枪鱼",
     recommended: true,
-    description: "由大西洋蓝鳍金枪鱼和黄鳍金枪鱼的最高级大腹肉拼凑的生鱼片料理。用白色拼子介装饰中间，增加视觉艳丽。",
-    imageUrl: recipeImageByName.get("拼子介金枪鱼生鱼片") ?? null,
+    description:
+      "由大西洋蓝鳍金枪鱼和黄鳍金枪鱼的最高级大腹肉拼凑的生鱼片料理。用白色拂子介装饰中间，增加视觉艳丽。",
+    imageUrl: recipeImageByName.get("拂子介金枪鱼生鱼片") ?? null,
     ingredients: [
       {
-        id: "拼子介金枪鱼生鱼片_ing_1",
+        id: "拂子介金枪鱼生鱼片_ing_1",
         name: "蓝鳍金枪鱼大腹",
+        fishId: "bluefin_tuna",
         emoji: "🐟",
         quantity: 3,
         location: "0-130米",
       },
       {
-        id: "拼子介金枪鱼生鱼片_ing_2",
+        id: "拂子介金枪鱼生鱼片_ing_2",
         name: "黄鳍金枪鱼大腹",
+        fishId: "yellowfin_tuna",
         emoji: "🐟",
         quantity: 3,
         location: "0-130米",
       },
       {
-        id: "拼子介金枪鱼生鱼片_ing_3",
-        name: "拼子介",
+        id: "拂子介金枪鱼生鱼片_ing_3",
+        name: "拂子介",
         emoji: "🐟",
         quantity: 2,
         location: "冰河海藻洞穴",
       },
     ],
   },
-{
+  {
     id: "炖松露鲍鱼",
     name: "炖松露鲍鱼",
     emoji: "🍱",
@@ -201,7 +214,8 @@ export const recipeData: Recipe[] = [
     tastiness: 280,
     servings: 2,
     obtainMethod: "",
-    description: "将鲍鱼切成大块，用昆布汤汁炖制后放上松露。松露香味与鱼肉清爽口感协调。",
+    description:
+      "将鲍鱼切成大块，用昆布汤汁炖制后放上松露。松露香味与鱼肉清爽口感协调。",
     imageUrl: recipeImageByName.get("炖松露鲍鱼") ?? null,
     ingredients: [
       {
@@ -227,34 +241,34 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
-    id: "拼子介辣安康鱼",
-    name: "拼子介辣安康鱼",
+  {
+    id: "拂子介辣安康鱼",
+    name: "拂子介辣安康鱼",
     emoji: "🍱",
     level: 1,
     sellPrice: 1650,
     tastiness: 248,
     servings: 1,
     obtainMethod: "",
-    description: "去除安康鱼内脏后与酱油蒸制，拼子介点缀，口感柔软。",
-    imageUrl: recipeImageByName.get("拼子介辣安康鱼") ?? null,
+    description: "去除安康鱼内脏后与酱油蒸制，拂子介点缀，口感柔软。",
+    imageUrl: recipeImageByName.get("拂子介辣安康鱼") ?? null,
     ingredients: [
       {
-        id: "拼子介辣安康鱼_ing_1",
+        id: "拂子介辣安康鱼_ing_1",
         name: "大西洋安康鱼",
         emoji: "🐟",
         quantity: 3,
         location: "钟乳洞",
       },
       {
-        id: "拼子介辣安康鱼_ing_2",
-        name: "拼子介",
+        id: "拂子介辣安康鱼_ing_2",
+        name: "拂子介",
         emoji: "🐟",
         quantity: 2,
         location: "冰河海藻洞穴",
       },
       {
-        id: "拼子介辣安康鱼_ing_3",
+        id: "拂子介辣安康鱼_ing_3",
         name: "酱油",
         emoji: "🐟",
         quantity: 1,
@@ -262,7 +276,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "酱螃蟹",
     name: "酱螃蟹",
     emoji: "🍱",
@@ -284,6 +298,7 @@ export const recipeData: Recipe[] = [
       {
         id: "酱螃蟹_ing_2",
         name: "雪蟹",
+        fishId: "snow_crab",
         emoji: "🐟",
         quantity: 2,
         location: "冰河区域",
@@ -291,6 +306,7 @@ export const recipeData: Recipe[] = [
       {
         id: "酱螃蟹_ing_3",
         name: "毛蟹",
+        fishId: "horsehair_crab",
         emoji: "🐟",
         quantity: 2,
         location: "冰河区域",
@@ -304,7 +320,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "龙虾拼盘",
     name: "龙虾拼盘",
     emoji: "🍱",
@@ -322,6 +338,7 @@ export const recipeData: Recipe[] = [
       {
         id: "龙虾拼盘_ing_1",
         name: "美洲龙虾",
+        fishId: "american_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "0-50米",
@@ -329,6 +346,7 @@ export const recipeData: Recipe[] = [
       {
         id: "龙虾拼盘_ing_2",
         name: "锦绣龙虾",
+        fishId: "tropical_rock_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "50-130米",
@@ -336,13 +354,14 @@ export const recipeData: Recipe[] = [
       {
         id: "龙虾拼盘_ing_3",
         name: "抓都昆虫",
+        fishId: "zhuadou_insect",
         emoji: "🐟",
         quantity: 2,
         location: "热泉喷出口",
       },
     ],
   },
-{
+  {
     id: "彩虹鳗鱼串",
     name: "彩虹鳗鱼串",
     emoji: "🍱",
@@ -366,7 +385,7 @@ export const recipeData: Recipe[] = [
         name: "彩虹蘑菇",
         emoji: "🐟",
         quantity: 1,
-        location: "张戈",
+        location: "张戈获取",
       },
       {
         id: "彩虹鳗鱼串_ing_3",
@@ -377,7 +396,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "大棱鱼开胃饼",
     name: "大棱鱼开胃饼",
     emoji: "🍱",
@@ -419,7 +438,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "平鳍旗鱼炖海藻",
     name: "平鳍旗鱼炖海藻",
     emoji: "🍱",
@@ -427,7 +446,8 @@ export const recipeData: Recipe[] = [
     sellPrice: 1572,
     tastiness: 300,
     servings: 9,
-    obtainMethod: "",    partyFood: "旗鱼",
+    obtainMethod: "",
+    partyFood: "旗鱼",
     star: true,
     description: "将平鳍旗鱼和海藻用酱油炖出海洋风味。",
     imageUrl: recipeImageByName.get("平鳍旗鱼炖海藻") ?? null,
@@ -435,6 +455,7 @@ export const recipeData: Recipe[] = [
       {
         id: "平鳍旗鱼炖海藻_ing_1",
         name: "平鳍旗鱼肉片",
+        fishId: "sailfish",
         emoji: "🐟",
         quantity: 3,
         location: "遇难船内部",
@@ -462,7 +483,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "醋拌菲尔德瓦普塔虾",
     name: "醋拌菲尔德瓦普塔虾",
     emoji: "🍱",
@@ -507,7 +528,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "烤哈瓦那辣椒鳗鱼",
     name: "烤哈瓦那辣椒鳗鱼",
     emoji: "🍱",
@@ -549,9 +570,9 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
-    id: "彩虹鲷鱼卷",
-    name: "彩虹鲷鱼卷",
+  {
+    id: "彩虹鲀鱼糕",
+    name: "彩虹鲀鱼糕",
     emoji: "🍱",
     level: 1,
     sellPrice: 1551,
@@ -559,39 +580,40 @@ export const recipeData: Recipe[] = [
     servings: 2,
     obtainMethod: "",
     description: "用鲷鱼片包裹彩虹蘑菇蒸制，口感鲜美。",
-    imageUrl: recipeImageByName.get("彩虹鲷鱼卷") ?? null,
+    imageUrl: recipeImageByName.get("彩虹鲀鱼糕") ?? null,
     ingredients: [
       {
-        id: "彩虹鲷鱼卷_ing_1",
-        name: "双色鲷",
+        id: "彩虹鲀鱼糕_ing_1",
+        name: "黑带锉鳞鲀",
         emoji: "🐟",
         quantity: 3,
         location: "0-50米",
       },
       {
-        id: "彩虹鲷鱼卷_ing_2",
-        name: "灰鲷",
+        id: "彩虹鲀鱼糕_ing_2",
+        name: "灰鳞鲀",
+        fishId: "grey_triggerfish",
         emoji: "🐟",
         quantity: 3,
         location: "50-130米",
       },
       {
-        id: "彩虹鲷鱼卷_ing_3",
+        id: "彩虹鲀鱼糕_ing_3",
         name: "彩虹蘑菇",
         emoji: "🐟",
         quantity: 1,
-        location: "张戈",
+        location: "张戈获取",
       },
       {
-        id: "彩虹鲷鱼卷_ing_4",
-        name: "海带",
+        id: "彩虹鲀鱼糕_ing_4",
+        name: "裙带菜",
         emoji: "🐟",
         quantity: 1,
         location: "50-130米",
       },
     ],
   },
-{
+  {
     id: "洪堡鱿鱼墨汁意大利面",
     name: "洪堡鱿鱼墨汁意大利面",
     emoji: "🍱",
@@ -608,6 +630,7 @@ export const recipeData: Recipe[] = [
       {
         id: "洪堡鱿鱼墨汁意大利面_ing_1",
         name: "洪堡鱿鱼肉片",
+        fishId: "humboldt_squid",
         emoji: "🐟",
         quantity: 1,
         location: "50-130米",
@@ -615,6 +638,7 @@ export const recipeData: Recipe[] = [
       {
         id: "洪堡鱿鱼墨汁意大利面_ing_2",
         name: "白竹节虾",
+        fishId: "white_shrimp",
         emoji: "🐟",
         quantity: 3,
         location: "0-130米",
@@ -635,7 +659,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "小飞象章鱼烧",
     name: "小飞象章鱼烧",
     emoji: "🍱",
@@ -644,12 +668,14 @@ export const recipeData: Recipe[] = [
     tastiness: 390,
     servings: 9,
     obtainMethod: "",
-    description: "在和好的面团里放入切碎的小飞象章鱼，烤制成圆形的料理。外酥内软入嘴即化。",
+    description:
+      "在和好的面团里放入切碎的小飞象章鱼，烤制成圆形的料理。外酥内软入嘴即化。",
     imageUrl: recipeImageByName.get("小飞象章鱼烧") ?? null,
     ingredients: [
       {
         id: "小飞象章鱼烧_ing_1",
         name: "小飞象章鱼",
+        fishId: "dumbo_octopus",
         emoji: "🐟",
         quantity: 3,
         location: "冰河通道",
@@ -670,7 +696,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "镰鳍鲳鲹味增汤",
     name: "镰鳍鲳鲹味增汤",
     emoji: "🍱",
@@ -682,19 +708,21 @@ export const recipeData: Recipe[] = [
     partyFood: "鲨鱼",
     recommended: true,
     star: true,
-    description: "放入镰鳍鲳鲹、切碎的伞形珊瑚、海带的味增汤。香喷喷的温汤顺着血管流淌。",
+    description:
+      "放入镰鳍鲳鲹、切碎的伞形珊瑚、裙带菜的味增汤。香喷喷的温汤顺着血管流淌。",
     imageUrl: recipeImageByName.get("镰鳍鲳鲹味增汤") ?? null,
     ingredients: [
       {
         id: "镰鳍鲳鲹味增汤_ing_1",
         name: "镰鳍鲳鲹",
+        fishId: "falcate_fin_pomfret",
         emoji: "🐟",
         quantity: 3,
         location: "热泉喷出区域",
       },
       {
         id: "镰鳍鲳鲹味增汤_ing_2",
-        name: "海带",
+        name: "裙带菜",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -715,7 +743,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "皮卡虫拉面",
     name: "皮卡虫拉面",
     emoji: "🍱",
@@ -730,6 +758,7 @@ export const recipeData: Recipe[] = [
       {
         id: "皮卡虫拉面_ing_1",
         name: "皮卡虫",
+        fishId: "pikaia",
         emoji: "🐟",
         quantity: 3,
         location: "热泉喷出区域",
@@ -757,7 +786,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "河豚丸子汤",
     name: "河豚丸子汤",
     emoji: "🍱",
@@ -766,12 +795,14 @@ export const recipeData: Recipe[] = [
     tastiness: 420,
     servings: 9,
     obtainMethod: "",
-    description: "用去除毒素的六斑刺鲀和星斑叉鼻鲀肉片做的丸子汤料理。长时间熬制的墨角藻汤汁具有健康的味道。",
+    description:
+      "用去除毒素的六斑刺鲀和星斑叉鼻鲀肉片做的丸子汤料理。长时间熬制的墨角藻汤汁具有健康的味道。",
     imageUrl: recipeImageByName.get("河豚丸子汤") ?? null,
     ingredients: [
       {
         id: "河豚丸子汤_ing_1",
         name: "六斑刺鲀",
+        fishId: "six_spot_puffer",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -779,6 +810,7 @@ export const recipeData: Recipe[] = [
       {
         id: "河豚丸子汤_ing_2",
         name: "星斑叉鼻鲀",
+        fishId: "starry_puffer",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -799,7 +831,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "彩虹帆鳍鲹茶泡饭",
     name: "彩虹帆鳍鲹茶泡饭",
     emoji: "🍱",
@@ -808,7 +840,8 @@ export const recipeData: Recipe[] = [
     tastiness: 290,
     servings: 2,
     obtainMethod: "",
-    description: "将精心烤制的帆鳍鲹和五颜六色的彩虹蘑菇作为浇头的茶泡饭。咸脆的鱼肉和柔软刺激的彩虹蘑菇浑然天成，仿佛原本就是一体的。",
+    description:
+      "将精心烤制的帆鳍鲹和五颜六色的彩虹蘑菇作为浇头的茶泡饭。咸脆的鱼肉和柔软刺激的彩虹蘑菇浑然天成，仿佛原本就是一体的。",
     imageUrl: recipeImageByName.get("彩虹帆鳍鲹茶泡饭") ?? null,
     ingredients: [
       {
@@ -823,7 +856,7 @@ export const recipeData: Recipe[] = [
         name: "彩虹蘑菇",
         emoji: "🐟",
         quantity: 1,
-        location: "张戈",
+        location: "张戈获取",
       },
       {
         id: "彩虹帆鳍鲹茶泡饭_ing_3",
@@ -841,7 +874,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "马粪海胆黄瓜沙拉",
     name: "马粪海胆黄瓜沙拉",
     emoji: "🍱",
@@ -852,12 +885,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "黄瓜",
     recommended: true,
-    description: "在黄花沙拉上放入满满的马粪海胆和海珊瑚。这道料理的特色是黄瓜切成长长的一条。",
+    description:
+      "在黄花沙拉上放入满满的马粪海胆和海珊瑚。这道料理的特色是黄瓜切成长长的一条。",
     imageUrl: recipeImageByName.get("马粪海胆黄瓜沙拉") ?? null,
     ingredients: [
       {
         id: "马粪海胆黄瓜沙拉_ing_1",
         name: "马粪海胆",
+        fishId: "horse_dung_sea_urchin",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -878,7 +913,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "味噌酱烤茄子",
     name: "味噌酱烤茄子",
     emoji: "🍱",
@@ -920,7 +955,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "散寿司",
     name: "散寿司",
     emoji: "🍱",
@@ -931,12 +966,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "金枪鱼",
     recommended: true,
-    description: "搭配马粪海胆、墨鱼和金枪鱼刺身的顶级海鲜盖饭。是歌手 mxmtoon 最爱的美食。",
+    description:
+      "搭配马粪海胆、墨鱼和金枪鱼刺身的顶级海鲜盖饭。是歌手 mxmtoon 最爱的美食。",
     imageUrl: recipeImageByName.get("散寿司") ?? null,
     ingredients: [
       {
         id: "散寿司_ing_1",
         name: "马粪海胆",
+        fishId: "horse_dung_sea_urchin",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -944,6 +981,7 @@ export const recipeData: Recipe[] = [
       {
         id: "散寿司_ing_2",
         name: "大西洋蓝鳍金枪鱼中腹肉",
+        fishId: "bluefin_tuna",
         emoji: "🐟",
         quantity: 3,
         location: "0-130 米",
@@ -951,13 +989,14 @@ export const recipeData: Recipe[] = [
       {
         id: "散寿司_ing_3",
         name: "乌贼",
+        fishId: "cuttlefish",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
       },
     ],
   },
-{
+  {
     id: "什锦炸海胆",
     name: "什锦炸海胆",
     emoji: "🍱",
@@ -972,6 +1011,7 @@ export const recipeData: Recipe[] = [
       {
         id: "什锦炸海胆_ing_1",
         name: "马粪海胆",
+        fishId: "horse_dung_sea_urchin",
         emoji: "🐟",
         quantity: 2,
         location: "0-50 米",
@@ -979,6 +1019,7 @@ export const recipeData: Recipe[] = [
       {
         id: "什锦炸海胆_ing_2",
         name: "紫海胆",
+        fishId: "purple_sea_urchin",
         emoji: "🐟",
         quantity: 2,
         location: "0-50 米",
@@ -999,7 +1040,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "意式烤孔雀鱿鱼",
     name: "意式烤孔雀鱿鱼",
     emoji: "🍱",
@@ -1008,12 +1049,14 @@ export const recipeData: Recipe[] = [
     tastiness: 360,
     servings: 7,
     obtainMethod: "",
-    description: "在孔雀鱿鱼的身体里放入切碎的大蒜和炒鸡蛋后制作的料理。有弹韧的鱿鱼将其它食材衬托的很好。",
+    description:
+      "在孔雀鱿鱼的身体里放入切碎的大蒜和炒鸡蛋后制作的料理。有弹韧的鱿鱼将其它食材衬托的很好。",
     imageUrl: recipeImageByName.get("意式烤孔雀鱿鱼") ?? null,
     ingredients: [
       {
         id: "意式烤孔雀鱿鱼_ing_1",
         name: "孔雀鱿鱼",
+        fishId: "peacock_squid",
         emoji: "🐟",
         quantity: 3,
         location: "冰河通道",
@@ -1041,7 +1084,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "甘氏巨螯蟹盖饭",
     name: "甘氏巨螯蟹盖饭",
     emoji: "🍱",
@@ -1050,12 +1093,14 @@ export const recipeData: Recipe[] = [
     tastiness: 330,
     servings: 7,
     obtainMethod: "",
-    description: "热饭上放满甘氏巨螯蟹的料理。能够同时感受到蟹肉的柔软口感和脆豆的口感。",
+    description:
+      "热饭上放满甘氏巨螯蟹的料理。能够同时感受到蟹肉的柔软口感和脆豆的口感。",
     imageUrl: recipeImageByName.get("甘氏巨螯蟹盖饭") ?? null,
     ingredients: [
       {
         id: "甘氏巨螯蟹盖饭_ing_1",
         name: "甘氏巨螯蟹",
+        fishId: "spider_crab",
         emoji: "🐟",
         quantity: 1,
         location: "130-250 米",
@@ -1076,7 +1121,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炸哈瓦那辣椒尖牙鱼",
     name: "炸哈瓦那辣椒尖牙鱼",
     emoji: "🍱",
@@ -1085,12 +1130,14 @@ export const recipeData: Recipe[] = [
     tastiness: 420,
     servings: 7,
     obtainMethod: "",
-    description: "将捣碎的尖牙鱼放入新鲜的哈瓦那辣椒后油炸的料理。辣椒的辣味会叫人狂喝饮料。",
+    description:
+      "将捣碎的尖牙鱼放入新鲜的哈瓦那辣椒后油炸的料理。辣椒的辣味会叫人狂喝饮料。",
     imageUrl: recipeImageByName.get("炸哈瓦那辣椒尖牙鱼") ?? null,
     ingredients: [
       {
         id: "炸哈瓦那辣椒尖牙鱼_ing_1",
         name: "尖牙鱼",
+        fishId: "fangtooth",
         emoji: "🐟",
         quantity: 2,
         location: "130-250 米",
@@ -1118,7 +1165,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "北极鳕鱼焗饭",
     name: "北极鳕鱼焗饭",
     emoji: "🍱",
@@ -1127,12 +1174,14 @@ export const recipeData: Recipe[] = [
     tastiness: 377,
     servings: 9,
     obtainMethod: "",
-    description: "圣女果、大蒜和高级米饭经过长时间的蒸煮，再放上烤得金黄的北极鳕鱼做成的料理。酸甜圣女果的香味萦绕着整个食物。",
+    description:
+      "圣女果、大蒜和高级米饭经过长时间的蒸煮，再放上烤得金黄的北极鳕鱼做成的料理。酸甜圣女果的香味萦绕着整个食物。",
     imageUrl: recipeImageByName.get("北极鳕鱼焗饭") ?? null,
     ingredients: [
       {
         id: "北极鳕鱼焗饭_ing_1",
         name: "北极鳕",
+        fishId: "arctic_cod",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -1160,7 +1209,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "凉拌马粪海胆和水母",
     name: "凉拌马粪海胆和水母",
     emoji: "🍱",
@@ -1177,6 +1226,7 @@ export const recipeData: Recipe[] = [
       {
         id: "凉拌马粪海胆和水母_ing_1",
         name: "马粪海胆",
+        fishId: "horse_dung_sea_urchin",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1184,6 +1234,7 @@ export const recipeData: Recipe[] = [
       {
         id: "凉拌马粪海胆和水母_ing_2",
         name: "箱水母",
+        fishId: "box_jellyfish",
         emoji: "🐟",
         quantity: 2,
         location: "0-50 米",
@@ -1197,7 +1248,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "南极章鱼薄片",
     name: "南极章鱼薄片",
     emoji: "🍱",
@@ -1206,12 +1257,14 @@ export const recipeData: Recipe[] = [
     tastiness: 408,
     servings: 7,
     obtainMethod: "",
-    description: "将新鲜的南极章鱼稍微加热后淋上橄榄油的料理。放入打碎的洋葱，带来既柔软又有弹性且酸爽的味道。",
+    description:
+      "将新鲜的南极章鱼稍微加热后淋上橄榄油的料理。放入打碎的洋葱，带来既柔软又有弹性且酸爽的味道。",
     imageUrl: recipeImageByName.get("南极章鱼薄片") ?? null,
     ingredients: [
       {
         id: "南极章鱼薄片_ing_1",
         name: "南极章鱼",
+        fishId: "antarctic_octopus",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -1232,7 +1285,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "意式水煮黑线鳕鱼",
     name: "意式水煮黑线鳕鱼",
     emoji: "🍱",
@@ -1241,12 +1294,14 @@ export const recipeData: Recipe[] = [
     tastiness: 400,
     servings: 9,
     obtainMethod: "",
-    description: "在黑线鳕鱼上涂抹橄榄油，用小火烤熟后放入其它食材一同做熟的料理。风味悠然味道鲜甜。",
+    description:
+      "在黑线鳕鱼上涂抹橄榄油，用小火烤熟后放入其它食材一同做熟的料理。风味悠然味道鲜甜。",
     imageUrl: recipeImageByName.get("意式水煮黑线鳕鱼") ?? null,
     ingredients: [
       {
         id: "意式水煮黑线鳕鱼_ing_1",
         name: "黑线鳕",
+        fishId: "haddock",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -1274,7 +1329,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "月光墨角藻鱼卷",
     name: "月光墨角藻鱼卷",
     emoji: "🍱",
@@ -1283,12 +1338,14 @@ export const recipeData: Recipe[] = [
     tastiness: 360,
     servings: 9,
     obtainMethod: "",
-    description: "用鱼肉填满寿司的馅儿后，用墨角藻包起来的料理。味道犹如置身于森林般清新无比。",
+    description:
+      "用鱼肉填满寿司的馅儿后，用墨角藻包起来的料理。味道犹如置身于森林般清新无比。",
     imageUrl: recipeImageByName.get("月光墨角藻鱼卷") ?? null,
     ingredients: [
       {
         id: "月光墨角藻鱼卷_ing_1",
         name: "长刺真鳂",
+        fishId: "longspine_squirrelfish",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1296,6 +1353,7 @@ export const recipeData: Recipe[] = [
       {
         id: "月光墨角藻鱼卷_ing_2",
         name: "白针狮子鱼",
+        fishId: "white_needle_lionfish",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1316,7 +1374,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "燕鱼亲子饭",
     name: "燕鱼亲子饭",
     emoji: "🍱",
@@ -1325,19 +1383,22 @@ export const recipeData: Recipe[] = [
     tastiness: 447,
     servings: 7,
     obtainMethod: "",
-    description: "加入小燕鱼和雌燕鱼制作的海鲜盖饭。稚嫩和成熟的肉片在微熟鸡蛋的衬托下绝妙混合，温润可口。",
+    description:
+      "加入小燕鱼和雌燕鱼制作的海鲜盖饭。稚嫩和成熟的肉片在微熟鸡蛋的衬托下绝妙混合，温润可口。",
     imageUrl: recipeImageByName.get("燕鱼亲子饭") ?? null,
     ingredients: [
       {
         id: "燕鱼亲子饭_ing_1",
         name: "尖翅燕鱼",
+        fishId: "sharp_wing_fish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
       },
       {
         id: "燕鱼亲子饭_ing_2",
-        name: "圆翅燕鱼",
+        name: "圆眼燕鱼",
+        fishId: "round_wing_fish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -1358,7 +1419,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "细鳞圆鲹热狗",
     name: "细鳞圆鲹热狗",
     emoji: "🍱",
@@ -1367,12 +1428,14 @@ export const recipeData: Recipe[] = [
     tastiness: 340,
     servings: 6,
     obtainMethod: "",
-    description: "将烤熟的细鳞圆鲹夹在面包之间，再浇上蛋黄酱制作的料理。因为使用了整块海鲜，吃起来又香脆又痛快。",
+    description:
+      "将烤熟的细鳞圆鲹夹在面包之间，再浇上蛋黄酱制作的料理。因为使用了整块海鲜，吃起来又香脆又痛快。",
     imageUrl: recipeImageByName.get("细鳞圆鲹热狗") ?? null,
     ingredients: [
       {
         id: "细鳞圆鲹热狗_ing_1",
         name: "细鳞圆鲹",
+        fishId: "mackerel_scad",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -1393,7 +1456,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "日式炸鲨鱼",
     name: "日式炸鲨鱼",
     emoji: "🍱",
@@ -1401,13 +1464,16 @@ export const recipeData: Recipe[] = [
     sellPrice: 1480,
     tastiness: 380,
     servings: 9,
-    obtainMethod: "",    partyFood: "鲨鱼",
-    description: "将乌翅真鲨和短尾真鲨的肉切成一口大小后，裹上淀粉油炸的料理。可以品尝酥皮中嫩滑的鲨鱼肉。",
+    obtainMethod: "",
+    partyFood: "鲨鱼",
+    description:
+      "将乌翅真鲨和短尾真鲨的肉切成一口大小后，裹上淀粉油炸的料理。可以品尝酥皮中嫩滑的鲨鱼肉。",
     imageUrl: recipeImageByName.get("日式炸鲨鱼") ?? null,
     ingredients: [
       {
         id: "日式炸鲨鱼_ing_1",
         name: "黑鳍鲨肉片",
+        fishId: "blacktip_reef_shark",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1415,6 +1481,7 @@ export const recipeData: Recipe[] = [
       {
         id: "日式炸鲨鱼_ing_2",
         name: "短尾真鲨肉片",
+        fishId: "shortfin_mako",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1435,7 +1502,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "独角鲸味噌汤",
     name: "独角鲸味噌汤",
     emoji: "🍱",
@@ -1444,12 +1511,14 @@ export const recipeData: Recipe[] = [
     tastiness: 420,
     servings: 12,
     obtainMethod: "",
-    description: "放入独角鲸制作成的味噌酱料理。青瞻星鱼肉片的肉质劲道，味道富有层次感，与大酱汤相得益彰。",
+    description:
+      "放入独角鲸制作成的味噌酱料理。青瞻星鱼肉片的肉质劲道，味道富有层次感，与大酱汤相得益彰。",
     imageUrl: recipeImageByName.get("独角鲸味噌汤") ?? null,
     ingredients: [
       {
         id: "独角鲸味噌汤_ing_1",
         name: "独角鲸肉片",
+        fishId: "narwhal",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -1477,7 +1546,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "竹荚鱼南蛮渍",
     name: "竹荚鱼南蛮渍",
     emoji: "🍱",
@@ -1486,12 +1555,14 @@ export const recipeData: Recipe[] = [
     tastiness: 343,
     servings: 7,
     obtainMethod: "",
-    description: "使用竹荚鱼制作的日式腌制食物。用酸味酱料炸至酥脆的竹荚鱼很小，可以连骨吃下。",
+    description:
+      "使用竹荚鱼制作的日式腌制食物。用酸味酱料炸至酥脆的竹荚鱼很小，可以连骨吃下。",
     imageUrl: recipeImageByName.get("竹荚鱼南蛮渍") ?? null,
     ingredients: [
       {
         id: "竹荚鱼南蛮渍_ing_1",
         name: "黄带拟鲹",
+        fishId: "yellowtail_amberjack",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -1519,7 +1590,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "乌贼洋葱圈",
     name: "乌贼洋葱圈",
     emoji: "🍱",
@@ -1528,12 +1599,14 @@ export const recipeData: Recipe[] = [
     tastiness: 360,
     servings: 7,
     obtainMethod: "",
-    description: "乌贼和洋葱炸制料理。甜味洋葱外酥里润，乌贼劲道咸香，吃一口就不想停下来。",
+    description:
+      "乌贼和洋葱炸制料理。甜味洋葱外酥里润，乌贼劲道咸香，吃一口就不想停下来。",
     imageUrl: recipeImageByName.get("乌贼洋葱圈") ?? null,
     ingredients: [
       {
         id: "乌贼洋葱圈_ing_1",
         name: "乌贼",
+        fishId: "cuttlefish",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -1561,7 +1634,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "乌鳍石斑鱼排",
     name: "乌鳍石斑鱼排",
     emoji: "🍱",
@@ -1570,12 +1643,14 @@ export const recipeData: Recipe[] = [
     tastiness: 328,
     servings: 7,
     obtainMethod: "",
-    description: "用乌鳍石斑鱼的鱼腹肉制作的鱼排。石斑鱼在汹涌的大海中锻炼出来的结实肉质堪称一品。",
+    description:
+      "用乌鳍石斑鱼的鱼腹肉制作的鱼排。石斑鱼在汹涌的大海中锻炼出来的结实肉质堪称一品。",
     imageUrl: recipeImageByName.get("乌鳍石斑鱼排") ?? null,
     ingredients: [
       {
         id: "乌鳍石斑鱼排_ing_1",
         name: "乌鳍石斑鱼",
+        fishId: "dusky_grouper",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -1603,7 +1678,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "海马海草沙拉",
     name: "海马海草沙拉",
     emoji: "🍱",
@@ -1611,8 +1686,9 @@ export const recipeData: Recipe[] = [
     sellPrice: 1480,
     tastiness: 295,
     servings: 6,
-    obtainMethod: '米仓15级解锁',
-    description: "加入炸海马的沙拉。虽然大家都认为海马不适合食用，但班乔凭借他高超的技艺把它做成了又香又酥的料理，完全适配沙拉的爽脆口感。",
+    obtainMethod: "米仓15级解锁",
+    description:
+      "加入炸海马的沙拉。虽然大家都认为海马不适合食用，但班乔凭借他高超的技艺把它做成了又香又酥的料理，完全适配沙拉的爽脆口感。",
     imageUrl: recipeImageByName.get("海马海草沙拉") ?? null,
     ingredients: [
       {
@@ -1645,7 +1721,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炸茄子鲜虾丸",
     name: "炸茄子鲜虾丸",
     emoji: "🍱",
@@ -1668,7 +1744,8 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "炸茄子鲜虾丸_ing_2",
-        name: "白对虾",
+        name: "凡纳对虾",
+        fishId: "whiteleg_shrimp",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1689,7 +1766,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "白竹节虾盖饭",
     name: "白竹节虾盖饭",
     emoji: "🍱",
@@ -1700,12 +1777,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "虾",
     recommended: true,
-    description: "摆满了由酱油腌制而成的白竹节虾的盖饭。将鸡蛋蛋黄戳破后拌着吃的话就如同拥有了整个世界。",
+    description:
+      "摆满了由酱油腌制而成的白竹节虾的盖饭。将鸡蛋蛋黄戳破后拌着吃的话就如同拥有了整个世界。",
     imageUrl: recipeImageByName.get("白竹节虾盖饭") ?? null,
     ingredients: [
       {
         id: "白竹节虾盖饭_ing_1",
         name: "白竹节虾",
+        fishId: "white_shrimp",
         emoji: "🐟",
         quantity: 3,
         location: "0-130 米",
@@ -1733,7 +1812,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "锦鱼咖喱",
     name: "锦鱼咖喱",
     emoji: "🍱",
@@ -1744,7 +1823,8 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "咖喱",
     recommended: true,
-    description: "放满了孔雀锦鱼和杂斑鲨鱼的咖喱料理。满满的大豆，看起来像一片清新的田野。",
+    description:
+      "放满了孔雀锦鱼和杂斑鲨鱼的咖喱料理。满满的大豆，看起来像一片清新的田野。",
     imageUrl: recipeImageByName.get("锦鱼咖喱") ?? null,
     ingredients: [
       {
@@ -1757,6 +1837,7 @@ export const recipeData: Recipe[] = [
       {
         id: "锦鱼咖喱_ing_2",
         name: "孔雀锦鱼",
+        fishId: "peacock_wrasse",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -1777,7 +1858,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "甘氏巨螯蟹咖喱",
     name: "甘氏巨螯蟹咖喱",
     emoji: "🍱",
@@ -1788,12 +1869,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "咖喱",
     recommended: true,
-    description: "放入甘氏巨螯蟹的肉，再将打散鸡蛋制成的咖喱料理。因为掺入了高级鸡蛋，塑造了这宛如奶油般丝滑的料理。",
+    description:
+      "放入甘氏巨螯蟹的肉，再将打散鸡蛋制成的咖喱料理。因为掺入了高级鸡蛋，塑造了这宛如奶油般丝滑的料理。",
     imageUrl: recipeImageByName.get("甘氏巨螯蟹咖喱") ?? null,
     ingredients: [
       {
         id: "甘氏巨螯蟹咖喱_ing_1",
         name: "甘氏巨螯蟹",
+        fishId: "spider_crab",
         emoji: "🐟",
         quantity: 1,
         location: "130-250 米",
@@ -1814,7 +1897,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "海藻鸡蛋卷",
     name: "海藻鸡蛋卷",
     emoji: "🍱",
@@ -1823,7 +1906,8 @@ export const recipeData: Recipe[] = [
     tastiness: 300,
     servings: 9,
     obtainMethod: "",
-    description: "将薄薄的鸡蛋摊成饼卷起来的料理。昆布和海带的美味搭配柔软的鸡蛋，就像咀嚼云朵一般。",
+    description:
+      "将薄薄的鸡蛋摊成饼卷起来的料理。昆布和裙带菜的美味搭配柔软的鸡蛋，就像咀嚼云朵一般。",
     imageUrl: recipeImageByName.get("海藻鸡蛋卷") ?? null,
     ingredients: [
       {
@@ -1835,7 +1919,7 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "海藻鸡蛋卷_ing_2",
-        name: "海带",
+        name: "裙带菜",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -1849,7 +1933,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "海葡萄鸡蛋盖饭",
     name: "海葡萄鸡蛋盖饭",
     emoji: "🍱",
@@ -1858,7 +1942,8 @@ export const recipeData: Recipe[] = [
     tastiness: 260,
     servings: 9,
     obtainMethod: "",
-    description: "用鸡蛋像盖子一样盖住米饭的盖饭。柔软的鸡蛋上装饰着晶莹剔透的海葡萄，梦幻般的组合。",
+    description:
+      "用鸡蛋像盖子一样盖住米饭的盖饭。柔软的鸡蛋上装饰着晶莹剔透的海葡萄，梦幻般的组合。",
     imageUrl: recipeImageByName.get("海葡萄鸡蛋盖饭") ?? null,
     ingredients: [
       {
@@ -1891,7 +1976,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "烤三色鱿鱼",
     name: "烤三色鱿鱼",
     emoji: "🍱",
@@ -1901,12 +1986,14 @@ export const recipeData: Recipe[] = [
     servings: 12,
     obtainMethod: "",
     star: true,
-    description: "将孔雀鱿鱼、吸血鱿鱼和乌贼放在炭火上精心烤制而成的料理。色泽多样口感丰富。",
+    description:
+      "将孔雀鱿鱼、吸血鱿鱼和乌贼放在炭火上精心烤制而成的料理。色泽多样口感丰富。",
     imageUrl: recipeImageByName.get("烤三色鱿鱼") ?? null,
     ingredients: [
       {
         id: "烤三色鱿鱼_ing_1",
         name: "孔雀鱿鱼",
+        fishId: "peacock_squid",
         emoji: "🐟",
         quantity: 3,
         location: "冰河通道",
@@ -1914,6 +2001,7 @@ export const recipeData: Recipe[] = [
       {
         id: "烤三色鱿鱼_ing_2",
         name: "吸血鱿鱼",
+        fishId: "vampire_squid",
         emoji: "🐟",
         quantity: 3,
         location: "冰河通道",
@@ -1921,6 +2009,7 @@ export const recipeData: Recipe[] = [
       {
         id: "烤三色鱿鱼_ing_3",
         name: "乌贼",
+        fishId: "cuttlefish",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -1934,7 +2023,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "鳐鱼脯",
     name: "鳐鱼脯",
     emoji: "🍱",
@@ -1943,19 +2032,22 @@ export const recipeData: Recipe[] = [
     tastiness: 225,
     servings: 12,
     obtainMethod: "",
-    description: "将黄鳐、石纹电鳐、扁鳐风干后稍微炙烤而成的料理。从料理中可以感受到旭日阳光和舒爽清风。",
+    description:
+      "将赤半魟、石纹电鳐、扁鳐风干后稍微炙烤而成的料理。从料理中可以感受到旭日阳光和舒爽清风。",
     imageUrl: recipeImageByName.get("鳐鱼脯") ?? null,
     ingredients: [
       {
         id: "鳐鱼脯_ing_1",
         name: "扁鳐",
+        fishId: "flat_skate",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
       },
       {
         id: "鳐鱼脯_ing_2",
-        name: "黄鳐肉片",
+        name: "赤半魟肉片",
+        fishId: "yellow_ray",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1963,6 +2055,7 @@ export const recipeData: Recipe[] = [
       {
         id: "鳐鱼脯_ing_3",
         name: "石纹电鳐肉片",
+        fishId: "marbled_electric_ray",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -1976,7 +2069,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炖鼠鲨",
     name: "炖鼠鲨",
     emoji: "🍱",
@@ -1987,12 +2080,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "鲨鱼",
     recommended: true,
-    description: "将鼠鲨切成厚片后用小火久炖出来的料理。加入一点黑醋和胡椒可以令风味更加浓郁。",
+    description:
+      "将鼠鲨切成厚片后用小火久炖出来的料理。加入一点黑醋和胡椒可以令风味更加浓郁。",
     imageUrl: recipeImageByName.get("炖鼠鲨") ?? null,
     ingredients: [
       {
         id: "炖鼠鲨_ing_1",
         name: "鼠鲨肉片",
+        fishId: "porbeagle_shark",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -2013,7 +2108,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "大蒜烤热带鱼",
     name: "大蒜烤热带鱼",
     emoji: "🍱",
@@ -2021,27 +2116,31 @@ export const recipeData: Recipe[] = [
     sellPrice: 1480,
     tastiness: 236,
     servings: 9,
-    obtainMethod: '东北15级解锁',
-    description: "将切碎的大蒜涂满霞蝶鱼、小丑鱼和蓝倒吊上烤制而成的料理。烤大蒜呈现出高级的风味。",
+    obtainMethod: "东北15级解锁",
+    description:
+      "将切碎的大蒜涂满多鳞霞蝶鱼、小丑鱼和黄尾副刺尾鱼上烤制而成的料理。烤大蒜呈现出高级的风味。",
     imageUrl: recipeImageByName.get("大蒜烤热带鱼") ?? null,
     ingredients: [
       {
         id: "大蒜烤热带鱼_ing_1",
         name: "小丑鱼",
+        fishId: "clownfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
       },
       {
         id: "大蒜烤热带鱼_ing_2",
-        name: "霞蝶鱼",
+        name: "多鳞霞蝶鱼",
+        fishId: "butterflyfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
       },
       {
         id: "大蒜烤热带鱼_ing_3",
-        name: "蓝倒吊",
+        name: "黄尾副刺尾鱼",
+        fishId: "blue_tang",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2055,7 +2154,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "绯红鱼卷",
     name: "绯红鱼卷",
     emoji: "🍱",
@@ -2063,17 +2162,19 @@ export const recipeData: Recipe[] = [
     sellPrice: 1480,
     tastiness: 285,
     servings: 9,
-    obtainMethod: '比利15级解锁',
+    obtainMethod: "比利15级解锁",
     partyFood: "鲨鱼",
     recommended: true,
     star: true,
 
-    description: "仅选用鱼肉片制作而成的鱼卷料理。就算不去咀嚼也会在口中融化，仿佛在吃冰淇淋一般。",
+    description:
+      "仅选用鱼肉片制作而成的鱼卷料理。就算不去咀嚼也会在口中融化，仿佛在吃冰淇淋一般。",
     imageUrl: recipeImageByName.get("绯红鱼卷") ?? null,
     ingredients: [
       {
         id: "绯红鱼卷_ing_1",
         name: "大斑躄鱼",
+        fishId: "clown_frogfish",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -2081,6 +2182,7 @@ export const recipeData: Recipe[] = [
       {
         id: "绯红鱼卷_ing_2",
         name: "金眼鲷",
+        fishId: "red_bream",
         emoji: "🐟",
         quantity: 3,
         location: "130-250 米",
@@ -2088,13 +2190,14 @@ export const recipeData: Recipe[] = [
       {
         id: "绯红鱼卷_ing_3",
         name: "长吻银鲛肉片",
+        fishId: "rhinochimaeridae",
         emoji: "🐟",
         quantity: 3,
         location: "130-250 米",
       },
     ],
   },
-{
+  {
     id: "冰鱼咖喱",
     name: "冰鱼咖喱",
     emoji: "🍱",
@@ -2105,12 +2208,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "咖喱",
     recommended: true,
-    description: "用处理好的冰鱼做成的咖喱料理。清淡的冰鱼加上香喷喷的大豆和咖喱非常搭配。",
+    description:
+      "用处理好的冰鱼做成的咖喱料理。清淡的冰鱼加上香喷喷的大豆和咖喱非常搭配。",
     imageUrl: recipeImageByName.get("冰鱼咖喱") ?? null,
     ingredients: [
       {
         id: "冰鱼咖喱_ing_1",
         name: "冰鱼",
+        fishId: "ice_fish",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -2131,7 +2236,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "凉拌水母",
     name: "凉拌水母",
     emoji: "🍱",
@@ -2139,17 +2244,19 @@ export const recipeData: Recipe[] = [
     sellPrice: 1480,
     tastiness: 298,
     servings: 6,
-    obtainMethod: '詹姆斯15级解锁',
+    obtainMethod: "詹姆斯15级解锁",
     partyFood: "水母",
     recommended: true,
     star: true,
 
-    description: "将桶水母和蛋黄水母切丝后，再用大蒜酱料凉拌而成的料理。既酸爽又香酥，适合当做简单的一餐。",
+    description:
+      "将桶水母和蛋黄水母切丝后，再用大蒜酱料凉拌而成的料理。既酸爽又香酥，适合当做简单的一餐。",
     imageUrl: recipeImageByName.get("凉拌水母") ?? null,
     ingredients: [
       {
         id: "凉拌水母_ing_1",
         name: "桶水母",
+        fishId: "barrel_jellyfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2157,6 +2264,7 @@ export const recipeData: Recipe[] = [
       {
         id: "凉拌水母_ing_2",
         name: "蛋黄水母",
+        fishId: "fried_egg_jellyfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2177,7 +2285,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "深海鱼天妇罗",
     name: "深海鱼天妇罗",
     emoji: "🍱",
@@ -2185,13 +2293,15 @@ export const recipeData: Recipe[] = [
     sellPrice: 1461,
     tastiness: 320,
     servings: 7,
-    obtainMethod: "",    partyFood: "鲨鱼",
+    obtainMethod: "",
+    partyFood: "鲨鱼",
     description: "在柔软又有弹性的深海鱼上裹上一层薄薄的炸衣炸制而成的料理。",
     imageUrl: recipeImageByName.get("深海鱼天妇罗") ?? null,
     ingredients: [
       {
         id: "深海鱼天妇罗_ing_1",
         name: "雪茄达摩鲨",
+        fishId: "cookiecutter_shark",
         emoji: "🐟",
         quantity: 1,
         location: "130-250 米",
@@ -2199,6 +2309,7 @@ export const recipeData: Recipe[] = [
       {
         id: "深海鱼天妇罗_ing_2",
         name: "吸血鱿鱼",
+        fishId: "vampire_squid",
         emoji: "🐟",
         quantity: 1,
         location: "冰河通道",
@@ -2206,6 +2317,7 @@ export const recipeData: Recipe[] = [
       {
         id: "深海鱼天妇罗_ing_3",
         name: "桶眼鱼",
+        fishId: "barreleye",
         emoji: "🐟",
         quantity: 1,
         location: "冰河通道",
@@ -2219,7 +2331,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "辣椒金枪鱼",
     name: "辣椒金枪鱼",
     emoji: "🍱",
@@ -2231,12 +2343,14 @@ export const recipeData: Recipe[] = [
     partyFood: "金枪鱼",
     recommended: true,
     star: true,
-    description: "将金枪鱼肉切薄后，与哈瓦那辣椒酱一起炒制而成的料理。这个料理的灵感来自于 MC 赛米的音乐。",
+    description:
+      "将金枪鱼肉切薄后，与哈瓦那辣椒酱一起炒制而成的料理。这个料理的灵感来自于 MC 赛米的音乐。",
     imageUrl: recipeImageByName.get("辣椒金枪鱼") ?? null,
     ingredients: [
       {
         id: "辣椒金枪鱼_ing_1",
         name: "大西洋蓝鳍金枪鱼中腹肉",
+        fishId: "bluefin_tuna",
         emoji: "🐟",
         quantity: 3,
         location: "0-130 米",
@@ -2264,7 +2378,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "糖醋青瞻星鱼",
     name: "糖醋青瞻星鱼",
     emoji: "🍱",
@@ -2279,6 +2393,7 @@ export const recipeData: Recipe[] = [
       {
         id: "糖醋青瞻星鱼_ing_1",
         name: "青瞻星鱼",
+        fishId: "bluespotted_stargazer",
         emoji: "🐟",
         quantity: 1,
         location: "130-250 米",
@@ -2306,7 +2421,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "西红柿炒蜗牛鱼",
     name: "西红柿炒蜗牛鱼",
     emoji: "🍱",
@@ -2315,12 +2430,14 @@ export const recipeData: Recipe[] = [
     tastiness: 335,
     servings: 12,
     obtainMethod: "",
-    description: "将南极蜗牛鱼和细鳍短吻狮子鱼切成易食用的大小，再和西红柿一起翻炒而成的料理。酸酸甜甜的味道和清淡的口感相组合，让人欲罢不能。",
+    description:
+      "将南极蜗牛鱼和细鳍短吻狮子鱼切成易食用的大小，再和西红柿一起翻炒而成的料理。酸酸甜甜的味道和清淡的口感相组合，让人欲罢不能。",
     imageUrl: recipeImageByName.get("西红柿炒蜗牛鱼") ?? null,
     ingredients: [
       {
         id: "西红柿炒蜗牛鱼_ing_1",
         name: "南极狮子鱼",
+        fishId: "antarctic_lionfish",
         emoji: "🐟",
         quantity: 3,
         location: "冰河区域",
@@ -2328,6 +2445,7 @@ export const recipeData: Recipe[] = [
       {
         id: "西红柿炒蜗牛鱼_ing_2",
         name: "细鳍短吻狮子鱼",
+        fishId: "shortnose_lionfish",
         emoji: "🐟",
         quantity: 3,
         location: "130-250 米",
@@ -2348,7 +2466,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "鲇鱼三明治",
     name: "鲇鱼三明治",
     emoji: "🍱",
@@ -2357,7 +2475,8 @@ export const recipeData: Recipe[] = [
     tastiness: 420,
     servings: 6,
     obtainMethod: "",
-    description: "将鲇鱼和纹首鮨油炸后夹在面包片之间的料理。放入香喷喷的鸡蛋，有一种淳厚的味道。",
+    description:
+      "将鲇鱼和纹首鮨油炸后夹在面包片之间的料理。放入香喷喷的鸡蛋，有一种淳厚的味道。",
     imageUrl: recipeImageByName.get("鲇鱼三明治") ?? null,
     ingredients: [
       {
@@ -2370,6 +2489,7 @@ export const recipeData: Recipe[] = [
       {
         id: "鲇鱼三明治_ing_2",
         name: "纹首鮨",
+        fishId: "harlequin_hind",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -2390,7 +2510,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "康氏马鲛炸饭团",
     name: "康氏马鲛炸饭团",
     emoji: "🍱",
@@ -2399,12 +2519,14 @@ export const recipeData: Recipe[] = [
     tastiness: 364,
     servings: 7,
     obtainMethod: "",
-    description: "将康氏马鲛和大蒜酱料与米饭拌在一起后做成圆形，再进行炸制的料理。做起来很方便，适合当作小孩子的零食。",
+    description:
+      "将康氏马鲛和大蒜酱料与米饭拌在一起后做成圆形，再进行炸制的料理。做起来很方便，适合当作小孩子的零食。",
     imageUrl: recipeImageByName.get("康氏马鲛炸饭团") ?? null,
     ingredients: [
       {
         id: "康氏马鲛炸饭团_ing_1",
         name: "康氏马鲛",
+        fishId: "narrow_barred_spanish_mackerel",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -2432,7 +2554,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "烤毛鳞鱼",
     name: "烤毛鳞鱼",
     emoji: "🍱",
@@ -2443,12 +2565,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "咖喱",
     recommended: true,
-    description: "这是用小火把撒满姜黄粉的毛鳞鱼烤成金黄色的料理。香酥的味道与啤酒最是搭配。",
+    description:
+      "这是用小火把撒满姜黄粉的毛鳞鱼烤成金黄色的料理。香酥的味道与啤酒最是搭配。",
     imageUrl: recipeImageByName.get("烤毛鳞鱼") ?? null,
     ingredients: [
       {
         id: "烤毛鳞鱼_ing_1",
         name: "毛鳞鱼",
+        fishId: "capelin",
         emoji: "🐟",
         quantity: 5,
         location: "冰河区域",
@@ -2469,7 +2593,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炸狮子鱼",
     name: "炸狮子鱼",
     emoji: "🍱",
@@ -2478,12 +2602,14 @@ export const recipeData: Recipe[] = [
     tastiness: 366,
     servings: 4,
     obtainMethod: "",
-    description: "将狮子鱼油炸至酥脆的料理。虽然是一种挑刺很麻烦的鱼，但是肉质宛如绸缎一般丝滑。",
+    description:
+      "将翱翔蓑鲉油炸至酥脆的料理。虽然是一种挑刺很麻烦的鱼，但是肉质宛如绸缎一般丝滑。",
     imageUrl: recipeImageByName.get("炸狮子鱼") ?? null,
     ingredients: [
       {
         id: "炸狮子鱼_ing_1",
-        name: "狮子鱼",
+        name: "翱翔蓑鲉",
+        fishId: "red_lionfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2511,7 +2637,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炒哈瓦那辣椒龙虾",
     name: "炒哈瓦那辣椒龙虾",
     emoji: "🍱",
@@ -2522,7 +2648,8 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "龙虾",
     recommended: true,
-    description: "将有着极端辣味的哈瓦那辣椒调料炒龙虾的料理。剥龙虾皮的时候手可能会发麻，所以最好准备手套。",
+    description:
+      "将有着极端辣味的哈瓦那辣椒调料炒龙虾的料理。剥龙虾皮的时候手可能会发麻，所以最好准备手套。",
     imageUrl: recipeImageByName.get("炒哈瓦那辣椒龙虾") ?? null,
     ingredients: [
       {
@@ -2548,7 +2675,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "烟熏大西洋鲭鱼炒鸡蛋",
     name: "烟熏大西洋鲭鱼炒鸡蛋",
     emoji: "🍱",
@@ -2557,12 +2684,14 @@ export const recipeData: Recipe[] = [
     tastiness: 460,
     servings: 6,
     obtainMethod: "",
-    description: "将熏腌的大西洋鲭鱼撕碎，和鸡蛋一起用大火翻炒后放在面包上面的料理。适合当做简单的一餐。",
+    description:
+      "将熏腌的大西洋鲭鱼撕碎，和鸡蛋一起用大火翻炒后放在面包上面的料理。适合当做简单的一餐。",
     imageUrl: recipeImageByName.get("烟熏大西洋鲭鱼炒鸡蛋") ?? null,
     ingredients: [
       {
         id: "烟熏大西洋鲭鱼炒鸡蛋_ing_1",
         name: "大西洋鲭鱼",
+        fishId: "atlantic_mackerel",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -2583,7 +2712,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "黑醋炖鹦鹉嘴鱼",
     name: "黑醋炖鹦鹉嘴鱼",
     emoji: "🍱",
@@ -2592,12 +2721,13 @@ export const recipeData: Recipe[] = [
     tastiness: 406,
     servings: 6,
     obtainMethod: "",
-    description: "在鹦鹉鱼上浇酸味黑醋制作的炖食。五颜六色的鹦鹉鱼和浑厚的黑色酱料融合在一起，形成了绝妙无比的组合。",
+    description:
+      "在鹦鹉鱼上浇酸味黑醋制作的炖食。五颜六色的鹦鹉鱼和浑厚的黑色酱料融合在一起，形成了绝妙无比的组合。",
     imageUrl: recipeImageByName.get("黑醋炖鹦鹉嘴鱼") ?? null,
     ingredients: [
       {
         id: "黑醋炖鹦鹉嘴鱼_ing_1",
-        name: "地中海鹦鹉嘴鱼",
+        name: "异齿鹦鲷",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2618,7 +2748,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "红石蟹炒饭",
     name: "红石蟹炒饭",
     emoji: "🍱",
@@ -2627,12 +2757,14 @@ export const recipeData: Recipe[] = [
     tastiness: 305,
     servings: 10,
     obtainMethod: "",
-    description: "将红石蟹的肉挑取出来后搭配高级米和鸡蛋一起翻炒出来的料理。蛋液包裹着颗颗米粒，带来丰富的味道。",
+    description:
+      "将红石蟹的肉挑取出来后搭配高级米和鸡蛋一起翻炒出来的料理。蛋液包裹着颗颗米粒，带来丰富的味道。",
     imageUrl: recipeImageByName.get("红石蟹炒饭") ?? null,
     ingredients: [
       {
         id: "红石蟹炒饭_ing_1",
         name: "红石蟹",
+        fishId: "sally_lightfoot_crab",
         emoji: "🐟",
         quantity: 2,
         location: "遇难船内部",
@@ -2660,7 +2792,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "鳗鲶派",
     name: "鳗鲶派",
     emoji: "🍱",
@@ -2669,12 +2801,14 @@ export const recipeData: Recipe[] = [
     tastiness: 420,
     servings: 7,
     obtainMethod: "",
-    description: "放了很多处理好的鳗鲶和切碎的洋葱，烤制而成的派料理。仿佛鱼在仰望天空中的星星。",
+    description:
+      "放了很多处理好的线纹鳗鲶和切碎的洋葱，烤制而成的派料理。仿佛鱼在仰望天空中的星星。",
     imageUrl: recipeImageByName.get("鳗鲶派") ?? null,
     ingredients: [
       {
         id: "鳗鲶派_ing_1",
-        name: "鳗鲶",
+        name: "线纹鳗鲶",
+        fishId: "striped_catfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2702,7 +2836,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "紫海胆盖饭",
     name: "紫海胆盖饭",
     emoji: "🍱",
@@ -2717,6 +2851,7 @@ export const recipeData: Recipe[] = [
       {
         id: "紫海胆盖饭_ing_1",
         name: "紫海胆",
+        fishId: "purple_sea_urchin",
         emoji: "🐟",
         quantity: 2,
         location: "0-50 米",
@@ -2737,7 +2872,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "大西洋鲣鱼咖喱",
     name: "大西洋鲣鱼咖喱",
     emoji: "🍱",
@@ -2754,6 +2889,7 @@ export const recipeData: Recipe[] = [
       {
         id: "大西洋鲣鱼咖喱_ing_1",
         name: "大西洋鲣鱼",
+        fishId: "atlantic_bonito",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -2774,7 +2910,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炸虾特级寿司",
     name: "炸虾特级寿司",
     emoji: "🍱",
@@ -2785,7 +2921,8 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "虾",
     recommended: true,
-    description: "用油炸白对虾、油炸虎虾做成的特级寿司。大大的炸虾和高级米相结合呈现出梦幻般的味道。",
+    description:
+      "用油炸白对虾、油炸虎虾做成的特级寿司。大大的炸虾和高级米相结合呈现出梦幻般的味道。",
     imageUrl: recipeImageByName.get("炸虾特级寿司") ?? null,
     ingredients: [
       {
@@ -2797,7 +2934,8 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "炸虾特级寿司_ing_2",
-        name: "白对虾",
+        name: "凡纳对虾",
+        fishId: "whiteleg_shrimp",
         emoji: "🐟",
         quantity: 2,
         location: "0-50 米",
@@ -2818,7 +2956,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "酱烤条纹四鳍旗鱼",
     name: "酱烤条纹四鳍旗鱼",
     emoji: "🍱",
@@ -2826,13 +2964,16 @@ export const recipeData: Recipe[] = [
     sellPrice: 1406,
     tastiness: 272,
     servings: 9,
-    obtainMethod: "",    partyFood: "旗鱼",
-    description: "在条纹四鳍旗鱼上涂满用大蒜和大酱制成的特殊酱料仔细烤制而成的料理。不仅香酥，还有点鲜甜，味道简直一绝。",
+    obtainMethod: "",
+    partyFood: "旗鱼",
+    description:
+      "在条纹四鳍旗鱼上涂满用大蒜和大酱制成的特殊酱料仔细烤制而成的料理。不仅香酥，还有点鲜甜，味道简直一绝。",
     imageUrl: recipeImageByName.get("酱烤条纹四鳍旗鱼") ?? null,
     ingredients: [
       {
         id: "酱烤条纹四鳍旗鱼_ing_1",
         name: "条纹四鳍旗鱼肉片",
+        fishId: "marlin",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -2853,7 +2994,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "西红柿鸡蛋汤",
     name: "西红柿鸡蛋汤",
     emoji: "🍱",
@@ -2862,7 +3003,8 @@ export const recipeData: Recipe[] = [
     tastiness: 309,
     servings: 12,
     obtainMethod: "",
-    description: "是将西红柿和鸡蛋一起煮的料理。醉酒后的第二天用来醒酒非常不错。",
+    description:
+      "是将西红柿和鸡蛋一起煮的料理。醉酒后的第二天用来醒酒非常不错。",
     imageUrl: recipeImageByName.get("西红柿鸡蛋汤") ?? null,
     ingredients: [
       {
@@ -2888,7 +3030,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "东部岩石龙虾鸡蛋羹",
     name: "东部岩石龙虾鸡蛋羹",
     emoji: "🍱",
@@ -2900,12 +3042,14 @@ export const recipeData: Recipe[] = [
     partyFood: "龙虾",
     recommended: true,
     star: true,
-    description: "用昆布煮出的汤汁里放入鸡蛋和东部岩石龙虾做成的料理。大块的龙虾肉看起来很好吃。",
+    description:
+      "用昆布煮出的汤汁里放入鸡蛋和东部岩石龙虾做成的料理。大块的龙虾肉看起来很好吃。",
     imageUrl: recipeImageByName.get("东部岩石龙虾鸡蛋羹") ?? null,
     ingredients: [
       {
         id: "东部岩石龙虾鸡蛋羹_ing_1",
         name: "东部岩石龙虾",
+        fishId: "eastern_rock_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "130-250 米",
@@ -2926,7 +3070,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "海马乌冬",
     name: "海马乌冬",
     emoji: "🍱",
@@ -2935,7 +3079,8 @@ export const recipeData: Recipe[] = [
     tastiness: 353,
     servings: 4,
     obtainMethod: "",
-    description: "加入炸海马的乌冬料理。柔滑的面条搭配口感粗糙的海马，别有一番特色。",
+    description:
+      "加入炸海马的乌冬料理。柔滑的面条搭配口感粗糙的海马，别有一番特色。",
     imageUrl: recipeImageByName.get("海马乌冬") ?? null,
     ingredients: [
       {
@@ -2961,7 +3106,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "咖喱鹦鹉鱼头",
     name: "咖喱鹦鹉鱼头",
     emoji: "🍱",
@@ -2976,6 +3121,7 @@ export const recipeData: Recipe[] = [
       {
         id: "咖喱鹦鹉鱼头_ing_1",
         name: "鹦鹉鱼肉片",
+        fishId: "parrotfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2996,7 +3142,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "华美特级寿司套餐",
     name: "华美特级寿司套餐",
     emoji: "🍱",
@@ -3012,6 +3158,7 @@ export const recipeData: Recipe[] = [
       {
         id: "华美特级寿司套餐_ing_1",
         name: "泰坦扳机鱼",
+        fishId: "titan_triggerfish",
         emoji: "🐟",
         quantity: 3,
         location: "0-50 米",
@@ -3019,6 +3166,7 @@ export const recipeData: Recipe[] = [
       {
         id: "华美特级寿司套餐_ing_2",
         name: "青条鳃棘鲈",
+        fishId: "coral_trout",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -3026,6 +3174,7 @@ export const recipeData: Recipe[] = [
       {
         id: "华美特级寿司套餐_ing_3",
         name: "豹纹鳃棘鲈",
+        fishId: "leopard_coral_grouper",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -3039,7 +3188,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "蔬菜寿司",
     name: "蔬菜寿司",
     emoji: "🍱",
@@ -3074,7 +3223,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "软隐棘杜父鱼春卷",
     name: "软隐棘杜父鱼春卷",
     emoji: "🍱",
@@ -3083,12 +3232,14 @@ export const recipeData: Recipe[] = [
     tastiness: 322,
     servings: 10,
     obtainMethod: "",
-    description: "将和好的面粉以薄薄的形状烤出后，塞满软隐棘杜父鱼卷起来再炸制的料理。与芝麻和蛋黄酱混合制成的酱料非常搭。",
+    description:
+      "将和好的面粉以薄薄的形状烤出后，塞满软隐棘杜父鱼卷起来再炸制的料理。与芝麻和蛋黄酱混合制成的酱料非常搭。",
     imageUrl: recipeImageByName.get("软隐棘杜父鱼春卷") ?? null,
     ingredients: [
       {
         id: "软隐棘杜父鱼春卷_ing_1",
         name: "软隐棘杜父鱼",
+        fishId: "soft_sculpin",
         emoji: "🐟",
         quantity: 3,
         location: "冰河通道",
@@ -3116,7 +3267,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "面包虾",
     name: "面包虾",
     emoji: "🍱",
@@ -3127,7 +3278,8 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "虾",
     recommended: true,
-    description: "在切成正方形的面包片中间放上剁碎的虾，油炸而成的料理。因为放入了很多白对虾和虎虾，有着浓郁的味道。",
+    description:
+      "在切成正方形的面包片中间放上剁碎的虾，油炸而成的料理。因为放入了很多凡纳对虾和虎虾，有着浓郁的味道。",
     imageUrl: recipeImageByName.get("面包虾") ?? null,
     ingredients: [
       {
@@ -3139,7 +3291,8 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "面包虾_ing_2",
-        name: "白对虾",
+        name: "凡纳对虾",
+        fishId: "whiteleg_shrimp",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -3160,7 +3313,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "吞鳗鱼冻",
     name: "吞鳗鱼冻",
     emoji: "🍱",
@@ -3169,7 +3322,8 @@ export const recipeData: Recipe[] = [
     tastiness: 439,
     servings: 9,
     obtainMethod: "",
-    description: "将切块后的吞鳗中放入石花菜蒸熟后，摆盘待冷却的料理。也可根据喜好选择趁热吃。",
+    description:
+      "将切块后的吞鳗中放入石花菜蒸熟后，摆盘待冷却的料理。也可根据喜好选择趁热吃。",
     imageUrl: recipeImageByName.get("吞鳗鱼冻") ?? null,
     ingredients: [
       {
@@ -3195,34 +3349,38 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
-    id: "水晶龙虾虾卷",
-    name: "水晶龙虾虾卷",
+  {
+    id: "水晶龙虾卷",
+    name: "水晶龙虾卷",
     emoji: "🍱",
     level: 1,
     sellPrice: 1369,
     tastiness: 305,
     servings: 9,
     obtainMethod: "",
-    description: "在铺开的米饭上放入水晶龙虾肉未而制成的寿司卷。玲珑的光彩令人舍不得吃。",
-    imageUrl: recipeImageByName.get("水晶龙虾虾卷") ?? null,
+    partyFood: "龙虾",
+    recommended: true,
+    description:
+      "在铺开的米饭上放入水晶龙虾肉未而制成的寿司卷。玲珑的光彩令人舍不得吃。",
+    imageUrl: recipeImageByName.get("水晶龙虾卷") ?? null,
     ingredients: [
       {
-        id: "水晶龙虾虾卷_ing_1",
+        id: "水晶龙虾卷_ing_1",
         name: "水晶龙虾",
+        fishId: "crystal_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "50-130 米",
       },
       {
-        id: "水晶龙虾虾卷_ing_2",
+        id: "水晶龙虾卷_ing_2",
         name: "白米",
         emoji: "🐟",
         quantity: 2,
         location: "小菜园",
       },
       {
-        id: "水晶龙虾虾卷_ing_3",
+        id: "水晶龙虾卷_ing_3",
         name: "墨角藻",
         emoji: "🐟",
         quantity: 2,
@@ -3230,7 +3388,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "哥斯拉大战伊比拉咖喱",
     name: "哥斯拉大战伊比拉咖喱",
     emoji: "🍱",
@@ -3239,12 +3397,14 @@ export const recipeData: Recipe[] = [
     tastiness: 365,
     servings: 9,
     obtainMethod: "",
-    description: "这道咖喱料理还原了哥斯拉和伊比拉大战的激烈瞬间。用炸海鳝来代表哥斯拉，炸欧洲龙虾则代表伊比拉。",
+    description:
+      "这道咖喱料理还原了哥斯拉和伊比拉大战的激烈瞬间。用炸海鳝来代表哥斯拉，炸欧洲龙虾则代表伊比拉。",
     imageUrl: recipeImageByName.get("哥斯拉大战伊比拉咖喱") ?? null,
     ingredients: [
       {
         id: "哥斯拉大战伊比拉咖喱_ing_1",
         name: "欧洲龙虾",
+        fishId: "european_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "0-50 米",
@@ -3252,6 +3412,7 @@ export const recipeData: Recipe[] = [
       {
         id: "哥斯拉大战伊比拉咖喱_ing_2",
         name: "海鳝",
+        fishId: "moray_eel",
         emoji: "🐟",
         quantity: 2,
         location: "0-50 米",
@@ -3272,7 +3433,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "金枪鱼生鱼片盖饭",
     name: "金枪鱼生鱼片盖饭",
     emoji: "🍱",
@@ -3290,6 +3451,7 @@ export const recipeData: Recipe[] = [
       {
         id: "金枪鱼生鱼片盖饭_ing_1",
         name: "大西洋蓝鳍金枪鱼红肉",
+        fishId: "bluefin_tuna",
         emoji: "🐟",
         quantity: 3,
         location: "0-130 米",
@@ -3317,7 +3479,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "深海怪兽拉面",
     name: "深海怪兽拉面",
     emoji: "🍱",
@@ -3326,19 +3488,21 @@ export const recipeData: Recipe[] = [
     tastiness: 410,
     servings: 6,
     obtainMethod: "",
-    description: "这道拉面料理展现了倒在深海中的哥斯拉。用切好的紫菜来表示哥斯拉，用兜水母代替面粉面来提味。",
+    description:
+      "这道拉面料理展现了倒在深海中的哥斯拉。用切好的紫菜来表示哥斯拉，用兜水母代替面粉面来提味。",
     imageUrl: recipeImageByName.get("深海怪兽拉面") ?? null,
     ingredients: [
       {
         id: "深海怪兽拉面_ing_1",
         name: "兜水母",
+        fishId: "comb_jelly",
         emoji: "🐟",
         quantity: 5,
         location: "130-250 米",
       },
       {
         id: "深海怪兽拉面_ing_2",
-        name: "海带",
+        name: "裙带菜",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -3352,7 +3516,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "伊比拉钳下逃生生鱼片",
     name: "伊比拉钳下逃生生鱼片",
     emoji: "🍱",
@@ -3361,12 +3525,14 @@ export const recipeData: Recipe[] = [
     tastiness: 382,
     servings: 9,
     obtainMethod: "",
-    description: "这道料理呈现了潜水艇从伊比拉 “魔钳” 下逃脱的瞬间。用加州龙虾刻画出巨大的伊比拉，桶眼鱼则代表着潜水艇。",
+    description:
+      "这道料理呈现了潜水艇从伊比拉 “魔钳” 下逃脱的瞬间。用加州龙虾刻画出巨大的伊比拉，桶眼鱼则代表着潜水艇。",
     imageUrl: recipeImageByName.get("伊比拉钳下逃生生鱼片") ?? null,
     ingredients: [
       {
         id: "伊比拉钳下逃生生鱼片_ing_1",
         name: "加州龙虾",
+        fishId: "california_spiny_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "50-130 米",
@@ -3374,6 +3540,7 @@ export const recipeData: Recipe[] = [
       {
         id: "伊比拉钳下逃生生鱼片_ing_2",
         name: "桶眼鱼",
+        fishId: "barreleye",
         emoji: "🐟",
         quantity: 3,
         location: "冰河通道",
@@ -3387,7 +3554,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "甘氏巨螯蟹黄瓜寿司",
     name: "甘氏巨螯蟹黄瓜寿司",
     emoji: "🍱",
@@ -3404,6 +3571,7 @@ export const recipeData: Recipe[] = [
       {
         id: "甘氏巨螯蟹黄瓜寿司_ing_1",
         name: "甘氏巨螯蟹",
+        fishId: "spider_crab",
         emoji: "🐟",
         quantity: 1,
         location: "130-250 米",
@@ -3417,7 +3585,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "棘茄鱼黄瓜军舰寿司",
     name: "棘茄鱼黄瓜军舰寿司",
     emoji: "🍱",
@@ -3434,6 +3602,7 @@ export const recipeData: Recipe[] = [
       {
         id: "棘茄鱼黄瓜军舰寿司_ing_1",
         name: "棘茄鱼",
+        fishId: "sea_toad",
         emoji: "🐟",
         quantity: 1,
         location: "130-250 米",
@@ -3447,7 +3616,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "黄瓜串",
     name: "黄瓜串",
     emoji: "🍱",
@@ -3458,7 +3627,8 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "黄瓜",
     recommended: true,
-    description: "是用稍微削掉外皮的黄瓜制成的串料理。满满的冰块长时间保证黄瓜清脆的口感。",
+    description:
+      "是用稍微削掉外皮的黄瓜制成的串料理。满满的冰块长时间保证黄瓜清脆的口感。",
     imageUrl: recipeImageByName.get("黄瓜串") ?? null,
     ingredients: [
       {
@@ -3470,7 +3640,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "腌蔬菜",
     name: "腌蔬菜",
     emoji: "🍱",
@@ -3481,7 +3651,8 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "黄瓜",
     recommended: true,
-    description: "将多种蔬菜放入醋酱油中简单腌制而成的料理。萦绕在舌根的酸甜可以增进食欲。",
+    description:
+      "将多种蔬菜放入醋酱油中简单腌制而成的料理。萦绕在舌根的酸甜可以增进食欲。",
     imageUrl: recipeImageByName.get("腌蔬菜") ?? null,
     ingredients: [
       {
@@ -3514,7 +3685,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炸蔬菜",
     name: "炸蔬菜",
     emoji: "🍱",
@@ -3525,7 +3696,8 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "黄瓜",
     recommended: true,
-    description: "将各种蔬菜切过后和面团一起揉，再炸至酥脆的料理。仿佛可以从声音里尝到味道。",
+    description:
+      "将各种蔬菜切过后和面团一起揉，再炸至酥脆的料理。仿佛可以从声音里尝到味道。",
     imageUrl: recipeImageByName.get("炸蔬菜") ?? null,
     ingredients: [
       {
@@ -3558,7 +3730,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "竹荚鱼三明治",
     name: "竹荚鱼三明治",
     emoji: "🍱",
@@ -3569,12 +3741,14 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "黄瓜",
     recommended: true,
-    description: "将六带鲹和珍鲹的肉片捏得很厚并在中间夹上黄瓜的料理。黄瓜的清爽带来清新的口感。",
+    description:
+      "将六带鲹和珍鲹的肉片捏得很厚并在中间夹上黄瓜的料理。黄瓜的清爽带来清新的口感。",
     imageUrl: recipeImageByName.get("竹荚鱼三明治") ?? null,
     ingredients: [
       {
         id: "竹荚鱼三明治_ing_1",
         name: "珍鲹肉片",
+        fishId: "giant_trevally",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -3582,6 +3756,7 @@ export const recipeData: Recipe[] = [
       {
         id: "竹荚鱼三明治_ing_2",
         name: "六带鲹",
+        fishId: "bigeye_trevally",
         emoji: "🐟",
         quantity: 5,
         location: "50-130 米",
@@ -3595,7 +3770,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "黄鳍金枪鱼排",
     name: "黄鳍金枪鱼排",
     emoji: "🍱",
@@ -3603,13 +3778,15 @@ export const recipeData: Recipe[] = [
     sellPrice: 1128,
     tastiness: 332,
     servings: 9,
-    obtainMethod: "",    partyFood: "金枪鱼",
+    obtainMethod: "",
+    partyFood: "金枪鱼",
     description: "用小火烤黄鳍金枪鱼中腹肉制作的鱼排。",
     imageUrl: recipeImageByName.get("黄鳍金枪鱼排") ?? null,
     ingredients: [
       {
         id: "黄鳍金枪鱼排_ing_1",
         name: "黄鳍金枪鱼中腹肉",
+        fishId: "yellowfin_tuna",
         emoji: "🐟",
         quantity: 3,
         location: "0-130 米",
@@ -3630,7 +3807,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "海葡萄水母寿司",
     name: "海葡萄水母寿司",
     emoji: "🍣",
@@ -3650,10 +3827,10 @@ export const recipeData: Recipe[] = [
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "幻影水母寿司",
     name: "幻影水母寿司",
     emoji: "🍣",
@@ -3670,6 +3847,7 @@ export const recipeData: Recipe[] = [
       {
         id: "幻影水母寿司_ing_1",
         name: "幻影水母肉片（boss）",
+        fishId: "phantom_jellyfish",
         emoji: "🐟",
         quantity: 1,
         location: "boss",
@@ -3687,10 +3865,10 @@ export const recipeData: Recipe[] = [
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "箱水母寿司",
     name: "箱水母寿司",
     emoji: "🍣",
@@ -3707,13 +3885,14 @@ export const recipeData: Recipe[] = [
       {
         id: "箱水母寿司_ing_1",
         name: "箱水母",
+        fishId: "box_jellyfish",
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "血腹栉水母寿司",
     name: "血腹栉水母寿司",
     emoji: "🍣",
@@ -3730,13 +3909,14 @@ export const recipeData: Recipe[] = [
       {
         id: "血腹栉水母寿司_ing_1",
         name: "血腹栉水母",
+        fishId: "blood_belly_comb_jellyfish",
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "兜水母寿司",
     name: "兜水母寿司",
     emoji: "🍣",
@@ -3753,13 +3933,14 @@ export const recipeData: Recipe[] = [
       {
         id: "兜水母寿司_ing_1",
         name: "兜水母",
+        fishId: "comb_jelly",
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "澳洲斑点水母军舰寿司",
     name: "澳洲斑点水母军舰寿司",
     emoji: "🍣",
@@ -3776,13 +3957,14 @@ export const recipeData: Recipe[] = [
       {
         id: "澳洲斑点水母军舰寿司_ing_1",
         name: "澳洲斑点水母",
+        fishId: "australian_spotted_jellyfish",
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "蛋黄水母军舰寿司",
     name: "蛋黄水母军舰寿司",
     emoji: "🍣",
@@ -3799,13 +3981,14 @@ export const recipeData: Recipe[] = [
       {
         id: "蛋黄水母军舰寿司_ing_1",
         name: "蛋黄水母",
+        fishId: "fried_egg_jellyfish",
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "桶水母军舰寿司",
     name: "桶水母军舰寿司",
     emoji: "🍣",
@@ -3822,13 +4005,14 @@ export const recipeData: Recipe[] = [
       {
         id: "桶水母军舰寿司_ing_1",
         name: "桶水母",
+        fishId: "barrel_jellyfish",
         emoji: "🐟",
         quantity: 1,
         location: "—",
-      }
+      },
     ],
   },
-{
+  {
     id: "夏威夷盖饭",
     name: "夏威夷盖饭",
     emoji: "🍱",
@@ -3845,6 +4029,7 @@ export const recipeData: Recipe[] = [
       {
         id: "夏威夷盖饭_ing_1",
         name: "黄鳍金枪鱼红肉",
+        fishId: "yellowfin_tuna",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -3872,7 +4057,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "蓝鳍金枪鱼大腹肉寿司",
     name: "蓝鳍金枪鱼大腹肉寿司",
     emoji: "🍣",
@@ -3889,13 +4074,14 @@ export const recipeData: Recipe[] = [
       {
         id: "蓝鳍金枪鱼大腹肉寿司_ing_1",
         name: "大西洋蓝鳍金枪鱼大腹肉",
+        fishId: "bluefin_tuna",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "黄鳍金枪鱼大腹肉寿司",
     name: "黄鳍金枪鱼大腹肉寿司",
     emoji: "🍣",
@@ -3912,13 +4098,14 @@ export const recipeData: Recipe[] = [
       {
         id: "黄鳍金枪鱼大腹肉寿司_ing_1",
         name: "黄鳍金枪鱼大腹肉",
+        fishId: "yellowfin_tuna",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "蓝鳍金枪鱼中腹肉寿司",
     name: "蓝鳍金枪鱼中腹肉寿司",
     emoji: "🍣",
@@ -3935,13 +4122,14 @@ export const recipeData: Recipe[] = [
       {
         id: "蓝鳍金枪鱼中腹肉寿司_ing_1",
         name: "大西洋蓝鳍金枪鱼大腹肉",
+        fishId: "bluefin_tuna",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "黄鳍金枪鱼中腹肉寿司",
     name: "黄鳍金枪鱼中腹肉寿司",
     emoji: "🍣",
@@ -3958,13 +4146,14 @@ export const recipeData: Recipe[] = [
       {
         id: "黄鳍金枪鱼中腹肉寿司_ing_1",
         name: "黄鳍金枪鱼中腹肉",
+        fishId: "yellowfin_tuna",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "蓝鳍金枪鱼红肉寿司",
     name: "蓝鳍金枪鱼红肉寿司",
     emoji: "🍣",
@@ -3981,13 +4170,14 @@ export const recipeData: Recipe[] = [
       {
         id: "蓝鳍金枪鱼红肉寿司_ing_1",
         name: "大西洋蓝鳍金枪鱼红肉",
+        fishId: "bluefin_tuna",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "黄鳍金枪鱼红肉寿司",
     name: "黄鳍金枪鱼红肉寿司",
     emoji: "🍣",
@@ -4004,13 +4194,14 @@ export const recipeData: Recipe[] = [
       {
         id: "黄鳍金枪鱼红肉寿司_ing_1",
         name: "黄鳍金枪鱼红肉",
+        fishId: "yellowfin_tuna",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "平鳍旗鱼寿司",
     name: "平鳍旗鱼寿司",
     emoji: "🍣",
@@ -4027,13 +4218,14 @@ export const recipeData: Recipe[] = [
       {
         id: "平鳍旗鱼寿司_ing_1",
         name: "平鳍旗鱼肉片",
+        fishId: "sailfish",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "条纹四鳍旗鱼寿司",
     name: "条纹四鳍旗鱼寿司",
     emoji: "🍣",
@@ -4050,13 +4242,14 @@ export const recipeData: Recipe[] = [
       {
         id: "条纹四鳍旗鱼寿司_ing_1",
         name: "条纹四鳍旗鱼肉片",
+        fishId: "marlin",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "烤旋齿鲨鱼尾",
     name: "烤旋齿鲨鱼尾",
     emoji: "🍱",
@@ -4086,7 +4279,7 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "烤旋齿鲨鱼尾_ing_3",
-        name: "海带",
+        name: "裙带菜",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -4100,7 +4293,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "大白鲨煎蛋卷",
     name: "大白鲨煎蛋卷",
     emoji: "🍳",
@@ -4130,7 +4323,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "烤尖吻鲨腹肉",
     name: "烤尖吻鲨腹肉",
     emoji: "🍱",
@@ -4174,7 +4367,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "邓氏鱼寿司",
     name: "邓氏鱼寿司",
     emoji: "🍣",
@@ -4191,13 +4384,14 @@ export const recipeData: Recipe[] = [
       {
         id: "邓氏鱼寿司_ing_1",
         name: "邓氏鱼肉片",
+        fishId: "dunkleosteus",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "鼠鲨寿司",
     name: "鼠鲨寿司",
     emoji: "🍣",
@@ -4214,13 +4408,14 @@ export const recipeData: Recipe[] = [
       {
         id: "鼠鲨寿司_ing_1",
         name: "鼠鲨肉片",
+        fishId: "porbeagle_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "格陵兰鲨寿司",
     name: "格陵兰鲨寿司",
     emoji: "🍣",
@@ -4237,13 +4432,14 @@ export const recipeData: Recipe[] = [
       {
         id: "格陵兰鲨寿司_ing_1",
         name: "格陵兰鲨肉片",
+        fishId: "greenland_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "长尾鲨寿司",
     name: "长尾鲨寿司",
     emoji: "🍣",
@@ -4260,13 +4456,14 @@ export const recipeData: Recipe[] = [
       {
         id: "长尾鲨寿司_ing_1",
         name: "长尾鲨肉片",
+        fishId: "thresher_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "镰鳍鲳鲹寿司",
     name: "镰鳍鲳鲹寿司",
     emoji: "🍣",
@@ -4283,13 +4480,14 @@ export const recipeData: Recipe[] = [
       {
         id: "镰鳍鲳鲹寿司_ing_1",
         name: "镰鳍鲳鲹",
+        fishId: "falcate_fin_pomfret",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "斑马鲨寿司",
     name: "斑马鲨寿司",
     emoji: "🍣",
@@ -4306,13 +4504,14 @@ export const recipeData: Recipe[] = [
       {
         id: "斑马鲨寿司_ing_1",
         name: "斑马鲨肉片",
+        fishId: "zebra_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "平滑锤头鲨寿司",
     name: "平滑锤头鲨寿司",
     emoji: "🍣",
@@ -4329,13 +4528,14 @@ export const recipeData: Recipe[] = [
       {
         id: "平滑锤头鲨寿司_ing_1",
         name: "平滑锤头鲨肉片",
+        fishId: "smooth_hammerhead",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "灰鲭鲨寿司",
     name: "灰鲭鲨寿司",
     emoji: "🍣",
@@ -4352,13 +4552,14 @@ export const recipeData: Recipe[] = [
       {
         id: "灰鲭鲨寿司_ing_1",
         name: "灰鲭鲨肉片",
+        fishId: "mako_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "巨口鲨寿司",
     name: "巨口鲨寿司",
     emoji: "🍣",
@@ -4375,13 +4576,14 @@ export const recipeData: Recipe[] = [
       {
         id: "巨口鲨寿司_ing_1",
         name: "巨口鲨肉片",
+        fishId: "megamouth_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "长吻银鲛寿司",
     name: "长吻银鲛寿司",
     emoji: "🍣",
@@ -4398,13 +4600,14 @@ export const recipeData: Recipe[] = [
       {
         id: "长吻银鲛寿司_ing_1",
         name: "长吻银鲛肉片",
+        fishId: "rhinochimaeridae",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "皱鳃鲨寿司",
     name: "皱鳃鲨寿司",
     emoji: "🍣",
@@ -4421,13 +4624,14 @@ export const recipeData: Recipe[] = [
       {
         id: "皱鳃鲨寿司_ing_1",
         name: "皱鳃鲨肉片",
+        fishId: "frilled_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "全烤三齿鲨头",
     name: "全烤三齿鲨头",
     emoji: "🍱",
@@ -4457,7 +4661,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "雪茄达摩鲨寿司",
     name: "雪茄达摩鲨寿司",
     emoji: "🍣",
@@ -4474,13 +4678,14 @@ export const recipeData: Recipe[] = [
       {
         id: "雪茄达摩鲨寿司_ing_1",
         name: "雪茄达摩鲨",
+        fishId: "cookiecutter_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "短尾真鲨寿司",
     name: "短尾真鲨寿司",
     emoji: "🍣",
@@ -4497,13 +4702,14 @@ export const recipeData: Recipe[] = [
       {
         id: "短尾真鲨寿司_ing_1",
         name: "短尾真鲨肉片",
+        fishId: "shortfin_mako",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "黑鳍鲨寿司",
     name: "黑鳍鲨寿司",
     emoji: "🍣",
@@ -4520,13 +4726,14 @@ export const recipeData: Recipe[] = [
       {
         id: "黑鳍鲨寿司_ing_1",
         name: "黑鳍鲨肉片",
+        fishId: "blacktip_reef_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "虎鲨寿司",
     name: "虎鲨寿司",
     emoji: "🍣",
@@ -4543,13 +4750,14 @@ export const recipeData: Recipe[] = [
       {
         id: "虎鲨寿司_ing_1",
         name: "虎鲨肉片",
+        fishId: "tiger_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "锯鲨寿司",
     name: "锯鲨寿司",
     emoji: "🍣",
@@ -4566,13 +4774,14 @@ export const recipeData: Recipe[] = [
       {
         id: "锯鲨寿司_ing_1",
         name: "锯鲨肉片",
+        fishId: "longnose_sawshark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "三齿鲨寿司",
     name: "三齿鲨寿司",
     emoji: "🍣",
@@ -4589,13 +4798,14 @@ export const recipeData: Recipe[] = [
       {
         id: "三齿鲨寿司_ing_1",
         name: "三齿鲨肉片",
+        fishId: "sand_tiger_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "咖喱鹦嘴鱼头",
     name: "咖喱鹦嘴鱼头",
     emoji: "🍛",
@@ -4611,7 +4821,8 @@ export const recipeData: Recipe[] = [
     ingredients: [
       {
         id: "咖喱鹦嘴鱼头_ing_1",
-        name: "鹦嘴鱼肉片",
+        name: "驼峰大鹦嘴鱼肉片",
+        fishId: "parrotfish",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -4632,7 +4843,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "咖喱海鳝",
     name: "咖喱海鳝",
     emoji: "🍛",
@@ -4649,6 +4860,7 @@ export const recipeData: Recipe[] = [
       {
         id: "咖喱海鳝_ing_1",
         name: "海鳝",
+        fishId: "moray_eel",
         emoji: "🐟",
         quantity: 1,
         location: "夜间",
@@ -4662,7 +4874,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "炸白对虾",
     name: "炸白对虾",
     emoji: "🍤",
@@ -4678,7 +4890,8 @@ export const recipeData: Recipe[] = [
     ingredients: [
       {
         id: "炸白对虾_ing_1",
-        name: "白对虾",
+        name: "凡纳对虾",
+        fishId: "whiteleg_shrimp",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -4706,7 +4919,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "瓦普塔虾寿司",
     name: "瓦普塔虾寿司",
     emoji: "🍣",
@@ -4723,13 +4936,14 @@ export const recipeData: Recipe[] = [
       {
         id: "瓦普塔虾寿司_ing_1",
         name: "菲尔德瓦普塔虾",
+        fishId: "waptia_fieldensis",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "白竹节虾寿司",
     name: "白竹节虾寿司",
     emoji: "🍣",
@@ -4746,13 +4960,14 @@ export const recipeData: Recipe[] = [
       {
         id: "白竹节虾寿司_ing_1",
         name: "白竹节虾",
+        fishId: "white_shrimp",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
+  {
     id: "虎虾寿司",
     name: "虎虾寿司",
     emoji: "🍣",
@@ -4775,7 +4990,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "白对虾寿司",
     name: "白对虾寿司",
     emoji: "🍣",
@@ -4791,51 +5006,15 @@ export const recipeData: Recipe[] = [
     ingredients: [
       {
         id: "白对虾寿司_ing_1",
-        name: "白对虾",
+        name: "凡纳对虾",
+        fishId: "whiteleg_shrimp",
         emoji: "🐟",
         quantity: 1,
         location: "—",
       },
     ],
   },
-{
-    id: "水晶龙虾卷",
-    name: "水晶龙虾卷",
-    emoji: "🍣",
-    level: 1,
-    sellPrice: 1369,
-    tastiness: 250,
-    servings: 1,
-    obtainMethod: "",
-    partyFood: "龙虾",
-    recommended: true,
-    description: "",
-    imageUrl: recipeImageByName.get("水晶龙虾卷") ?? null,
-    ingredients: [
-      {
-        id: "水晶龙虾卷_ing_1",
-        name: "水晶龙虾",
-        emoji: "🐟",
-        quantity: 1,
-        location: "50-130米",
-      },
-      {
-        id: "水晶龙虾卷_ing_2",
-        name: "白米",
-        emoji: "🐟",
-        quantity: 1,
-        location: "小菜园",
-      },
-      {
-        id: "水晶龙虾卷_ing_3",
-        name: "墨角藻",
-        emoji: "🐟",
-        quantity: 1,
-        location: "冰河海藻洞穴",
-      },
-    ],
-  },
-{
+  {
     id: "酱炖螳螂虾",
     name: "酱炖螳螂虾",
     emoji: "🍲",
@@ -4879,7 +5058,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "清蒸巨奇虾鲜肉",
     name: "清蒸巨奇虾鲜肉",
     emoji: "🍲",
@@ -4909,7 +5088,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "抓都昆虫寿司",
     name: "抓都昆虫寿司",
     emoji: "🍣",
@@ -4926,13 +5105,14 @@ export const recipeData: Recipe[] = [
       {
         id: "抓都昆虫寿司_ing_1",
         name: "抓都昆虫",
+        fishId: "zhuadou_insect",
         emoji: "🐟",
         quantity: 1,
         location: "热泉喷出区域",
       },
     ],
   },
-{
+  {
     id: "东部岩石龙虾寿司",
     name: "东部岩石龙虾寿司",
     emoji: "🍣",
@@ -4949,13 +5129,14 @@ export const recipeData: Recipe[] = [
       {
         id: "东部岩石龙虾寿司_ing_1",
         name: "东部岩石龙虾",
+        fishId: "eastern_rock_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "130-250米",
       },
     ],
   },
-{
+  {
     id: "蓝色龙虾寿司",
     name: "蓝色龙虾寿司",
     emoji: "🍣",
@@ -4972,13 +5153,14 @@ export const recipeData: Recipe[] = [
       {
         id: "蓝色龙虾寿司_ing_1",
         name: "蓝色龙虾",
+        fishId: "blue_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "0-50米",
       },
     ],
   },
-{
+  {
     id: "水晶龙虾寿司",
     name: "水晶龙虾寿司",
     emoji: "🍣",
@@ -4995,13 +5177,14 @@ export const recipeData: Recipe[] = [
       {
         id: "水晶龙虾寿司_ing_1",
         name: "水晶龙虾",
+        fishId: "crystal_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "50-130米",
       },
     ],
   },
-{
+  {
     id: "袋头虾寿司",
     name: "袋头虾寿司",
     emoji: "🍣",
@@ -5018,13 +5201,14 @@ export const recipeData: Recipe[] = [
       {
         id: "袋头虾寿司_ing_1",
         name: "袋头虾",
+        fishId: "bag_head_shrimp",
         emoji: "🐟",
         quantity: 1,
         location: "热泉喷出区域",
       },
     ],
   },
-{
+  {
     id: "锦绣龙虾寿司",
     name: "锦绣龙虾寿司",
     emoji: "🍣",
@@ -5041,13 +5225,14 @@ export const recipeData: Recipe[] = [
       {
         id: "锦绣龙虾寿司_ing_1",
         name: "锦绣龙虾",
+        fishId: "tropical_rock_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "50-130米",
       },
     ],
   },
-{
+  {
     id: "美洲龙虾寿司",
     name: "美洲龙虾寿司",
     emoji: "🍣",
@@ -5064,13 +5249,14 @@ export const recipeData: Recipe[] = [
       {
         id: "美洲龙虾寿司_ing_1",
         name: "美洲龙虾",
+        fishId: "american_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "0-50米",
       },
     ],
   },
-{
+  {
     id: "红斑后海鳌虾寿司",
     name: "红斑后海鳌虾寿司",
     emoji: "🍣",
@@ -5093,7 +5279,7 @@ export const recipeData: Recipe[] = [
       },
     ],
   },
-{
+  {
     id: "挪威海鳌虾寿司",
     name: "挪威海鳌虾寿司",
     emoji: "🍣",
@@ -5110,13 +5296,14 @@ export const recipeData: Recipe[] = [
       {
         id: "挪威海鳌虾寿司_ing_1",
         name: "挪威海鳌虾",
+        fishId: "norway_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "130-250米",
       },
     ],
   },
-{
+  {
     id: "欧洲龙虾寿司",
     name: "欧洲龙虾寿司",
     emoji: "🍣",
@@ -5133,13 +5320,14 @@ export const recipeData: Recipe[] = [
       {
         id: "欧洲龙虾寿司_ing_1",
         name: "欧洲龙虾",
+        fishId: "european_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "0-50米",
       },
     ],
   },
-{
+  {
     id: "九齿扇虾寿司",
     name: "九齿扇虾寿司",
     emoji: "🍣",
@@ -5156,13 +5344,14 @@ export const recipeData: Recipe[] = [
       {
         id: "九齿扇虾寿司_ing_1",
         name: "九齿扇虾",
+        fishId: "fan_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "50-130米",
       },
     ],
   },
-{
+  {
     id: "加州龙虾寿司",
     name: "加州龙虾寿司",
     emoji: "🍣",
@@ -5179,6 +5368,7 @@ export const recipeData: Recipe[] = [
       {
         id: "加州龙虾寿司_ing_1",
         name: "加州龙虾",
+        fishId: "california_spiny_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "50-130米",
@@ -5186,4 +5376,3 @@ export const recipeData: Recipe[] = [
     ],
   },
 ];
-

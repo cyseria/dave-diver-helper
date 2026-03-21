@@ -136,7 +136,7 @@ const ENTRIES: TipEntry[] = [
     name: "镰鳍鲳鲹味增汤",
     tags: ["shark"],
     stats: { price: 1554, tastiness: 382, servings: 7 },
-    ingredients: "镰鳍鲳鲹×3 · 海带×3 · 海珊瑚×3 · 大酱×1",
+    ingredients: "镰鳍鲳鲹×3 · 裙带菜×3 · 海珊瑚×3 · 大酱×1",
   },
   {
     id: "shark-sandwich",

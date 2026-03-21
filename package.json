@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "biome lint .",
     "format": "biome format --write .",
-    "check": "biome check --write ."
+    "check": "biome check --write .",
+    "fill:fish-ids": "npx tsx scripts/fill-recipe-ingredient-fish-ids.ts"
   },
   "dependencies": {
     "react": "^18.3.1",

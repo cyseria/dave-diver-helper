@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../../components/EncyclopediaLayout";
 import { TabBar } from "../../components/TabBar";
@@ -8,7 +8,6 @@ import { recipeData } from "../../data/recipes";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
 import { getFishImageUrl } from "../../utils/fishImage";
 import styles from "./Fish.module.css";
-
 
 // Used by tab bar (keyed by module id)
 const FISH_MODULE_EMOJI: Record<string, string> = {
@@ -38,7 +37,12 @@ const ZONE_EMOJI: Record<string, string> = {
 
 const FISH_MODULE_THEME: Record<
   string,
-  { activeBg: string; activeBorder: string; activeColor: string; hoverBg: string }
+  {
+    activeBg: string;
+    activeBorder: string;
+    activeColor: string;
+    hoverBg: string;
+  }
 > = {
   "blue-hole-entrance": {
     activeBg: "#e6f5ff",
@@ -206,26 +210,80 @@ export function Fish() {
     ? fishData.filter((f) => f.zones?.includes(selectedModule.name))
     : fishData;
 
-  // Default select first fish in current module (entering page or switching module)
+  // 无 id / 无效 id：默认当前 Tab 第一条；有效 id 但不在当前 Tab 列表：切换 Tab（从食谱跳入时常见），勿误跳到别的鱼
   useEffect(() => {
     const first = moduleFish[0];
     if (!first) return;
-    const inModule = id ? moduleFish.some((f) => f.id === id) : false;
-    if (!id || !inModule) {
+
+    if (!id) {
       navigate(`/fish/${first.id}`, { replace: true });
+      return;
+    }
+
+    const fish = fishData.find((f) => f.id === id);
+    if (!fish) {
+      navigate(`/fish/${first.id}`, { replace: true });
+      return;
+    }
+
+    const inModule = moduleFish.some((f) => f.id === id);
+    if (!inModule) {
+      const mod =
+        fishGuideModules.find((m) => fish.zones?.includes(m.name)) ??
+        fishGuideModules.find((m) => m.fishIds.includes(id));
+      if (mod) setSelectedModuleId(mod.id);
+      else navigate(`/fish/${first.id}`, { replace: true });
+      return;
     }
   }, [id, navigate, moduleFish]);
+
+  // 选中鱼在左侧列表中滚入可视区域（URL 带 id 或 Tab 切换后需等列表重绘）
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 需与 selectedModuleId 同步，从食谱跳入会先切 Tab 再滚
+  useEffect(() => {
+    if (!id) return;
+    const raf = requestAnimationFrame(() => {
+      const safe =
+        typeof CSS !== "undefined" && typeof CSS.escape === "function"
+          ? CSS.escape(id)
+          : id.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+      const el = document.querySelector(`[data-fish-card-id="${safe}"]`);
+      el?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [id, selectedModuleId]);
 
   const getStars = (fishId: string, defaultStars: number) =>
     fishStarRatings[fishId] || defaultStars;
 
+  /** 切换区域 Tab 时同步路由到该分区第一条鱼，否则 useEffect 会因「当前鱼不在新列表」把 Tab 弹回原区 */
+  const handleFishModuleTabChange = useCallback(
+    (moduleId: string) => {
+      const mod = fishGuideModules.find((m) => m.id === moduleId);
+      if (!mod) return;
+      const list = fishData.filter((f) => f.zones?.includes(mod.name));
+      const first = list[0];
+      if (first) navigate(`/fish/${first.id}`, { replace: true });
+    },
+    [navigate],
+  );
+
   const habitatZones = useMemo(() => {
     const seen = new Set<string>();
-    const out: Array<{ id: string; name: string; emoji: string; mapZone: "shallow" | "deep" | "binghe" }> = [];
+    const out: Array<{
+      id: string;
+      name: string;
+      emoji: string;
+      mapZone: "shallow" | "deep" | "binghe";
+    }> = [];
     for (const name of selected?.zones ?? []) {
       if (seen.has(name)) continue;
       seen.add(name);
-      out.push({ id: name, name, emoji: ZONE_EMOJI[name] ?? "🗺️", mapZone: zoneToMapZone(name) });
+      out.push({
+        id: name,
+        name,
+        emoji: ZONE_EMOJI[name] ?? "🗺️",
+        mapZone: zoneToMapZone(name),
+      });
     }
     return out;
   }, [selected?.zones]);
@@ -245,6 +303,11 @@ export function Fish() {
       <div className={styles.grid}>
         {moduleFish.map((fish) => {
           const captured = capturedFishIds.includes(fish.id);
+          const stars = getStars(fish.id, fish.stars);
+          const isTwoStar = captured && stars === 2;
+          const isBossFish = fish.category === "boss";
+          const isBossThreeStar = captured && stars >= 3 && isBossFish;
+          const isThreeStarGold = captured && stars >= 3 && !isBossFish;
           const isSelected = fish.id === id;
           const depthText =
             fish.depthMin !== undefined && fish.depthMax !== undefined
@@ -253,7 +316,8 @@ export function Fish() {
           return (
             <div
               key={fish.id}
-              className={`${styles.card} ${captured ? styles.cardCaptured : ""} ${isSelected ? styles.cardSelected : ""} ${fish.category === "boss" ? styles.cardBoss : ""}`}
+              data-fish-card-id={fish.id}
+              className={`${styles.card} ${captured ? styles.cardCaptured : ""} ${isTwoStar ? styles.cardTwoStar : ""} ${isBossThreeStar ? styles.cardBossThreeStar : ""} ${isThreeStarGold ? styles.cardThreeStar : ""} ${isSelected ? styles.cardSelected : ""} ${isBossFish && !isBossThreeStar ? styles.cardBoss : ""}`}
               onClick={() => navigate(`/fish/${fish.id}`)}
               onKeyDown={(e) =>
                 e.key === "Enter" && navigate(`/fish/${fish.id}`)
@@ -264,7 +328,9 @@ export function Fish() {
             >
               <div className={styles.cardImg}>
                 {fish.category === "photo" ? (
-                  <span className={styles.cardPhotoIcon} aria-hidden>📷</span>
+                  <span className={styles.cardPhotoIcon} aria-hidden>
+                    📷
+                  </span>
                 ) : null}
                 {(() => {
                   const src = getFishImageUrl(fish.image);
@@ -273,7 +339,9 @@ export function Fish() {
                       <img src={src} alt="" className={styles.cardEmoji} />
                     </div>
                   ) : (
-                    <span className={styles.cardEmoji} aria-hidden>{fish.name || "—"}</span>
+                    <span className={styles.cardEmoji} aria-hidden>
+                      {fish.name || "—"}
+                    </span>
                   );
                 })()}
                 <StarRating
@@ -284,17 +352,17 @@ export function Fish() {
                   onRootClick={(e) => e.stopPropagation()}
                   onRootKeyDown={(e) => e.stopPropagation()}
                   onRate={(n) => {
-                      const currentStars = getStars(fish.id, fish.stars);
-                      if (!captured) {
-                        toggleFishCaptured(fish.id);
-                        setFishStarRating(fish.id, n);
-                      } else if (currentStars === n) {
-                        toggleFishCaptured(fish.id);
-                        setFishStarRating(fish.id, 0);
-                      } else {
-                        setFishStarRating(fish.id, n);
-                      }
-                    }}
+                    const currentStars = getStars(fish.id, fish.stars);
+                    if (!captured) {
+                      toggleFishCaptured(fish.id);
+                      setFishStarRating(fish.id, n);
+                    } else if (currentStars === n) {
+                      toggleFishCaptured(fish.id);
+                      setFishStarRating(fish.id, 0);
+                    } else {
+                      setFishStarRating(fish.id, n);
+                    }
+                  }}
                 />
               </div>
               <div className={styles.cardFooter}>
@@ -319,7 +387,9 @@ export function Fish() {
             return src ? (
               <img src={src} alt="" className={styles.detailEmoji} />
             ) : (
-              <span className={styles.detailEmoji} aria-hidden>{selected.name || "—"}</span>
+              <span className={styles.detailEmoji} aria-hidden>
+                {selected.name || "—"}
+              </span>
             );
           })()}
         </div>
@@ -345,9 +415,7 @@ export function Fish() {
           <div className={styles.detailNameRow}>
             <h1 className={styles.detailName}>{selected.name}</h1>
           </div>
-          <p className={styles.detailDesc}>
-            {selected.description ?? "—"}
-          </p>
+          <p className={styles.detailDesc}>{selected.description ?? "—"}</p>
         </div>
         <button
           type="button"
@@ -359,26 +427,7 @@ export function Fish() {
       </div>
 
       <div className={styles.statsBlock}>
-        {/* Row 1: HP + ATK（仅真实数据，无则显示 —，不做估算） */}
-        <div className={styles.statPairRow}>
-          <div className={styles.statCell}>
-            <span className={styles.statEm}>❤️</span>
-            <span className={styles.statLbl}>生命值</span>
-            <span className={styles.statVal}>
-              {selected.hp !== undefined ? selected.hp : "—"}
-            </span>
-          </div>
-          <div className={styles.statCellDivider} />
-          <div className={styles.statCell}>
-            <span className={styles.statEm}>⚔️</span>
-            <span className={styles.statLbl}>攻击力</span>
-            <span className={styles.statVal}>
-              {selected.attack !== undefined ? selected.attack : "—"}
-            </span>
-          </div>
-        </div>
-        <div className={styles.statDivider} />
-        {/* Row 2: Region + Depth */}
+        {/* Row 1: Region + Depth */}
         <div className={styles.statPairRow}>
           <div className={styles.statCell}>
             <span className={styles.statEm}>🗺️</span>
@@ -406,14 +455,15 @@ export function Fish() {
             <span className={styles.statEm}>📏</span>
             <span className={styles.statLbl}>深度</span>
             <span className={styles.statVal}>
-              {selected.depthMin !== undefined && selected.depthMax !== undefined
+              {selected.depthMin !== undefined &&
+              selected.depthMax !== undefined
                 ? `${selected.depthMin}–${selected.depthMax} m`
                 : "—"}
             </span>
           </div>
         </div>
         <div className={styles.statDivider} />
-        {/* Row 3: Weight + Meat by star（仅在有 meatByStar 时展示肉量） */}
+        {/* Row 2: Weight + Meat by star（仅在有 meatByStar 时展示肉量） */}
         <div className={styles.statPairRow}>
           <div className={styles.statCell}>
             <span className={styles.statEm}>⚖️</span>
@@ -432,19 +482,25 @@ export function Fish() {
                   <span className={styles.meatChip}>
                     <span className={styles.meatStar}>★</span>
                     <span className={styles.meatVal}>
-                      {selected.meatByStar[0] === -1 ? "—" : selected.meatByStar[0]}
+                      {selected.meatByStar[0] === -1
+                        ? "—"
+                        : selected.meatByStar[0]}
                     </span>
                   </span>
                   <span className={styles.meatChip}>
                     <span className={styles.meatStar}>★★</span>
                     <span className={styles.meatVal}>
-                      {selected.meatByStar[1] === -1 ? "—" : selected.meatByStar[1]}
+                      {selected.meatByStar[1] === -1
+                        ? "—"
+                        : selected.meatByStar[1]}
                     </span>
                   </span>
                   <span className={styles.meatChip}>
                     <span className={styles.meatStar}>★★★</span>
                     <span className={styles.meatVal}>
-                      {selected.meatByStar[2] === -1 ? "—" : selected.meatByStar[2]}
+                      {selected.meatByStar[2] === -1
+                        ? "—"
+                        : selected.meatByStar[2]}
                     </span>
                   </span>
                 </div>
@@ -490,7 +546,6 @@ export function Fish() {
           </div>
         </div>
       )}
-
     </div>
   ) : null;
 
@@ -515,21 +570,29 @@ export function Fish() {
         className={styles.fishTabWrap}
         style={
           {
-            "--tab-active-bg":
-              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).activeBg,
-            "--tab-active-border":
-              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).activeBorder,
-            "--tab-active-color":
-              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).activeColor,
-            "--tab-hover-bg":
-              (FISH_MODULE_THEME[selectedModuleId] ?? FISH_MODULE_THEME["blue-hole-entrance"]).hoverBg,
+            "--tab-active-bg": (
+              FISH_MODULE_THEME[selectedModuleId] ??
+              FISH_MODULE_THEME["blue-hole-entrance"]
+            ).activeBg,
+            "--tab-active-border": (
+              FISH_MODULE_THEME[selectedModuleId] ??
+              FISH_MODULE_THEME["blue-hole-entrance"]
+            ).activeBorder,
+            "--tab-active-color": (
+              FISH_MODULE_THEME[selectedModuleId] ??
+              FISH_MODULE_THEME["blue-hole-entrance"]
+            ).activeColor,
+            "--tab-hover-bg": (
+              FISH_MODULE_THEME[selectedModuleId] ??
+              FISH_MODULE_THEME["blue-hole-entrance"]
+            ).hoverBg,
           } as React.CSSProperties
         }
       >
         <TabBar
           tabs={fishTabs}
           value={selectedModuleId}
-          onChange={setSelectedModuleId}
+          onChange={handleFishModuleTabChange}
           aria-label="鱼类图鉴区域"
         />
       </div>
