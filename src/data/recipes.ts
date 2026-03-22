@@ -2190,7 +2190,7 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "绯红鱼卷_ing_2",
-        name: "金眼鲷",
+        name: "十指金眼鲷",
         fishId: "red_bream",
         emoji: "🐟",
         quantity: 3,
@@ -2198,7 +2198,7 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "绯红鱼卷_ing_3",
-        name: "长吻银鲛肉片",
+        name: "扁吻银鲛肉片",
         fishId: "rhinochimaeridae",
         emoji: "🐟",
         quantity: 3,
@@ -3603,7 +3603,7 @@ export const recipeData: Recipe[] = [
   },
   {
     id: "棘茄鱼黄瓜军舰寿司",
-    name: "棘茄鱼黄瓜军舰寿司",
+    name: "阿布单棘躄鱼黄瓜军舰寿司",
     emoji: "🍱",
     level: 1,
     sellPrice: 1184,
@@ -3612,12 +3612,12 @@ export const recipeData: Recipe[] = [
     obtainMethod: "",
     partyFood: "黄瓜",
     recommended: true,
-    description: "使用棘茄鱼和黄瓜制作的军舰寿司。",
-    imageUrl: recipeImageByName.get("棘茄鱼黄瓜军舰寿司") ?? null,
+    description: "使用阿布单棘躄鱼（又名棘茄鱼）和黄瓜制作的军舰寿司。",
+    imageUrl: recipeImageByName.get("阿布单棘躄鱼黄瓜军舰寿司") ?? null,
     ingredients: [
       {
         id: "棘茄鱼黄瓜军舰寿司_ing_1",
-        name: "棘茄鱼",
+        name: "阿布单棘躄鱼",
         fishId: "sea_toad",
         emoji: "🐟",
         quantity: 1,
@@ -4604,7 +4604,7 @@ export const recipeData: Recipe[] = [
   },
   {
     id: "长吻银鲛寿司",
-    name: "长吻银鲛寿司",
+    name: "扁吻银鲛寿司",
     emoji: "🍣",
     level: 1,
     sellPrice: 333,
@@ -4614,11 +4614,11 @@ export const recipeData: Recipe[] = [
     partyFood: "鲨鱼",
     recommended: true,
     description: "",
-    imageUrl: recipeImageByName.get("长吻银鲛寿司") ?? null,
+    imageUrl: recipeImageByName.get("扁吻银鲛寿司") ?? null,
     ingredients: [
       {
         id: "长吻银鲛寿司_ing_1",
-        name: "长吻银鲛肉片",
+        name: "扁吻银鲛肉片",
         fishId: "rhinochimaeridae",
         emoji: "🐟",
         quantity: 1,

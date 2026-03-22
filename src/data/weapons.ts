@@ -250,14 +250,14 @@ export const weaponsData: Weapon[] = [
     materials: [
       { name: "剧毒步枪I", qty: 1 },
       {
-        name: "长吻银鲛的毒刺",
+        name: "扁吻银鲛的毒刺",
         qty: 3,
-        tip: "长吻银鲛（天狗鲨）见于蓝洞深海，击杀或捕获后掉落",
+        tip: "扁吻银鲛（又名长吻银鲛，天狗鲨）见于蓝洞深海，击杀或捕获后掉落",
       },
       { name: "武器碎片", qty: 50 },
     ],
     goldCost: 1000,
-    tips: ["长吻银鲛偏稀有，可多次深海潜水或夜潜提高遭遇率。"],
+    tips: ["扁吻银鲛偏稀有，可多次深海潜水或夜潜提高遭遇率。"],
   },
   {
     id: "rifle_poison_hell",
@@ -992,14 +992,14 @@ export const weaponsData: Weapon[] = [
     materials: [
       { name: "剧毒狙击枪I", qty: 1 },
       {
-        name: "长吻银鲛的毒刺",
+        name: "扁吻银鲛的毒刺",
         qty: 3,
-        tip: "长吻银鲛（天狗鲨）见于蓝洞深海，击杀或捕获后掉落",
+        tip: "扁吻银鲛（又名长吻银鲛，天狗鲨）见于蓝洞深海，击杀或捕获后掉落",
       },
       { name: "武器碎片", qty: 50 },
     ],
     goldCost: 1000,
-    tips: ["长吻银鲛偏稀有，可多次深海潜水或夜潜提高遭遇率。"],
+    tips: ["扁吻银鲛偏稀有，可多次深海潜水或夜潜提高遭遇率。"],
   },
   {
     id: "sniper_lightning1",
@@ -1700,9 +1700,9 @@ export const weaponsData: Weapon[] = [
     materials: [
       { name: "剧毒地雷发射器I", qty: 1 },
       {
-        name: "长吻银鲛的毒刺",
+        name: "扁吻银鲛的毒刺",
         qty: 5,
-        tip: "长吻银鲛（天狗鲨）见于蓝洞深海，击杀或捕获后掉落",
+        tip: "扁吻银鲛（又名长吻银鲛，天狗鲨）见于蓝洞深海，击杀或捕获后掉落",
       },
       { name: "武器碎片", qty: 55 },
     ],

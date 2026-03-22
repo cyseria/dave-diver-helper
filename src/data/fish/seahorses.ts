@@ -9,6 +9,8 @@ export const seahorsesFish: Fish[] = [
     image: "images/fish/seahorses/白色海马.png",
     zones: ["海马"],
     category: "seahorse",
+    note:
+      "出现于深海区域、由木板遮盖的洞内；不会成群，需耐心搜寻。",
     weight: 0.5,
     meatByStar: [2, 3, 5],
   }),
@@ -72,6 +74,8 @@ export const seahorsesFish: Fish[] = [
     image: "images/fish/seahorses/直立海马.png",
     zones: ["海马"],
     category: "seahorse",
+    note:
+      "出现于深海，需搬起石头才会现身；搬石头需装备潜水手套。",
     weight: 0.5,
     meatByStar: [2, 3, 5],
   }),
@@ -99,6 +103,8 @@ export const seahorsesFish: Fish[] = [
     image: "images/fish/seahorses/库达海马.png",
     zones: ["海马"],
     category: "seahorse",
+    note:
+      "出现于深海蓝洞有水母、光线较暗的区域，辨认略费力，但数量较多；专程去找一般不易漏。",
     weight: 0.5,
     meatByStar: [2, 3, 5],
   }),
@@ -108,6 +114,8 @@ export const seahorsesFish: Fish[] = [
     image: "images/fish/seahorses/虎尾海马.png",
     zones: ["海马"],
     category: "seahorse",
+    note:
+      "出现于遇难船附近（大王鱿鱼所在位置），有时也会混入侏儒海马群，需仔细甄别。",
     weight: 0.5,
     meatByStar: [2, 3, 5],
   }),
@@ -117,7 +125,8 @@ export const seahorsesFish: Fish[] = [
     image: "images/fish/seahorses/条纹海马.png",
     zones: ["海马"],
     category: "seahorse",
-    note: "只在钟乳洞出现，出现概率也较低。",
+    note:
+      "仅出现于钟乳窟；窟内亦有其他种类海马，注意甄别，避免抓错。",
     weight: 0.5,
     meatByStar: [2, 3, 5],
   }),
@@ -127,6 +136,40 @@ export const seahorsesFish: Fish[] = [
     image: "images/fish/seahorses/刺海马.png",
     zones: ["海马"],
     category: "seahorse",
+    weight: 0.5,
+    meatByStar: [2, 3, 5],
+  }),
+  // 图鉴模块已引用，此前未录入数据
+  fish({
+    id: "leafy_seadragon",
+    name: "草海龙",
+    image: "images/fish/seahorses/草海龙.png",
+    zones: ["海马", "冰河地区"],
+    category: "seahorse",
+    note:
+      "冰河区域可见，尤其挖完矿石后，常有较高概率从矿石下方出现；收集武器强化材料时可顺带捕捉。",
+    weight: 0.5,
+    meatByStar: [2, 3, 5],
+  }),
+  fish({
+    id: "weedy_seadragon",
+    name: "叶海龙",
+    image: "images/fish/seahorses/叶海龙.png",
+    zones: ["海马", "冰河地区"],
+    category: "seahorse",
+    note:
+      "出现于冰河地区主线洞窟内；有时也会直接出现在水中。挖矿时有概率从地下刷出一只。",
+    weight: 0.5,
+    meatByStar: [2, 3, 5],
+  }),
+  fish({
+    id: "ruby_seadragon",
+    name: "红宝石海龙",
+    image: "images/fish/seahorses/红宝石海龙.png",
+    zones: ["海马", "热泉喷出区域"],
+    category: "seahorse",
+    note:
+      "第六章后可前往的热泉喷出区域左下方；挖掘红宝石时有机会从红宝石矿下方出现。",
     weight: 0.5,
     meatByStar: [2, 3, 5],
   }),
