@@ -256,6 +256,7 @@ export const recipeData: Recipe[] = [
       {
         id: "拂子介辣安康鱼_ing_1",
         name: "大西洋安康鱼",
+        fishId: "atlantic_anglerfish",
         emoji: "🐟",
         quantity: 3,
         location: "钟乳洞",
@@ -291,6 +292,7 @@ export const recipeData: Recipe[] = [
       {
         id: "酱螃蟹_ing_1",
         name: "帝王蟹",
+        fishId: "golden_king_crab",
         emoji: "🐟",
         quantity: 2,
         location: "冰河区域",
@@ -376,6 +378,7 @@ export const recipeData: Recipe[] = [
       {
         id: "彩虹鳗鱼串_ing_1",
         name: "朝天鼻刺豚",
+        fishId: "snub_nosed_spiny_eel",
         emoji: "🐟",
         quantity: 2,
         location: "冰河区域",
@@ -501,6 +504,7 @@ export const recipeData: Recipe[] = [
       {
         id: "醋拌菲尔德瓦普塔虾_ing_1",
         name: "瓦普塔虾",
+        fishId: "waptia_fieldensis",
         emoji: "🐟",
         quantity: 3,
         location: "热泉喷出口",
@@ -543,6 +547,7 @@ export const recipeData: Recipe[] = [
       {
         id: "烤哈瓦那辣椒鳗鱼_ing_1",
         name: "朝天鼻刺豚",
+        fishId: "snub_nosed_spiny_eel",
         emoji: "🐟",
         quantity: 2,
         location: "冰河区域",
@@ -585,6 +590,7 @@ export const recipeData: Recipe[] = [
       {
         id: "彩虹鲀鱼糕_ing_1",
         name: "黑带锉鳞鲀",
+        fishId: "triggerfish",
         emoji: "🐟",
         quantity: 3,
         location: "0-50米",
@@ -847,6 +853,7 @@ export const recipeData: Recipe[] = [
       {
         id: "彩虹帆鳍鲹茶泡饭_ing_1",
         name: "帆鳍鲹",
+        fishId: "falcate_fin_pomfret",
         emoji: "🐟",
         quantity: 3,
         location: "130-250 米",
@@ -1361,6 +1368,7 @@ export const recipeData: Recipe[] = [
       {
         id: "月光墨角藻鱼卷_ing_3",
         name: "黑鳍金枪鱼",
+        fishId: "blackfin_barracuda",
         emoji: "🐟",
         quantity: 3,
         location: "50-130 米",
@@ -1830,6 +1838,7 @@ export const recipeData: Recipe[] = [
       {
         id: "锦鱼咖喱_ing_1",
         name: "杂斑鲨鱼",
+        fishId: "shortfin_mako",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2482,6 +2491,7 @@ export const recipeData: Recipe[] = [
       {
         id: "鲇鱼三明治_ing_1",
         name: "鲇鱼",
+        fishId: "striped_catfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -2655,6 +2665,7 @@ export const recipeData: Recipe[] = [
       {
         id: "炒哈瓦那辣椒龙虾_ing_1",
         name: "挪威海螯虾",
+        fishId: "norway_lobster",
         emoji: "🐟",
         quantity: 2,
         location: "130-250 米",
@@ -2728,6 +2739,7 @@ export const recipeData: Recipe[] = [
       {
         id: "黑醋炖鹦鹉嘴鱼_ing_1",
         name: "异齿鹦鲷",
+        fishId: "mediterranean_parrotfish",
         emoji: "🐟",
         quantity: 5,
         location: "0-50 米",
@@ -3332,6 +3344,7 @@ export const recipeData: Recipe[] = [
       {
         id: "吞鳗鱼冻_ing_1",
         name: "吞鳗",
+        fishId: "pelican_eel",
         emoji: "🐟",
         quantity: 3,
         location: "冰河通道",
@@ -4269,6 +4282,7 @@ export const recipeData: Recipe[] = [
       {
         id: "烤旋齿鲨鱼尾_ing_1",
         name: "旋齿鲨的鱼尾",
+        fishId: "helicoprion",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -4313,6 +4327,7 @@ export const recipeData: Recipe[] = [
       {
         id: "大白鲨煎蛋卷_ing_1",
         name: "克劳斯的鱼鳍",
+        fishId: "great_white_shark_klaus",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -4343,6 +4358,7 @@ export const recipeData: Recipe[] = [
       {
         id: "烤尖吻鲨腹肉_ing_1",
         name: "剑吻鲨的腹肉",
+        fishId: "longnose_sawshark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -4651,6 +4667,7 @@ export const recipeData: Recipe[] = [
       {
         id: "全烤三齿鲨头_ing_1",
         name: "三齿鲨头",
+        fishId: "sand_tiger_shark",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -5037,6 +5054,7 @@ export const recipeData: Recipe[] = [
       {
         id: "酱炖螳螂虾_ing_1",
         name: "螳螂虾壳上的肉",
+        fishId: "mantis_shrimp",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -5081,6 +5099,7 @@ export const recipeData: Recipe[] = [
       {
         id: "清蒸巨奇虾鲜肉_ing_1",
         name: "巨奇虾鲜肉",
+        fishId: "anomalocaris",
         emoji: "🐟",
         quantity: 1,
         location: "—",
@@ -5279,6 +5298,7 @@ export const recipeData: Recipe[] = [
       {
         id: "红斑后海鳌虾寿司_ing_1",
         name: "红斑后海鳌虾",
+        fishId: "red_banded_lobster",
         emoji: "🐟",
         quantity: 1,
         location: "0-50米",

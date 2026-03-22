@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../../components/EncyclopediaLayout";
 import { TabBar } from "../../components/TabBar";
 import { restaurantTiers, staffData } from "../../data/staff";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
 import { StaffTips } from "./StaffTips";
 import type { StaffRole } from "../../types";
@@ -59,6 +60,7 @@ function StatBar({
 export function Staff() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [tab, setTab] = useState<"staff" | "levels" | "tips">("tips");
   const { hiredStaffIds, toggleStaffHired } = usePlayerProgress();
 
@@ -79,7 +81,7 @@ export function Staff() {
   function handleTabChange(next: "staff" | "levels" | "tips") {
     setTab(next);
     // 进入员工图鉴且当前没有选中员工时，默认选中第一个员工
-    if (next === "staff" && !id) {
+    if (next === "staff" && !id && !isMobile) {
       const first = staffData[0];
       if (first) navigate(`/staff/${first.id}`, { replace: true });
       return;
@@ -302,6 +304,7 @@ export function Staff() {
           detailPanel={detailPanel}
           hasSelection={!!selected}
           emptyMessage="← 从左侧选择一名员工查看详情"
+          onRequestClose={() => navigate("/staff", { replace: true })}
         />
       ) : tab === "levels" ? (
         <RestaurantLevelsPage />
@@ -317,7 +320,6 @@ function RestaurantLevelsPage() {
   return (
     <div className={styles.levelsPage}>
       <div className={styles.levelsInner}>
-        <h2 className={styles.levelsTitle}>班初寿司 · 餐厅等级</h2>
         <p className={styles.levelsTip}>
           餐厅等级决定每晚最大客流量与人员配置需求。建议至少3名员工解锁第二技能后再升至白金。
         </p>

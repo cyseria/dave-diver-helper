@@ -401,3 +401,65 @@
   font-weight: 700;
   color: #78350f;
 }
+
+@media (max-width: 900px) {
+  .detail {
+    gap: 14px;
+  }
+
+  .detailHeader {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .detailEmojiBadge {
+    width: 62px;
+    height: 62px;
+    font-size: 30px;
+  }
+
+  .detailName {
+    font-size: 10px;
+  }
+
+  .detailDesc {
+    font-size: 12px;
+  }
+
+  .completeBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .listHeader {
+    padding: 8px 10px;
+  }
+
+  .listTitle {
+    font-size: 8px;
+  }
+
+  .questItem {
+    padding: 9px 10px;
+    gap: 8px;
+  }
+
+  .questItemName {
+    font-size: 11px;
+  }
+
+  .chapterHeader {
+    padding: 7px 10px 5px;
+  }
+
+  .chapterName {
+    font-size: 6px;
+  }
+
+  .rewardRow {
+    padding: 10px 12px;
+  }
+}

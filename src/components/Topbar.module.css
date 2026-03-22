@@ -98,3 +98,55 @@
   background: var(--color-primary-light, #fde8dc);
   border-color: var(--color-primary, #e87040);
 }
+
+@media (max-width: 900px) {
+  .topbar {
+    height: auto;
+  }
+
+  .inner {
+    height: auto;
+    padding: 8px 12px 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .brand {
+    order: 1;
+  }
+
+  .brandIcon {
+    font-size: 18px;
+  }
+
+  .brandText {
+    font-size: 9px;
+  }
+
+  .dataTools {
+    order: 2;
+    margin-left: auto;
+    gap: 6px;
+  }
+
+  .dataBtn {
+    padding: 4px 8px;
+    font-size: 7px;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .navLink {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}

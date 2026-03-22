@@ -37,7 +37,9 @@ export interface Weapon {
   ammo: number | null; // null = ∞
   element: WeaponElement;
   effect: string; // description / special effect
-  parentId: string | null; // upgrade-from weapon id
+  parentId: string | null; // 主线合成父级（树布局主轴）
+  /** 额外父级：与 parentId 同时满足才算完整前置（如雷电系需闪电+休克两条线） */
+  extraParentIds?: string[];
   materials: WeaponMaterial[];
   goldCost: number;
   tips?: string[]; // tips for rare material acquisition

@@ -4,6 +4,7 @@ import { EncyclopediaLayout } from "../../components/EncyclopediaLayout";
 import { TabBar } from "../../components/TabBar";
 import type { TabItem } from "../../components/TabBar";
 import { questChapters, questData } from "../../data/quests";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
 import type { Quest, QuestType } from "../../types";
 import styles from "./Quests.module.css";
@@ -30,6 +31,7 @@ const TYPE_COLOR: Record<QuestType, string> = {
 export function Quests() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [tab, setTab] = useState<QuestTab>("main");
   const { completedQuestIds, toggleQuestCompleted } = usePlayerProgress();
 
@@ -42,15 +44,20 @@ export function Quests() {
 
   // Default to first quest in tab
   useEffect(() => {
+    if (isMobile) return;
     if (id) return;
     const first = visibleQuests[0];
     if (!first) return;
     navigate(`/quests/${first.id}`, { replace: true });
-  }, [id, visibleQuests, navigate]);
+  }, [id, isMobile, visibleQuests, navigate]);
 
   // When switching tab, navigate to first quest of that tab
   const handleTabChange = (next: QuestTab) => {
     setTab(next);
+    if (isMobile) {
+      navigate("/quests", { replace: true });
+      return;
+    }
     const first = questData.find((q) =>
       next === "main" ? q.type === "main" : q.type === "sub" || q.type === "vip",
     );
@@ -235,6 +242,7 @@ export function Quests() {
         detailPanel={detailPanel}
         hasSelection={!!selected}
         emptyMessage="← 选择一个任务查看详情"
+        onRequestClose={() => navigate("/quests", { replace: true })}
       />
     </div>
   );

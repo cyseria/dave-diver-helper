@@ -15,12 +15,19 @@
 
 .listHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   padding: 12px 14px;
   border-bottom: var(--pixel-border, 2px solid #3d2b1f);
   background: var(--color-surface-alt, #ede8dc);
   flex-shrink: 0;
+  gap: 10px;
+}
+
+.listHeaderTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
 }
 
@@ -36,6 +43,10 @@
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+}
+
+.listHeaderRightCollapsed {
+  display: none;
 }
 
 .listTitle {
@@ -97,6 +108,17 @@
   box-shadow: 2px 2px 0 #f59e0b;
   background: #fff7df;
   color: #8a4d00;
+}
+
+.mobileFilterToggle {
+  display: none;
+  padding: 6px 10px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  color: var(--color-text, #2a1f14);
+  border: var(--pixel-border, 2px solid #3d2b1f);
+  box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+  background: var(--color-surface, #fffdf7);
 }
 
 .grid {
@@ -599,3 +621,113 @@
   font-weight: 600;
 }
 
+@media (max-width: 900px) {
+  .listHeaderLeft {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+
+  .listHeaderRight {
+    width: 100%;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .mobileFilterToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sortWrap {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .sortSelect {
+    width: 100%;
+  }
+
+  .featureToggle {
+    margin-left: auto;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .detail {
+    gap: 14px;
+  }
+
+  .detailTop {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .detailImgBox {
+    width: 84px;
+    height: 84px;
+  }
+
+  .recipeMarkBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .listTitle {
+    font-size: 8px;
+  }
+
+  .listCount {
+    font-size: 11px;
+  }
+
+  .cardFooter {
+    padding: 4px 5px;
+  }
+
+  .cardName {
+    font-size: 9px;
+  }
+
+  .cardStat {
+    font-size: 7px;
+    padding: 0;
+  }
+
+  .detailName {
+    font-size: 10px;
+  }
+
+  .detailDesc {
+    font-size: 11px;
+  }
+
+  .ingredRow {
+    gap: 8px;
+    padding: 9px 10px;
+  }
+
+  .ingredThumb {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ingredName {
+    font-size: 12px;
+  }
+
+  .ingredQty {
+    font-size: 12px;
+  }
+}

@@ -1,7 +1,7 @@
 .appShell {
   /* Fluid layout: small side padding, no hard max-width */
   margin: 0 24px;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--color-bg, #f5f0e8);
@@ -13,4 +13,11 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .appShell {
+    margin: 0;
+    box-shadow: none;
+  }
 }

@@ -5,7 +5,20 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  position: relative;
   background: var(--color-bg, #f5f0e8);
+}
+
+.mobileDetailOverlay {
+  display: none;
+}
+
+.mobileDetailBackdrop {
+  display: none;
+}
+
+.mobileDetailSheet {
+  display: none;
 }
 
 /* ── Main area ── */
@@ -29,18 +42,12 @@
 
 .treePanelHeader {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 10px 16px;
   background: var(--color-surface, #fffdf7);
   border-bottom: 1px solid rgba(61, 43, 31, 0.15);
   flex-shrink: 0;
-}
-
-.treePanelTitle {
-  font-family: "Press Start 2P", monospace;
-  font-size: 10px;
-  color: var(--color-text, #2a1f14);
 }
 
 .treePanelCount {
@@ -431,6 +438,37 @@
   border: 2px solid rgba(61, 43, 31, 0.2);
 }
 
+.chainParentsAll {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: rgba(155, 122, 184, 0.12);
+  border: 1px dashed rgba(91, 61, 120, 0.45);
+}
+
+.chainParentsLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: #5b3d78;
+  letter-spacing: 0.02em;
+}
+
+.chainParentsValue {
+  font-family: "Press Start 2P", monospace;
+  font-size: 7px;
+  line-height: 1.6;
+  color: #4a3560;
+}
+
+.chainMergeNote {
+  margin: 10px 0 0;
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--color-text-muted, #8a7a68);
+}
+
 .chainRow {
   display: flex;
   flex-wrap: wrap;
@@ -614,4 +652,131 @@
   font-size: 8px;
   color: #5a8830;
   top: 4px;
+}
+
+@media (max-width: 900px) {
+  .mainArea {
+    min-height: 0;
+  }
+
+  .treePanel {
+    border-right: none;
+    min-height: 100%;
+  }
+
+  .treePanelHeader {
+    padding: 8px 10px;
+  }
+
+  .treeScrollOuter {
+    padding: 14px 10px;
+  }
+
+  .detailPanel {
+    display: none;
+  }
+
+  .mobileDetailOverlay {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    align-items: flex-end;
+    z-index: 30;
+  }
+
+  .mobileDetailBackdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    border: none;
+    background: rgba(15, 12, 8, 0.46);
+  }
+
+  .mobileDetailSheet {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    max-height: calc(100% - 18px);
+    background: var(--color-bg, #f5f0e8);
+    border-top: var(--pixel-border, 2px solid #3d2b1f);
+    box-shadow: 0 -3px 0 var(--color-border, #3d2b1f);
+    animation: weaponSheetIn 0.18s ease-out;
+  }
+
+  .mobileDetailHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-bottom: var(--pixel-border, 2px solid #3d2b1f);
+    background: var(--color-surface, #fffdf7);
+    flex-shrink: 0;
+  }
+
+  .mobileDetailTitle {
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: var(--color-text-secondary, #7a6a5a);
+  }
+
+  .mobileDetailClose {
+    padding: 6px 10px;
+    border: var(--pixel-border, 2px solid #3d2b1f);
+    box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+    background: var(--color-surface, #fffdf7);
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: var(--color-text, #2a1f14);
+  }
+
+  .mobileDetailBody {
+    min-height: 0;
+    overflow-y: auto;
+    padding: 14px 12px 20px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .detailHeader {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ownedToggle {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .statsRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .detailEmoji {
+    font-size: 40px;
+  }
+
+  .detailName {
+    font-size: 10px;
+  }
+
+  .matTipRow {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+@keyframes weaponSheetIn {
+  from {
+    transform: translateY(18px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

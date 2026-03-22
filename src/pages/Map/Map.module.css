@@ -9,6 +9,14 @@
   overflow: hidden;
 }
 
+.mobilePaneSwitch {
+  display: none;
+}
+
+.mobilePaneBtn {
+  display: none;
+}
+
 /* Below the TabBar */
 .body {
   display: flex;
@@ -307,4 +315,103 @@
   font-size: 9px;
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .mobilePaneSwitch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: 8px 10px;
+    border-bottom: var(--pixel-border, 2px solid #3d2b1f);
+    background: var(--color-surface, #fffdf7);
+  }
+
+  .mobilePaneBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    border: var(--pixel-border, 2px solid #3d2b1f);
+    box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+    background: var(--color-surface, #fffdf7);
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: var(--color-text-secondary, #7a6a5a);
+  }
+
+  .mobilePaneBtnActive {
+    background: var(--color-primary-light, #fde8dc);
+    border-color: var(--color-primary, #e87040);
+    color: var(--color-primary, #e87040);
+    box-shadow: 2px 2px 0 var(--color-primary, #e87040);
+  }
+
+  .body {
+    min-height: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    max-height: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .zoneDesc {
+    font-size: 10px;
+  }
+
+  .viewer {
+    min-height: 0;
+    flex: 1;
+  }
+
+  .imgContainer {
+    padding: 8px;
+  }
+
+  .openOriginalBtn {
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .body[data-mobile-pane="menu"] .viewer {
+    display: none;
+  }
+
+  .body[data-mobile-pane="viewer"] .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .zoneHeader {
+    padding: 8px 10px;
+  }
+
+  .zoneName {
+    font-size: 8px;
+  }
+
+  .moduleItemName {
+    font-size: 11px;
+  }
+
+  .moduleItemNote,
+  .tipText,
+  .resourceChip,
+  .creatureNote {
+    font-size: 9px;
+  }
+
+  .thumbImg {
+    width: 70px;
+    height: 48px;
+  }
 }

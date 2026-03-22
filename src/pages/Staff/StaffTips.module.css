@@ -318,6 +318,51 @@
   line-height: 1.5;
 }
 
+@media (max-width: 900px) {
+  .inner {
+    padding: 16px 12px 28px;
+    gap: 18px;
+  }
+
+  .lineupGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .lineupStores {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .lineupStoreBlock:first-child {
+    border-right: 1px solid rgba(61, 43, 31, 0.1);
+    margin-right: 0;
+  }
+
+  .lineupSlotRole {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    letter-spacing: 0.04em;
+    padding: 3px 7px;
+  }
+}
+
+@media (max-width: 520px) {
+  .attrGrid,
+  .skillPriorityGrid,
+  .roleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeader {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .sectionTitle {
+    font-size: 8px;
+  }
+}
+
 .lineupSlotRow .lineupAvatars {
   flex: 1;
   min-width: 0;

@@ -7,6 +7,7 @@ import { recipeData } from "../../data/recipes";
 import { staffData } from "../../data/staff";
 import { weaponsData } from "../../data/weapons";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
+import { getWeaponParentIds } from "../../utils/weaponParents";
 import { getFishImageUrl } from "../../utils/fishImage";
 import styles from "./Home.module.css";
 
@@ -55,12 +56,12 @@ export function Home() {
     staffData.find((s) => !hiredStaffIds.includes(s.id));
 
   // Recommend next craftable weapon (parent owned, self not owned)
-  const nextWeapon = weaponsData.find(
-    (w) =>
-      !ownedWeaponIds.includes(w.id) &&
-      w.parentId !== null &&
-      ownedWeaponIds.includes(w.parentId),
-  );
+  const nextWeapon = weaponsData.find((w) => {
+    if (ownedWeaponIds.includes(w.id)) return false;
+    const parents = getWeaponParentIds(w);
+    if (parents.length === 0) return false;
+    return parents.every((id) => ownedWeaponIds.includes(id));
+  });
 
   const ROLE_LABEL: Record<string, string> = {
     kitchen: "后厨",
@@ -197,7 +198,10 @@ export function Home() {
               icon={nextWeapon.emoji}
               category={`可制作武器 · Tier ${nextWeapon.tier}`}
               title={nextWeapon.name}
-              description={`由「${weaponsData.find((w) => w.id === nextWeapon.parentId)?.name ?? ""}」升级而来 | 伤害 ${nextWeapon.damage} · 弹药 ${nextWeapon.ammo ?? "∞"}`}
+              description={`前置武器：${getWeaponParentIds(nextWeapon)
+                .map((id) => weaponsData.find((w) => w.id === id)?.name)
+                .filter(Boolean)
+                .join(" + ")} | 伤害 ${nextWeapon.damage} · 弹药 ${nextWeapon.ammo ?? "∞"}`}
               actionLabel="查看武器"
               onAction={() => navigate("/weapons")}
             />

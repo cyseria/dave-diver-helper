@@ -1,3 +1,11 @@
+.wrapper {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  position: relative;
+}
+
 .layout {
   display: flex;
   flex: 1;
@@ -63,4 +71,105 @@
 .empty p {
   font-size: 14px;
   font-style: italic;
+}
+
+.mobileOverlay {
+  display: none;
+}
+
+.mobileBackdrop {
+  display: none;
+}
+
+.mobileSheet {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    min-height: 0;
+  }
+
+  .list {
+    width: 100%;
+    border-right: none;
+  }
+
+  .detailScroll {
+    padding: 16px 14px 18px;
+  }
+
+  .mobileOverlay {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    align-items: flex-end;
+    z-index: 20;
+  }
+
+  .mobileBackdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    border: none;
+    background: rgba(15, 12, 8, 0.46);
+  }
+
+  .mobileSheet {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    max-height: calc(100% - 18px);
+    background: var(--color-bg, #f5f0e8);
+    border-top: var(--pixel-border, 2px solid #3d2b1f);
+    box-shadow: 0 -3px 0 var(--color-border, #3d2b1f);
+    animation: sheetIn 0.18s ease-out;
+  }
+
+  .mobileSheetHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-bottom: var(--pixel-border, 2px solid #3d2b1f);
+    background: var(--color-surface, #fffdf7);
+    flex-shrink: 0;
+  }
+
+  .mobileSheetTitle {
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: var(--color-text-secondary, #7a6a5a);
+  }
+
+  .mobileCloseBtn {
+    padding: 6px 10px;
+    border: var(--pixel-border, 2px solid #3d2b1f);
+    box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+    background: var(--color-surface, #fffdf7);
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    color: var(--color-text, #2a1f14);
+  }
+
+  .mobileSheetBody {
+    min-height: 0;
+    overflow-y: auto;
+    padding: 14px 12px 20px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@keyframes sheetIn {
+  from {
+    transform: translateY(18px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

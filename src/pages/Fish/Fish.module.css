@@ -449,6 +449,7 @@
 
 /* 原图 296×224，仅前端展示 296×174，底部裁掉 */
 .cardImgCrop {
+  position: relative;
   aspect-ratio: 296 / 174;
   overflow: hidden;
   max-width: 100%;
@@ -456,6 +457,10 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+}
+
+.cardImgStarMask {
+  display: none;
 }
 
 .cardImgCrop .cardEmoji {
@@ -519,6 +524,18 @@
 }
 
 .cardStarsPosition .starBtn {
+  padding: 0;
+}
+
+.cardStarsInCrop {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  z-index: 2;
+  gap: 1px;
+}
+
+.cardStarsInCrop .starBtn {
   padding: 0;
 }
 
@@ -924,6 +941,27 @@
   line-height: 1.6;
 }
 
+.tipList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #5a4a38;
+  line-height: 1.6;
+}
+
+.tipListItem {
+  position: relative;
+  padding-left: 12px;
+}
+
+.tipListItem::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #8a6a22;
+}
+
 .section {
   display: flex;
   flex-direction: column;
@@ -937,33 +975,75 @@
   letter-spacing: 0.04em;
 }
 
-.recipeRow {
-  display: flex;
-  flex-wrap: wrap;
+.menuHint {
+  font-size: 12px;
+  color: var(--color-text-muted, #ada090);
+  line-height: 1.5;
+}
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 8px;
 }
 
-.recipeChip {
+.menuCard {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  padding: 10px 14px;
+  padding: 8px;
   background: var(--color-surface, #fffdf7);
   border: var(--pixel-border, 2px solid #3d2b1f);
   box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text, #2a1f14);
+  text-align: left;
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
-.recipeChip:hover {
+.menuCard:hover {
   transform: translate(-1px, -1px);
   box-shadow: 3px 3px 0 var(--color-border, #3d2b1f);
 }
 
-.recipePrice {
-  font-size: 11px;
+.menuThumb {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--color-border, #3d2b1f);
+  background: var(--color-surface-alt, #ede8dc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.menuThumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.menuThumbEmoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.menuInfo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menuName {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text, #2a1f14);
+  line-height: 1.4;
+}
+
+.menuMeta {
+  font-size: 10px;
   color: var(--color-warning, #e8a040);
   font-weight: 700;
 }
@@ -994,4 +1074,105 @@
   font-weight: 700;
   color: var(--color-text, #2a1f14);
   box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+}
+
+@media (max-width: 900px) {
+  .cardImgStarMask {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    width: 56px;
+    height: 17px;
+    background: #71b7ee;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .cardStarsInCrop {
+    right: 1px;
+    bottom: 4px;
+  }
+
+  .cardStarsPosition {
+    bottom: 4px;
+    right: 4px;
+    width: auto;
+    height: auto;
+    padding: 0;
+    z-index: 2;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .detail {
+    gap: 14px;
+  }
+
+  .detailTop {
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-bottom: 14px;
+  }
+
+  .detailImgBox {
+    width: 92px;
+  }
+
+  .detailName {
+    font-size: 11px;
+  }
+
+  .detailDesc {
+    font-size: 12px;
+  }
+
+  .menuGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .captureBtn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .statCell {
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 520px) {
+  .cardName {
+    font-size: 9px;
+  }
+
+  .cardMetaItem {
+    font-size: 8px;
+  }
+
+  .detailImgBox {
+    width: 84px;
+  }
+
+  .detailEmoji {
+    font-size: 50px;
+  }
+
+  .statPairRow {
+    flex-direction: column;
+  }
+
+  .statCellDivider {
+    width: auto;
+    height: 1px;
+  }
+
+  .zoneChip {
+    font-size: 10px;
+    padding: 3px 7px;
+  }
 }

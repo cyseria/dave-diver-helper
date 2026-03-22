@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TabBar } from "../../components/TabBar";
 import type { TabItem } from "../../components/TabBar";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 /* ── Image imports ───────────────────────────────────────── */
 // Shallow sea – 圆角悬崖
@@ -230,10 +231,12 @@ const ZONES: Zone[] = [
 
 /* ── Component ──────────────────────────────────────────── */
 export function MapPage() {
+  const isMobile = useIsMobile();
   const [searchParams] = useSearchParams();
   const [zoneId, setZoneId]     = useState<string>("shallow");
   const [moduleId, setModuleId] = useState<string>("yuanjiao");
   const [imgIndex, setImgIndex] = useState<number>(0);
+  const [mobilePane, setMobilePane] = useState<"menu" | "viewer">("menu");
 
   const zone = ZONES.find((z) => z.id === zoneId) ?? ZONES[0];
 
@@ -253,16 +256,22 @@ export function MapPage() {
     setImgIndex(0);
   }, [searchParams, zoneId]);
 
+  useEffect(() => {
+    if (!isMobile) setMobilePane("menu");
+  }, [isMobile]);
+
   function handleZoneChange(id: string) {
     setZoneId(id);
     const z = ZONES.find((z) => z.id === id);
     setModuleId(z?.modules?.[0]?.id ?? "");
     setImgIndex(0);
+    if (isMobile) setMobilePane("viewer");
   }
 
   function handleModuleChange(id: string) {
     setModuleId(id);
     setImgIndex(0);
+    if (isMobile) setMobilePane("viewer");
   }
 
   function handleImgChange(i: number) {
@@ -288,8 +297,26 @@ export function MapPage() {
         onChange={handleZoneChange}
         aria-label="地图区域"
       />
+      {isMobile ? (
+        <div className={styles.mobilePaneSwitch}>
+          <button
+            type="button"
+            className={`${styles.mobilePaneBtn} ${mobilePane === "menu" ? styles.mobilePaneBtnActive : ""}`}
+            onClick={() => setMobilePane("menu")}
+          >
+            菜单
+          </button>
+          <button
+            type="button"
+            className={`${styles.mobilePaneBtn} ${mobilePane === "viewer" ? styles.mobilePaneBtnActive : ""}`}
+            onClick={() => setMobilePane("viewer")}
+          >
+            地图
+          </button>
+        </div>
+      ) : null}
 
-      <div className={styles.body}>
+      <div className={styles.body} data-mobile-pane={mobilePane}>
         {/* ── Sidebar ── */}
         <aside className={styles.sidebar}>
           <div

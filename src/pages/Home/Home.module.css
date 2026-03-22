@@ -129,3 +129,56 @@
   color: var(--color-text-muted, #ada090);
   letter-spacing: 0.04em;
 }
+
+@media (max-width: 900px) {
+  .page {
+    padding: 18px 14px 20px;
+  }
+
+  .header {
+    margin-bottom: 18px;
+  }
+
+  .title {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .section {
+    gap: 14px;
+  }
+
+  .completionRing {
+    align-items: flex-start;
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .ringStats {
+    width: 100%;
+    gap: 8px 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .ringOuter {
+    width: 76px;
+    height: 76px;
+  }
+
+  .ringInner {
+    inset: 10px;
+  }
+
+  .ringPct {
+    font-size: 9px;
+  }
+
+  .ringStatNum {
+    font-size: 14px;
+  }
+}

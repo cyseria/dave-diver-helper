@@ -5,9 +5,15 @@ import {
   WEAPON_CATEGORIES,
   weaponsData,
 } from "../../data/weapons";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import { TabBar } from "../../components/TabBar";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
 import type { Weapon, WeaponCategory, WeaponElement } from "../../types";
+import {
+  getDirectChildWeapons,
+  getWeaponParentIds,
+  isRootInCategory,
+} from "../../utils/weaponParents";
 import styles from "./Weapons.module.css";
 
 // ── Element config ────────────────────────────────────────────────────────
@@ -16,10 +22,10 @@ const ELEMENT_LABEL: Record<WeaponElement, string> = {
   fire: "🔥 火焰",
   poison: "☠️ 毒液",
   lightning: "⚡ 闪电",
-  shock: "⚡ 震荡",
+  shock: "⚡ 休克",
   sleep: "😴 麻醉",
   freeze: "❄️ 冰冻",
-  thunder: "🌩️ 雷霆",
+  thunder: "🌩️ 雷电",
 };
 
 const ELEMENT_CLASS: Record<WeaponElement, string> = {
@@ -92,6 +98,15 @@ function shiftNode(node: LayoutNode, dx: number, dy: number): LayoutNode {
   };
 }
 
+function findLayoutNode(root: LayoutNode, weaponId: string): LayoutNode | null {
+  if (root.weapon.id === weaponId) return root;
+  for (const c of root.children) {
+    const found = findLayoutNode(c, weaponId);
+    if (found) return found;
+  }
+  return null;
+}
+
 function flattenNodes(node: LayoutNode): LayoutNode[] {
   return [node, ...node.children.flatMap(flattenNodes)];
 }
@@ -117,6 +132,30 @@ function collectConnectors(node: LayoutNode): { path: string; key: string }[] {
   return result;
 }
 
+/** 多父级合并：从 extraParentIds 指向子节点的额外连线（与主线 parentId 树并存） */
+function collectMergeConnectors(
+  root: LayoutNode,
+  inCat: Weapon[],
+  inCatIds: Set<string>,
+): { path: string; key: string }[] {
+  const result: { path: string; key: string }[] = [];
+  for (const w of inCat) {
+    if (!w.extraParentIds?.length) continue;
+    const toNode = findLayoutNode(root, w.id);
+    if (!toNode) continue;
+    for (const pid of w.extraParentIds) {
+      if (!inCatIds.has(pid)) continue;
+      const fromNode = findLayoutNode(root, pid);
+      if (!fromNode) continue;
+      result.push({
+        path: connectorPath(fromNode, toNode),
+        key: `merge-${pid}->${w.id}`,
+      });
+    }
+  }
+  return result;
+}
+
 // ── Weapon Tree Component ─────────────────────────────────────────────────
 interface WeaponTreeProps {
   category: WeaponCategory;
@@ -135,15 +174,16 @@ function WeaponTree({
 }: WeaponTreeProps) {
   const inCat = weaponsData.filter((w) => w.category === category);
   const inCatIds = new Set(inCat.map((w) => w.id));
-  const root = inCat.find(
-    (w) => w.parentId === null || !inCatIds.has(w.parentId ?? ""),
-  );
+  const root = inCat.find((w) => isRootInCategory(w, inCat));
 
   if (!root) return <div className={styles.emptyTree}>暂无数据</div>;
 
   const { node: rootNode, height } = buildLayout(root.id, inCat, 0);
   const allNodes = flattenNodes(rootNode);
-  const connectors = collectConnectors(rootNode);
+  const connectors = [
+    ...collectConnectors(rootNode),
+    ...collectMergeConnectors(rootNode, inCat, inCatIds),
+  ];
   const maxX = Math.max(...allNodes.map((n) => n.x + CARD_W));
   const totalH = height + 24;
   const totalW = maxX + 16;
@@ -165,10 +205,11 @@ function WeaponTree({
           <path
             key={key}
             d={path}
-            stroke="#c8b090"
+            stroke={key.startsWith("merge-") ? "#9b7ab8" : "#c8b090"}
             strokeWidth="2"
             fill="none"
-            strokeDasharray="5 3"
+            strokeDasharray={key.startsWith("merge-") ? "6 4" : "5 3"}
+            opacity={key.startsWith("merge-") ? 0.95 : 1}
           />
         ))}
       </svg>
@@ -234,8 +275,8 @@ function buildChain(weapon: Weapon, all: Weapon[]): Weapon[] {
   let cur: Weapon | undefined = weapon;
   while (cur) {
     chain.unshift(cur);
-    const pid = cur.parentId;
-    cur = pid ? all.find((w) => w.id === pid) : undefined;
+    const parentId: string | null = cur.parentId;
+    cur = parentId ? all.find((w) => w.id === parentId) : undefined;
   }
   return chain;
 }
@@ -243,7 +284,10 @@ function buildChain(weapon: Weapon, all: Weapon[]): Weapon[] {
 function DetailPanel({ weapon, ownedIds, onToggle }: DetailPanelProps) {
   const owned = ownedIds.includes(weapon.id);
   const chain = buildChain(weapon, weaponsData);
-  const children = weaponsData.filter((w) => w.parentId === weapon.id);
+  const children = getDirectChildWeapons(weapon, weaponsData);
+  const parentNamesFull = getWeaponParentIds(weapon)
+    .map((id) => weaponsData.find((w) => w.id === id)?.name)
+    .filter(Boolean) as string[];
   const elemClass = ELEMENT_CLASS[weapon.element];
 
   return (
@@ -296,6 +340,14 @@ function DetailPanel({ weapon, ownedIds, onToggle }: DetailPanelProps) {
       {/* Upgrade chain */}
       <div className={styles.chainBox}>
         <span className={styles.sectionLabel}>升级路线</span>
+        {parentNamesFull.length > 1 && (
+          <div className={styles.chainParentsAll}>
+            <span className={styles.chainParentsLabel}>合成前置（全部）</span>
+            <span className={styles.chainParentsValue}>
+              {parentNamesFull.join(" + ")}
+            </span>
+          </div>
+        )}
         <div className={styles.chainRow}>
           {chain.map((w, i) => (
             <span key={w.id} className={styles.chainItem}>
@@ -320,6 +372,12 @@ function DetailPanel({ weapon, ownedIds, onToggle }: DetailPanelProps) {
             </>
           )}
         </div>
+        {weapon.extraParentIds && weapon.extraParentIds.length > 0 && (
+          <p className={styles.chainMergeNote}>
+            树状图主线沿「{weaponsData.find((w) => w.id === weapon.parentId)?.name ?? "—"}
+            」延伸；紫色虚线表示合并所需的另一条支线。
+          </p>
+        )}
       </div>
 
       {/* Materials */}
@@ -383,15 +441,16 @@ function DetailPanel({ weapon, ownedIds, onToggle }: DetailPanelProps) {
 
 // ── Main page ─────────────────────────────────────────────────────────────
 export function Weapons() {
+  const isMobile = useIsMobile();
   const [category, setCategory] = useState<WeaponCategory>("rifle");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const { ownedWeaponIds, toggleWeaponOwned } = usePlayerProgress();
 
   const selected = selectedId
     ? (weaponsData.find((w) => w.id === selectedId) ?? null)
     : null;
   const inCat = weaponsData.filter((w) => w.category === category);
-  const ownedInCat = inCat.filter((w) => ownedWeaponIds.includes(w.id)).length;
   const ownedByCat: Record<WeaponCategory, { owned: number; total: number }> =
     WEAPON_CATEGORIES.reduce(
       (acc, cat) => {
@@ -408,16 +467,31 @@ export function Weapons() {
   function handleCategoryChange(cat: WeaponCategory) {
     setCategory(cat);
     setSelectedId(null);
+    if (isMobile) setMobileDetailOpen(false);
+  }
+
+  function handleSelectWeapon(weapon: Weapon) {
+    setSelectedId(weapon.id);
+    if (isMobile) setMobileDetailOpen(true);
   }
 
   // Default select the first root weapon in category
   useEffect(() => {
     if (selectedId) return;
-    const roots = inCat.filter((w) => w.parentId === null);
+    const roots = inCat.filter((w) => isRootInCategory(w, inCat));
     const first = roots[0] ?? inCat[0];
     if (!first) return;
     setSelectedId(first.id);
   }, [category, selectedId, inCat]);
+
+  useEffect(() => {
+    if (!isMobile) setMobileDetailOpen(false);
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (selectedId !== null) return;
+    setMobileDetailOpen(false);
+  }, [selectedId]);
 
   const weaponTabs = WEAPON_CATEGORIES.map((cat) => ({
     id: cat,
@@ -440,9 +514,6 @@ export function Weapons() {
         {/* Tree panel */}
         <div className={styles.treePanel}>
           <div className={styles.treePanelHeader}>
-            <span className={styles.treePanelTitle}>
-              {CATEGORY_EMOJI[category]} {CATEGORY_LABELS[category]} 升级路线
-            </span>
             <span className={styles.treePanelCount}>已拥有</span>
           </div>
           <div className={styles.treeScrollOuter}>
@@ -450,7 +521,7 @@ export function Weapons() {
               category={category}
               selectedId={selectedId}
               ownedIds={ownedWeaponIds}
-              onSelect={(w) => setSelectedId(w.id)}
+              onSelect={handleSelectWeapon}
               onToggle={toggleWeaponOwned}
             />
           </div>
@@ -476,6 +547,35 @@ export function Weapons() {
           )}
         </div>
       </div>
+      {isMobile && selected && mobileDetailOpen ? (
+        <div className={styles.mobileDetailOverlay}>
+          <button
+            type="button"
+            className={styles.mobileDetailBackdrop}
+            aria-label="关闭详情"
+            onClick={() => setMobileDetailOpen(false)}
+          />
+          <section className={styles.mobileDetailSheet}>
+            <header className={styles.mobileDetailHeader}>
+              <span className={styles.mobileDetailTitle}>武器详情</span>
+              <button
+                type="button"
+                className={styles.mobileDetailClose}
+                onClick={() => setMobileDetailOpen(false)}
+              >
+                关闭
+              </button>
+            </header>
+            <div className={styles.mobileDetailBody}>
+              <DetailPanel
+                weapon={selected}
+                ownedIds={ownedWeaponIds}
+                onToggle={toggleWeaponOwned}
+              />
+            </div>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }

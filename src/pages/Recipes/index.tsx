@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../../components/EncyclopediaLayout";
 import { fishData } from "../../data/fish";
 import { recipeData } from "../../data/recipes";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import { usePlayerProgress } from "../../store/usePlayerProgress";
 import type { Fish, Recipe } from "../../types";
 import { getFishImageUrl } from "../../utils/fishImage";
@@ -46,9 +47,11 @@ const fishById = (() => {
 export function Recipes() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [sortKey, setSortKey] = useState<RecipeSortKey>("sellPrice");
   const [partyFilter, setPartyFilter] = useState<PartyFoodKey>("all");
   const [starOnly, setFeaturedOnly] = useState(false);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const { capturedFishIds, recipeEnhanceLevels, setRecipeEnhanceLevel } =
     usePlayerProgress();
 
@@ -93,11 +96,16 @@ export function Recipes() {
 
   // Default select first recipe
   useEffect(() => {
+    if (isMobile) return;
     if (id) return;
     const first = visibleRecipes[0];
     if (!first) return;
     navigate(`/recipes/${first.id}`, { replace: true });
-  }, [id, visibleRecipes, navigate]);
+  }, [id, isMobile, visibleRecipes, navigate]);
+
+  useEffect(() => {
+    if (!isMobile) setShowMobileFilters(false);
+  }, [isMobile]);
 
   // When party filter changes, keep the selected recipe in sync with visible list.
   useEffect(() => {
@@ -119,19 +127,32 @@ export function Recipes() {
   const listPanel = (
     <div className={styles.listWrap}>
       <div className={styles.listHeader}>
-        <div className={styles.listHeaderLeft}>
-          <span className={styles.listTitle}>食谱图鉴</span>
-          <span className={styles.listCount}>
-            <span className={styles.countHighlight} title="与首页进度一致">
-              🍣 {unlockedCount}/{totalRecipes}
+        <div className={styles.listHeaderTop}>
+          <div className={styles.listHeaderLeft}>
+            <span className={styles.listTitle}>食谱图鉴</span>
+            <span className={styles.listCount}>
+              <span className={styles.countHighlight} title="与首页进度一致">
+                🍣 {unlockedCount}/{totalRecipes}
+              </span>
+              {" · "}
+              {visibleRecipes.length} 条
+              {" · "}
+              {partyFilter === "all" ? "全部" : `${partyFilter}派对`}
             </span>
-            {" · "}
-            {visibleRecipes.length} 条
-            {" · "}
-            {partyFilter === "all" ? "全部" : `${partyFilter}派对`}
-          </span>
+          </div>
+          {isMobile ? (
+            <button
+              type="button"
+              className={styles.mobileFilterToggle}
+              onClick={() => setShowMobileFilters((v) => !v)}
+            >
+              {showMobileFilters ? "收起筛选" : "筛选"}
+            </button>
+          ) : null}
         </div>
-        <div className={styles.listHeaderRight}>
+        <div
+          className={`${styles.listHeaderRight} ${isMobile && !showMobileFilters ? styles.listHeaderRightCollapsed : ""}`}
+        >
           <label className={styles.sortWrap}>
             <span className={styles.sortLabel}>排序</span>
             <select
@@ -347,6 +368,7 @@ export function Recipes() {
         detailPanel={detailPanel}
         hasSelection={!!selected}
         emptyMessage="← 从左侧选择一个食谱查看详情"
+        onRequestClose={() => navigate("/recipes", { replace: true })}
       />
     </div>
   );
