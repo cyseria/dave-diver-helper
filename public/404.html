@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dave the Diver Helper</title>
+    <!--
+      GitHub Pages 对子路径直接请求会返回本页。将完整 URL 存到 sessionStorage 后跳转到仓库根下的 index.html，
+      再由主 index.html 内联脚本 history.replaceState 恢复路由（与 Vite SPA + BrowserRouter 配合）。
+      GitHub 要求自定义 404 页至少约 512 字节；以下注释用于满足体积要求。
+      padding-padding-padding-padding-padding-padding-padding-padding-padding
+      padding-padding-padding-padding-padding-padding-padding-padding-padding
+    -->
+    <script>
+      (function () {
+        if (location.hostname.indexOf("github.io") === -1) {
+          return;
+        }
+        var segs = location.pathname.split("/").filter(Boolean);
+        if (segs.length < 2) {
+          return;
+        }
+        var base = "/" + segs[0] + "/";
+        try {
+          sessionStorage.setItem(
+            "spa_redirect",
+            location.pathname + location.search + location.hash,
+          );
+        } catch (e) {}
+        location.replace(location.origin + base);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>正在跳转…</p>
+  </body>
+</html>

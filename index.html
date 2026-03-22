@@ -9,6 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <!-- GitHub Pages：404.html 会写入 spa_redirect 后跳回站点根，此处恢复完整路径供 React Router 使用 -->
+    <script>
+      (function () {
+        try {
+          var r = sessionStorage.getItem("spa_redirect");
+          if (r) {
+            sessionStorage.removeItem("spa_redirect");
+            var cur =
+              window.location.pathname +
+              window.location.search +
+              window.location.hash;
+            if (r !== cur) {
+              window.history.replaceState(null, "", r);
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

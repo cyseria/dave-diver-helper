@@ -44,7 +44,8 @@ export function DataBackupModal({ open, onClose }: DataBackupModalProps) {
     }
     applyProgressSnapshot(result.snapshot);
     setText("");
-    dialogRef.current?.close();
+    // 必须同步父级 open=false；仅 close() 不会更新 state，useEffect 会再次 showModal
+    onClose();
   };
 
   return createPortal(
@@ -78,7 +79,7 @@ export function DataBackupModal({ open, onClose }: DataBackupModalProps) {
         <button
           type="button"
           className={styles.btnSecondary}
-          onClick={() => dialogRef.current?.close()}
+          onClick={() => onClose()}
         >
           取消
         </button>

@@ -1,5 +1,12 @@
 .page {
+  /* 与 App main.content（flex + overflow:hidden）配合：占满剩余高度并在此区域内滚动 */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 32px 28px;
 }
