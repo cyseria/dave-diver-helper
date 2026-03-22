@@ -144,7 +144,7 @@ const ZONES: Zone[] = [
     ],
     creatures: [
       { emoji: "🦈", name: "虎鲨",         note: "中下层，攻击性强，皮革珍贵" },
-      { emoji: "🦈", name: "锯鲨",         note: "中层漫游，触碰锯吻掉血" },
+      { emoji: "🦈", name: "长吻锯鲨",     note: "中层漫游，触碰锯吻掉血" },
       { emoji: "🦈", name: "三齿鲨",       note: "上层，移速快，警惕性高" },
       { emoji: "🐍", name: "黄鳝",         note: "藏于礁缝，夜间活跃" },
       { emoji: "🪼", name: "澳洲盲点水母", note: "中层漂浮，接触有毒" },

@@ -23,7 +23,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1727,
     tastiness: 295,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     partyFood: "旗鱼",
     star: true,
     description:
@@ -63,7 +63,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1716,
     tastiness: 282,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     partyFood: "龙虾",
     recommended: true,
     star: true,
@@ -96,7 +96,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1705,
     tastiness: 273,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     partyFood: "鲨鱼",
     recommended: true,
     star: true,
@@ -136,7 +136,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1694,
     tastiness: 253,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description:
       "用炭火烤制的南极章鱼的腿，甘苦与松露一起放在盘子里的料理。完美融合了大海和陆地的味道。",
     imageUrl: recipeImageByName.get("烤松露南极章鱼") ?? null,
@@ -213,7 +213,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1661,
     tastiness: 280,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description:
       "将鲍鱼切成大块，用昆布汤汁炖制后放上松露。松露香味与鱼肉清爽口感协调。",
     imageUrl: recipeImageByName.get("炖松露鲍鱼") ?? null,
@@ -284,7 +284,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1609,
     tastiness: 505,
     servings: 6,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description: "将清理好的毛蟹、雪蟹、帝王蟹浸泡在酱油后熟成。",
     imageUrl: recipeImageByName.get("酱螃蟹") ?? null,
     ingredients: [
@@ -328,7 +328,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1609,
     tastiness: 375,
     servings: 6,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     partyFood: "龙虾",
     recommended: true,
     star: true,
@@ -369,7 +369,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1606,
     tastiness: 295,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description: "彩虹蘑菇与朝天鼻刺豚交替串好后烤制。",
     imageUrl: recipeImageByName.get("彩虹鳗鱼串") ?? null,
     ingredients: [
@@ -385,7 +385,7 @@ export const recipeData: Recipe[] = [
         name: "彩虹蘑菇",
         emoji: "🐟",
         quantity: 1,
-        location: "张戈获取",
+        location: "张戈",
       },
       {
         id: "彩虹鳗鱼串_ing_3",
@@ -578,7 +578,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1551,
     tastiness: 268,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description: "用鲷鱼片包裹彩虹蘑菇蒸制，口感鲜美。",
     imageUrl: recipeImageByName.get("彩虹鲀鱼糕") ?? null,
     ingredients: [
@@ -602,7 +602,7 @@ export const recipeData: Recipe[] = [
         name: "彩虹蘑菇",
         emoji: "🐟",
         quantity: 1,
-        location: "张戈获取",
+        location: "张戈",
       },
       {
         id: "彩虹鲀鱼糕_ing_4",
@@ -794,7 +794,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1554,
     tastiness: 420,
     servings: 9,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description:
       "用去除毒素的六斑刺鲀和星斑叉鼻鲀肉片做的丸子汤料理。长时间熬制的墨角藻汤汁具有健康的味道。",
     imageUrl: recipeImageByName.get("河豚丸子汤") ?? null,
@@ -839,7 +839,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1562,
     tastiness: 290,
     servings: 2,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description:
       "将精心烤制的帆鳍鲹和五颜六色的彩虹蘑菇作为浇头的茶泡饭。咸脆的鱼肉和柔软刺激的彩虹蘑菇浑然天成，仿佛原本就是一体的。",
     imageUrl: recipeImageByName.get("彩虹帆鳍鲹茶泡饭") ?? null,
@@ -856,7 +856,7 @@ export const recipeData: Recipe[] = [
         name: "彩虹蘑菇",
         emoji: "🐟",
         quantity: 1,
-        location: "张戈获取",
+        location: "张戈",
       },
       {
         id: "彩虹帆鳍鲹茶泡饭_ing_3",
@@ -1129,7 +1129,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1517,
     tastiness: 420,
     servings: 7,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description:
       "将捣碎的尖牙鱼放入新鲜的哈瓦那辣椒后油炸的料理。辣椒的辣味会叫人狂喝饮料。",
     imageUrl: recipeImageByName.get("炸哈瓦那辣椒尖牙鱼") ?? null,
@@ -1337,7 +1337,7 @@ export const recipeData: Recipe[] = [
     sellPrice: 1498,
     tastiness: 360,
     servings: 9,
-    obtainMethod: "",
+    obtainMethod: "张戈秘密菜谱",
     description:
       "用鱼肉填满寿司的馅儿后，用墨角藻包起来的料理。味道犹如置身于森林般清新无比。",
     imageUrl: recipeImageByName.get("月光墨角藻鱼卷") ?? null,
@@ -2750,7 +2750,7 @@ export const recipeData: Recipe[] = [
   },
   {
     id: "红石蟹炒饭",
-    name: "红石蟹炒饭",
+    name: "真方蟹炒饭",
     emoji: "🍱",
     level: 1,
     sellPrice: 1424,
@@ -2758,12 +2758,15 @@ export const recipeData: Recipe[] = [
     servings: 10,
     obtainMethod: "",
     description:
-      "将红石蟹的肉挑取出来后搭配高级米和鸡蛋一起翻炒出来的料理。蛋液包裹着颗颗米粒，带来丰富的味道。",
-    imageUrl: recipeImageByName.get("红石蟹炒饭") ?? null,
+      "将真方蟹的肉挑取出来后搭配高级米和鸡蛋一起翻炒出来的料理。蛋液包裹着颗颗米粒，带来丰富的味道。",
+    imageUrl:
+      recipeImageByName.get("真方蟹炒饭") ??
+      recipeImageByName.get("红石蟹炒饭") ??
+      null,
     ingredients: [
       {
         id: "红石蟹炒饭_ing_1",
-        name: "红石蟹",
+        name: "真方蟹",
         fishId: "sally_lightfoot_crab",
         emoji: "🐟",
         quantity: 2,
@@ -3165,7 +3168,7 @@ export const recipeData: Recipe[] = [
       },
       {
         id: "华美特级寿司套餐_ing_2",
-        name: "青条鳃棘鲈",
+        name: "波伦氏九棘鲈",
         fishId: "coral_trout",
         emoji: "🐟",
         quantity: 3,
@@ -4759,7 +4762,7 @@ export const recipeData: Recipe[] = [
   },
   {
     id: "锯鲨寿司",
-    name: "锯鲨寿司",
+    name: "长吻锯鲨寿司",
     emoji: "🍣",
     level: 1,
     sellPrice: 129,
@@ -4769,11 +4772,14 @@ export const recipeData: Recipe[] = [
     partyFood: "鲨鱼",
     recommended: true,
     description: "",
-    imageUrl: recipeImageByName.get("锯鲨寿司") ?? null,
+    imageUrl:
+      recipeImageByName.get("长吻锯鲨寿司") ??
+      recipeImageByName.get("锯鲨寿司") ??
+      null,
     ingredients: [
       {
         id: "锯鲨寿司_ing_1",
-        name: "锯鲨肉片",
+        name: "长吻锯鲨肉片",
         fishId: "longnose_sawshark",
         emoji: "🐟",
         quantity: 1,

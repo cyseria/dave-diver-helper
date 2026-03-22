@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EncyclopediaLayout } from "../../components/EncyclopediaLayout";
 import { fishData } from "../../data/fish";
@@ -49,9 +49,23 @@ export function Recipes() {
   const [sortKey, setSortKey] = useState<RecipeSortKey>("sellPrice");
   const [partyFilter, setPartyFilter] = useState<PartyFoodKey>("all");
   const [starOnly, setFeaturedOnly] = useState(false);
-  const { capturedFishIds } = usePlayerProgress();
+  const { capturedFishIds, recipeEnhanceLevels, setRecipeEnhanceLevel } =
+    usePlayerProgress();
+
+  /** 与首页一致：强化等级 ≥1 视为已解锁食谱 */
+  const isRecipeUnlocked = useCallback(
+    (r: Recipe) => (recipeEnhanceLevels[r.id] ?? 0) >= 1,
+    [recipeEnhanceLevels],
+  );
+
+  const totalRecipes = recipeData.length;
+  const unlockedCount = useMemo(
+    () => recipeData.filter((r) => isRecipeUnlocked(r)).length,
+    [isRecipeUnlocked],
+  );
 
   const selected = id ? (recipeData.find((r) => r.id === id) ?? null) : null;
+  const selectedUnlocked = selected ? isRecipeUnlocked(selected) : false;
 
   const sortedRecipes = useMemo<Recipe[]>(() => {
     const copy = [...recipeData];
@@ -108,7 +122,11 @@ export function Recipes() {
         <div className={styles.listHeaderLeft}>
           <span className={styles.listTitle}>食谱图鉴</span>
           <span className={styles.listCount}>
-            {visibleRecipes.length}
+            <span className={styles.countHighlight} title="与首页进度一致">
+              🍣 {unlockedCount}/{totalRecipes}
+            </span>
+            {" · "}
+            {visibleRecipes.length} 条
             {" · "}
             {partyFilter === "all" ? "全部" : `${partyFilter}派对`}
           </span>
@@ -153,10 +171,11 @@ export function Recipes() {
       <div className={styles.grid}>
         {visibleRecipes.map((recipe, index) => {
           const isSelected = recipe.id === id;
+          const unlocked = isRecipeUnlocked(recipe);
           return (
             <div
               key={`${recipe.id}-${index}`}
-              className={`${styles.card} ${recipe.star ? styles.cardFeatured : ""} ${isSelected ? styles.cardSelected : ""}`}
+              className={`${styles.card} ${recipe.star ? styles.cardFeatured : ""} ${isSelected ? styles.cardSelected : ""} ${unlocked ? styles.cardRecipeUnlocked : ""}`}
               onClick={() => navigate(`/recipes/${recipe.id}`)}
               onKeyDown={(e) =>
                 e.key === "Enter" && navigate(`/recipes/${recipe.id}`)
@@ -179,12 +198,28 @@ export function Recipes() {
                     <span className={styles.cardEmoji}>{recipe.emoji}</span>
                   );
                 })()}
+                <button
+                  type="button"
+                  className={`${styles.cardRecipeStamp} ${unlocked ? styles.cardRecipeStampOn : styles.cardRecipeStampOff}`}
+                  title={unlocked ? "已解锁（点击取消）" : "点击标记已解锁"}
+                  aria-label={unlocked ? "已解锁" : "未解锁"}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setRecipeEnhanceLevel(recipe.id, unlocked ? 0 : 1);
+                  }}
+                >
+                  {unlocked ? "✓" : "+"}
+                </button>
               </div>
               <div className={styles.cardFooter}>
                 <span className={styles.cardName}>{recipe.name}</span>
                 <div className={styles.cardStatsRow}>
-                  <span className={styles.cardStat}>💰 {recipe.sellPrice}</span>
-                  <span className={styles.cardStat}>😋 {recipe.tastiness}</span>
+                  <span className={styles.cardStat}>
+                    💰 {recipe.sellPrice}
+                  </span>
+                  <span className={styles.cardStat}>
+                    😋 {recipe.tastiness}
+                  </span>
                 </div>
               </div>
             </div>
@@ -212,7 +247,6 @@ export function Recipes() {
         <div className={styles.detailMeta}>
           <h1 className={styles.detailName}>{selected.name}</h1>
 
-          {/* Info badges: artisan flame + current price */}
           <div className={styles.detailBadges}>
             <span className={styles.priceBadge}>
               💰 {selected.sellPrice} 金
@@ -233,9 +267,17 @@ export function Recipes() {
             </div>
           ) : null}
         </div>
+        <button
+          type="button"
+          className={`${styles.recipeMarkBtn} ${selectedUnlocked ? styles.recipeMarkBtnOn : ""}`}
+          onClick={() =>
+            setRecipeEnhanceLevel(selected.id, selectedUnlocked ? 0 : 1)
+          }
+        >
+          {selectedUnlocked ? "✓ 已解锁" : "标记解锁"}
+        </button>
       </div>
 
-      {/* ── Ingredients first ── */}
       <div className={styles.ingredSection}>
         <h3 className={styles.sectionTitle}>🥘 所需食材（每份）</h3>
         <div className={styles.ingredList}>

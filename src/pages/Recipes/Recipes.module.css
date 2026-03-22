@@ -118,7 +118,8 @@
   position: relative;
   overflow: hidden;
   background: var(--color-surface-alt, #ede8dc);
-  opacity: 1;
+  /* 与鱼类列表一致：未标记时略淡 */
+  opacity: 0.85;
 }
 
 .card:hover {
@@ -126,8 +127,15 @@
   box-shadow: 3px 3px 0 var(--color-border, #3d2b1f);
 }
 
-.cardOwned {
-  /* 仅通过角标区分，保持默认亮色 */
+/* 已解锁：与鱼类「已捕获」卡同款暖色底与描边 */
+.cardRecipeUnlocked {
+  background: #fff8e8;
+  border-color: #b8861a;
+  opacity: 1;
+}
+
+.cardRecipeUnlocked:hover {
+  border-color: var(--color-warning, #e8a040);
 }
 
 .cardSelected {
@@ -209,26 +217,50 @@
   image-rendering: pixelated;
 }
 
-
-.lockOverlay {
+/* 卡片右下角：像素小印，与鱼类缩略图上的星级区一样不占文案 */
+.cardRecipeStamp {
   position: absolute;
-  top: 2px;
+  bottom: 3px;
   right: 2px;
-  font-size: 12px;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
   line-height: 1;
-  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+  border: 2px solid var(--color-border, #3d2b1f);
+  box-shadow: 2px 2px 0 var(--color-border, #3d2b1f);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+  font-family: system-ui, sans-serif;
 }
 
-/* 已获得角标 */
-.obtainedBadge {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  font-size: 14px;
-  font-weight: 900;
-  color: #22c55e;
-  line-height: 1;
-  filter: drop-shadow(0 0 1px #fff) drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+.cardRecipeStamp:hover {
+  transform: translate(-1px, -1px);
+}
+
+.cardRecipeStamp:active {
+  transform: translate(0, 0);
+  box-shadow: 1px 1px 0 var(--color-border, #3d2b1f);
+}
+
+/* 与鱼类「已捕获」角标同系配色 */
+.cardRecipeStampOn {
+  background: var(--color-secondary-light, #e0f0e4);
+  border-color: var(--color-success, #5aa469);
+  color: #1a4d2e;
+  box-shadow: 2px 2px 0 var(--color-success, #5aa469);
+}
+
+.cardRecipeStampOff {
+  background: var(--color-surface, #fffdf7);
+  color: #9a8a78;
 }
 
 .partyEmojiTag {
@@ -333,6 +365,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .detailName {
@@ -340,6 +373,35 @@
   font-size: 12px;
   color: var(--color-text, #2a1f14);
   line-height: 1.6;
+}
+
+/* 与鱼类图鉴「标记已捕获」同款：奶油底 + 像素边，获得后淡绿 */
+.recipeMarkBtn {
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 8px 12px;
+  border: var(--pixel-border, 2px solid #3d2b1f);
+  box-shadow: var(--pixel-shadow-sm, 2px 2px 0 #3d2b1f);
+  background: var(--color-surface, #fffdf7);
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  line-height: 1.5;
+  color: var(--color-text, #2a1f14);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.recipeMarkBtn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--color-border, #3d2b1f);
+}
+
+.recipeMarkBtnOn {
+  background: var(--color-secondary-light, #e0f0e4);
+  border-color: var(--color-success, #5aa469);
+  color: var(--color-success, #5aa469);
+  box-shadow: 2px 2px 0 var(--color-success, #5aa469);
 }
 
 .detailDesc {
@@ -421,43 +483,6 @@
   border: 1.5px solid #60a5fa;
   color: #1e3a8a;
 }
-
-/* ── 已获得/未获得 切换按钮 ── */
-.obtainedToggle,
-.notObtainedToggle {
-  flex-shrink: 0;
-  padding: 8px 14px;
-  font-family: "Press Start 2P", monospace;
-  font-size: 9px;
-  border: 2px solid;
-  cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.obtainedToggle {
-  background: #dcfce7;
-  border-color: #22c55e;
-  color: #166534;
-}
-
-.obtainedToggle:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 2px 2px 0 #22c55e;
-}
-
-.notObtainedToggle {
-  background: var(--color-surface-alt, #ede8dc);
-  border-color: var(--color-border, #3d2b1f);
-  color: var(--color-text-muted, #ada090);
-}
-
-.notObtainedToggle:hover {
-  border-color: var(--color-primary, #e87040);
-  color: var(--color-text, #2a1f14);
-  transform: translate(-1px, -1px);
-  box-shadow: 2px 2px 0 var(--color-border, #3d2b1f);
-}
-
 
 /* ── Ingredients section ── */
 .ingredSection {
